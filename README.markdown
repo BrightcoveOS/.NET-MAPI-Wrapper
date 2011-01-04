@@ -1,6 +1,6 @@
 Brightcove4net
 --------------
-- **Homepage**: [http://blog.velir.com/index.php/brightcove4net/][official-page]
+- **Homepage**: https://github.com/Velir/Brightcove4net
 - **Author**: [David Mills](mailto:david.mills@velir.com)
 - **Copyright**: 2011 [Velir]
 - **License**: [MIT License](file:MIT-LICENSE)
@@ -26,7 +26,6 @@ Usage
 ----------------
 A simple case, find all videos in an account: 
 
-```c#
 	// Instantiate an API object by using the provided factory
 	BrightcoveApi api = BrightcoveApiFactory.CreateApi("my API read token");
 	
@@ -39,17 +38,17 @@ A simple case, find all videos in an account:
 	{
 		// do something with each video
 	}
-```
 
-All available API calls are [documented by Brightcove][brightcove-api-docs]; or see the [official Brightcove4net page][official-page] for more examples. 
+
+All available API calls are [documented by Brightcove][brightcove-api-docs]; or see the [Brightcove4net wiki][b4net-wiki] for more examples. 
 
 Documentation
 ----------------
-Examples and other documentation are available on the [official Brightcove4net page][official-page].
+Examples and other documentation are available on the [wiki][b4net-wiki].
 
 Copyright & License
 ----------------
-Copyright (c) 2010 [Velir](http://www.velir.com), released under the [MIT License](file:MIT-LICENSE)
+Copyright (c) 2011 [Velir](http://www.velir.com), released under the [MIT License](file:MIT-LICENSE)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -71,6 +70,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 [latest-dll]: https://github.com/downloads/Velir/Brightcove4net/Brightcove4net.latest.dlls.zip
-[official-page]: http://blog.velir.com/index.php/brightcove4net/
+[b4net-wiki]: https://github.com/Velir/Brightcove4net/wiki
 [brightcove-api-docs]: http://docs.brightcove.com/en/media/
 [velir]: http://www.velir.com
