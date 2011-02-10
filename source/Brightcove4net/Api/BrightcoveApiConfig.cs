@@ -55,6 +55,16 @@ namespace Brightcove4net.Api
 			set;
 		}
 
+		/// <summary>
+		/// The number of milliseconds to wait before an API request times out. 
+		/// The default value is 100,000 milliseconds (100 seconds).
+		/// </summary>
+		public int RequestTimeout
+		{
+			get;
+			set;
+		}
+
 		public BrightcoveApiConfig() : this(null)
 		{
 		}
@@ -69,6 +79,7 @@ namespace Brightcove4net.Api
 			WriteToken = writeToken;
 			ApiReadUrl = "http://api.brightcove.com/services/library";
 			ApiWriteUrl = "http://api.brightcove.com/services/post";
+			RequestTimeout = 100000;
 		}
 	}
 }

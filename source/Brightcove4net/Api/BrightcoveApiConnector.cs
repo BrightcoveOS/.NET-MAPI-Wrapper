@@ -38,12 +38,19 @@ namespace Brightcove4net.Api
 			Debug.WriteLine(String.Format("Request URL: {0}", url));
 
 			// Make the request
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			HttpWebRequest request = BuildRequest(url);
 			string json = PerformRequest(request);
 
 			Debug.WriteLine(String.Format("JSON Response: \n{0}", json));
 
 			return json;
+		}
+
+		private HttpWebRequest BuildRequest(string url)
+		{
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			request.Timeout = Configuration.RequestTimeout;
+			return request;
 		}
 
 		/// <summary>
