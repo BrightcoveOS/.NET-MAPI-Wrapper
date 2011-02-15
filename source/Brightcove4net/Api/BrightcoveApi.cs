@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Script.Serialization;
+using Brightcove4net.Api.Connectors;
 using Brightcove4net.Model;
 using Brightcove4net.Model.Containers;
 using Brightcove4net.Serialization;
