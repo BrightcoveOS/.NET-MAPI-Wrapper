@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Brightcove4net.Api.Connectors;
 
 namespace Brightcove4net.Api
 {
