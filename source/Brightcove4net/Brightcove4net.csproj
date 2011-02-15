@@ -86,9 +86,12 @@
       <DependentUpon>BrightcoveApi.cs</DependentUpon>
     </Compile>
     <Compile Include="Api\BrightcoveApiException.cs" />
-    <Compile Include="Api\BrightcoveApiConnector.cs" />
+    <Compile Include="Api\Connectors\BasicRequestBuilder.cs" />
+    <Compile Include="Api\Connectors\BrightcoveApiConnector.cs" />
     <Compile Include="Api\BrightcoveApiFactory.cs" />
-    <Compile Include="Api\IBrightcoveApiConnector.cs" />
+    <Compile Include="Api\Connectors\FileParameter.cs" />
+    <Compile Include="Api\Connectors\IBrightcoveApiConnector.cs" />
+    <Compile Include="Api\Connectors\IRequestBuilder.cs" />
     <Compile Include="Model\BrightcoveEnumerations.cs" />
     <Compile Include="Model\Containers\BrightcoveError.cs" />
     <Compile Include="Model\Containers\BrightcoveItemCollection.cs" />
