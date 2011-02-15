@@ -1,4 +1,6 @@
-﻿namespace Brightcove4net.Api
+﻿using System.Text;
+
+namespace Brightcove4net.Api
 {
 	public class BrightcoveApiConfig
 	{
@@ -60,6 +62,24 @@
 			set;
 		}
 
+		/// <summary>
+		/// The encoding used when POSTing files for upload. Defaults to UTF-8.
+		/// </summary>
+		public Encoding Encoding
+		{
+			get;
+			set;
+		}
+
+		/// <summary>
+		/// The user agent report by this API wrapper. Defaults to "Brightcove .NET MAPI Wrapper"
+		/// </summary>
+		public string UserAgent
+		{
+			get;
+			set;
+		}
+
 		public BrightcoveApiConfig() : this(null)
 		{
 		}
@@ -75,6 +95,8 @@
 			ApiReadUrl = "http://api.brightcove.com/services/library";
 			ApiWriteUrl = "http://api.brightcove.com/services/post";
 			RequestTimeout = 100000; // .NET default
+			Encoding = Encoding.UTF8;
+			UserAgent = "Brightcove .NET MAPI Wrapper";
 		}
 	}
 }
