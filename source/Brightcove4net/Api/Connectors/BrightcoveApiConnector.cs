@@ -75,35 +75,36 @@ namespace Brightcove4net.Api.Connectors
 		/// <returns></returns>
 		public virtual string GetFilePostResponseJson(string postJson, string fileName, byte[] fileData)
 		{
-			return GetPostResponseJson(postJson, d => d.Add("file", new FormUploadUtil.FileParameter(fileData, fileName)));
+			return GetPostResponseJson(postJson, new FileParameter(fileData, fileName));
 		}
 
 		/// <summary>
 		/// Performs an API Write (HTTP POST) request, with an optional callback to add extra request params
 		/// </summary>
 		/// <param name="postJson"></param>
-		/// <param name="addParamsCallback"></param>
+		/// <param name="fileParameter"></param>
 		/// <returns></returns>
-		protected virtual string GetPostResponseJson(string postJson, Action<IDictionary<string, object>> addParamsCallback)
+		protected virtual string GetPostResponseJson(string postJson, FileParameter fileParameter)
 		{
 			// Build the URL
 			string url = Configuration.ApiWriteUrl;
 
 			Debug.WriteLine(String.Format("POSTing request to URL '{0}' with json: {1} ", url, postJson));
 
-			// Generate post objects
-			Dictionary<string, object> postParameters = new Dictionary<string, object>();
-
+			// build our post parameters
+			NameValueCollection postParameters = new NameValueCollection();
 			postParameters.Add("json", postJson);
 
-			if (addParamsCallback != null)
+			HttpWebRequest request;
+			if (fileParameter != null)
 			{
-				addParamsCallback(postParameters);
+				request = RequestBuilder.BuildMultipartFormDataPostRequest(url, postParameters, fileParameter);
+			}
+			else
+			{
+				request = RequestBuilder.BuildPostFormRequest(url, postParameters);
 			}
 
-			const string userAgent = "Brightcove .NET MAPI Wrapper";
-
-			HttpWebRequest request = FormUploadUtil.BuildMultipartFormDataPostRequest(RequestBuilder, url, userAgent, postParameters, Configuration.RequestTimeout);
 			string json = PerformRequest(request);
 
 			Debug.WriteLine(String.Format("JSON Response: \n{0}", json));
@@ -118,8 +119,6 @@ namespace Brightcove4net.Api.Connectors
 		/// <returns></returns>
 		protected virtual string PerformRequest(HttpWebRequest request)
 		{
-			Debug.WriteLine(String.Format("Performing request. Timeout is {0}.", request.Timeout));
-
 			string json;
 			try
 			{
@@ -145,7 +144,7 @@ namespace Brightcove4net.Api.Connectors
 		{
 			if (responseStream == null)
 			{
-				throw new ArgumentNullException("responseStream"); //NOTE: Resharper seems to think this might happen, but I doubt it.
+				throw new ArgumentNullException("responseStream");
 			}
 
 			using (TextReader reader = new StreamReader(responseStream))
