@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Brightcove4net.Api
+﻿namespace Brightcove4net.Api
 {
 	public class BrightcoveApiConfig
 	{
@@ -79,7 +74,7 @@ namespace Brightcove4net.Api
 			WriteToken = writeToken;
 			ApiReadUrl = "http://api.brightcove.com/services/library";
 			ApiWriteUrl = "http://api.brightcove.com/services/post";
-			RequestTimeout = 100000;
+			RequestTimeout = 100000; // .NET default
 		}
 	}
 }
