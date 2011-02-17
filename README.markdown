@@ -1,25 +1,25 @@
-Brightcove4net
+BrightcoveOS .NET-MAPI-Wrapper
 --------------
-- **Homepage**: https://github.com/Velir/Brightcove4net
+- **Homepage**: https://github.com/BrightcoveOS/.NET-MAPI-Wrapper
 - **Author**: [David Mills](mailto:david.mills@velir.com)
 - **Copyright**: 2011 [Velir]
 - **License**: [MIT License](file:MIT-LICENSE)
 
-About Brightcove4net
+About the .NET-MAPI-Wrapper
 ----------------
-Brightcove4net is a .NET wrapper for the [Brightcove](http://www.brightcove.com/) [Media API](http://support.brightcove.com/en/docs/media-api-reference). All available API calls are wrapped, for both video and audio.
+BrightcoveOS .NET-MAPI-Wrapper is a .NET wrapper for the [Brightcove](http://www.brightcove.com/) [Media API](http://support.brightcove.com/en/docs/media-api-reference). All available API calls are wrapped, for both video and audio.
 
 Getting Started
 ----------------
-1. Download the [latest release][latest-dll]. Extract the archive and place Brightcove4net.dll in an appropriate place for inclusion in your project. 
+1. Download the [latest release][latest-dll]. Extract the archive and place BrightcoveOS.NET-MAPI-Wrapper.dll in an appropriate place for inclusion in your project. 
 	- Choose the debug dll while developing, since it is compiled with debug symbols, and will print raw information about the API calls to the .NET debug trace listener as the calls are made. 
 	- For productions environments, use the release version of the dll.
 2. Add a reference to your project for the dll.
 3. Add "using" statements to your code for the following namespaces:
-	- using Brightcove4net.Api;
-	- using Brightcove4net.Model;
-	- using Brightcove4net.Model.Containers;
-	- using Brightcove4net.Model.Items;
+	- using BrightcoveMapiWrapper.Api;
+	- using BrightcoveMapiWrapper.Model;
+	- using BrightcoveMapiWrapper.Model.Containers;
+	- using BrightcoveMapiWrapper.Model.Items;
 3. Create a BrightcoveApi object and make API calls!
 
 Usage
@@ -40,11 +40,11 @@ A simple case, find all videos in an account:
 	}
 
 
-All available API calls are [documented by Brightcove][brightcove-api-docs]; or see the [Brightcove4net wiki][b4net-wiki] for more examples. 
+All available API calls are [documented by Brightcove][brightcove-api-docs]; or see the [.NET-MAPI-Wrapper wiki][wiki] for more examples. 
 
 Documentation
 ----------------
-Examples and other documentation are available on the [wiki][b4net-wiki].
+Examples and other documentation are available on the [wiki].
 
 Copyright & License
 ----------------
@@ -69,7 +69,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[latest-dll]: https://github.com/downloads/Velir/Brightcove4net/Brightcove4net.latest.dlls.zip
-[b4net-wiki]: https://github.com/Velir/Brightcove4net/wiki
+[latest-dll]: https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/BrightcoveOS.NET-MAPI-Wrapper.latest.dlls.zip
+[wiki]: https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/wiki
 [brightcove-api-docs]: http://docs.brightcove.com/en/media/
 [velir]: http://www.velir.com
