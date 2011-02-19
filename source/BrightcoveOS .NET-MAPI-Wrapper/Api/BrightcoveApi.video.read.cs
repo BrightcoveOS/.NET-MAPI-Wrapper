@@ -40,7 +40,7 @@ namespace BrightcoveMapiWrapper.Api
 
 			if (customFields != null)
 			{
-				parms.AddRange("custom_fields", videoFields);
+				parms.AddRange("custom_fields", customFields);
 			}
 
 			return RunQuery<BrightcoveVideo>(parms);
