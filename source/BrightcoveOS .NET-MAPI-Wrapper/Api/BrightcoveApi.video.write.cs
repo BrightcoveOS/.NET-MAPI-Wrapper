@@ -173,7 +173,7 @@ namespace BrightcoveMapiWrapper.Api
 																		 {
 																			 methodParams.Add(propName, propValue);
 																			 methodParams.Add("cascade", cascade.ToString().ToLower());
-																			 methodParams.Add("delete_shares ", deleteShares.ToString().ToLower());
+																			 methodParams.Add("delete_shares", deleteShares.ToString().ToLower());
 																		 });
 
 			RunPost<BrightcoveResultContainer<long>>(parms);
