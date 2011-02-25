@@ -35,6 +35,12 @@ namespace BrightcoveMapiWrapper.Util
 
 		public static void ConvertAndSetDate(object dateString, Action<DateTime> setterCallback)
 		{
+			if (dateString == null)
+			{
+				setterCallback(DateTime.MinValue);
+				return;
+			}
+
 			long milliseconds = long.Parse((string)dateString);
 			setterCallback(FromUnixMillisecondsUtc(milliseconds));
 		}
