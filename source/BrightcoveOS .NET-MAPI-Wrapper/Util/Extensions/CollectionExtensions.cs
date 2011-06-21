@@ -35,8 +35,12 @@ namespace BrightcoveMapiWrapper.Util.Extensions
 			string amp = "";
 			foreach (string key in nvc.Keys)
 			{
-				sb.AppendFormat("{0}{1}={2}", amp, key, HttpUtility.UrlEncode(nvc[key]));
-				amp = "&";
+				string[] split = nvc[key].Split(',');
+				foreach (string s in split)
+				{
+					sb.AppendFormat("{0}{1}={2}", amp, key, HttpUtility.UrlEncode(s));
+					amp = "&";
+				}
 			}
 			return sb.ToString();
 		}
