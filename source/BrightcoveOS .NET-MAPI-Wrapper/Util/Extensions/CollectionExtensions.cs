@@ -31,11 +31,15 @@ namespace BrightcoveMapiWrapper.Util.Extensions
 				return "";
 			}
 
+			// The search_videos API call uses these parameters, but does support multiple values 
+			// being comman separated, so they must be split-out
+			string[] splitOnCommas = new[] { "all", "any", "none" }; 
+
 			StringBuilder sb = new StringBuilder();
 			string amp = "";
 			foreach (string key in nvc.Keys)
 			{
-				string[] split = nvc[key].Split(',');
+				string[] split = splitOnCommas.Contains(key) ? nvc[key].Split(',') : new[] {nvc[key]};
 				foreach (string s in split)
 				{
 					sb.AppendFormat("{0}{1}={2}", amp, key, HttpUtility.UrlEncode(s));
