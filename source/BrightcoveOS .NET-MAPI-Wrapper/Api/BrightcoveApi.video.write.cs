@@ -17,6 +17,41 @@ namespace BrightcoveMapiWrapper.Api
 		/// Creates a new video by uploading a file.
 		/// </summary>
 		/// <param name="video">The metadata for the video you want to create.</param>
+		/// <param name="fileName">The full path to the file to be uploaded.</param>
+		/// <param name="fileBytes">The contents of the file</param>
+		/// <param name="encodeTo">If the file requires transcoding, use this parameter to specify the target encoding. 
+		/// Valid values are MP4 or FLV, representing the H264 and VP6 codecs respectively. Note that transcoding of 
+		/// FLV files to another codec is not currently supported. This parameter is optional and defaults to FLV.</param>
+		/// <param name="createMultipleRenditions">If the file is a supported transcodeable type, this optional flag can be 
+		/// used to control the number of transcoded renditions. If true (default), multiple renditions at varying encoding 
+		/// rates and dimensions are created. Setting this to false will cause a single transcoded VP6 rendition to be created 
+		/// at the standard encoding rate and dimensions.</param>
+		/// <param name="preserveSourceRendition">If the video file is H.264 encoded and if createMultipleRenditions is true, 
+		/// then multiple VP6 renditions are created and in addition the H.264 source is retained as an additional rendition.</param>
+		/// <param name="h264NoProcessing">Use this option to prevent H.264 source files from being transcoded. This parameter cannot
+		/// be used in combination with create_multiple_renditions. It is optional and defaults to false.</param>
+		/// <returns>The numeric ID of the newly created video.</returns>
+		public long CreateVideo(BrightcoveVideo video, string fileName, byte[] fileBytes, EncodeTo encodeTo, bool createMultipleRenditions, bool preserveSourceRendition, bool h264NoProcessing)
+		{
+			BrightcoveParamCollection parms = CreateWriteParamCollection("create_video",
+																		 methodParams =>
+																		 {
+																			 methodParams.Add("video", video);
+																			 if (encodeTo != EncodeTo.None)
+																			 {
+																				 methodParams.Add("encode_to", encodeTo.ToString().ToUpper());
+																			 }
+																			 methodParams.Add("create_multiple_renditions", createMultipleRenditions.ToString().ToLower());
+																			 methodParams.Add("preserve_source_rendition", preserveSourceRendition.ToString().ToLower());
+																			 methodParams.Add("H264NoProcessing ", h264NoProcessing.ToString().ToLower());
+																		 });
+			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileName, fileBytes).Result;
+		}
+
+		/// <summary>
+		/// Creates a new video by uploading a file.
+		/// </summary>
+		/// <param name="video">The metadata for the video you want to create.</param>
 		/// <param name="fileToUpload">The full path to the file to be uploaded.</param>
 		/// <param name="encodeTo">If the file requires transcoding, use this parameter to specify the target encoding. 
 		/// Valid values are MP4 or FLV, representing the H264 and VP6 codecs respectively. Note that transcoding of 
@@ -35,20 +70,9 @@ namespace BrightcoveMapiWrapper.Api
 			string fileName;
 			byte[] fileBytes;
 			GetFileUploadInfo(fileToUpload, out fileName, out fileBytes);
-			
-			BrightcoveParamCollection parms = CreateWriteParamCollection("create_video",
-																		 methodParams =>
-																		 	{
-																				methodParams.Add("video", video);
-																				if (encodeTo != EncodeTo.None)
-																				{
-																					methodParams.Add("encode_to", encodeTo.ToString().ToUpper());
-																				}
-																				methodParams.Add("create_multiple_renditions", createMultipleRenditions.ToString().ToLower());
-																				methodParams.Add("preserve_source_rendition", preserveSourceRendition.ToString().ToLower());
-																				methodParams.Add("H264NoProcessing ", h264NoProcessing.ToString().ToLower());
-																		 	});
-			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileName, fileBytes).Result;
+
+			return CreateVideo(video, fileName, fileBytes, encodeTo, createMultipleRenditions, preserveSourceRendition,
+			                   h264NoProcessing);
 		}
 
 		/// <summary>
