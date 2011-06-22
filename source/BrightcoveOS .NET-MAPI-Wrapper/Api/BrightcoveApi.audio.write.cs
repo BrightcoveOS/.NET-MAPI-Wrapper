@@ -16,6 +16,20 @@ namespace BrightcoveMapiWrapper.Api
 		/// Creates a new audio track in Brightcove by uploading a file.
 		/// </summary>
 		/// <param name="audioTrack">The audio track to create</param>
+		/// <param name="fileName">The name of the file being uploaded.</param>
+		/// <param name="fileBytes"></param>
+		/// <returns>The numeric ID of the uploaded track</returns>
+		public long CreateAudioTrack(BrightcoveAudioTrack audioTrack, string fileName, byte[] fileBytes)
+		{
+			BrightcoveParamCollection parms = CreateWriteParamCollection("create_audiotrack",
+																		 methodParams => methodParams.Add("audiotrack", audioTrack));
+			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileName, fileBytes).Result;
+		}
+
+		/// <summary>
+		/// Creates a new audio track in Brightcove by uploading a file.
+		/// </summary>
+		/// <param name="audioTrack">The audio track to create</param>
 		/// <param name="fileToUpload">The full path to the file to be uploaded.</param>
 		/// <returns>The numeric ID of the uploaded track</returns>
 		public long CreateAudioTrack(BrightcoveAudioTrack audioTrack, string fileToUpload)
@@ -24,9 +38,7 @@ namespace BrightcoveMapiWrapper.Api
 			byte[] fileBytes;
 			GetFileUploadInfo(fileToUpload, out fileName, out fileBytes);
 
-			BrightcoveParamCollection parms = CreateWriteParamCollection("create_audiotrack",
-																		 methodParams => methodParams.Add("audiotrack", audioTrack));
-			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileName, fileBytes).Result;
+			return CreateAudioTrack(audioTrack, fileName, fileBytes);
 		}
 
 		#region AddAudioImage
