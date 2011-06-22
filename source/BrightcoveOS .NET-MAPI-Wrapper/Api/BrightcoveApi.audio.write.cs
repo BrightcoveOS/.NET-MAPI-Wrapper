@@ -17,7 +17,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="audioTrack">The audio track to create</param>
 		/// <param name="fileName">The name of the file being uploaded.</param>
-		/// <param name="fileBytes"></param>
+		/// <param name="fileBytes">The contents of the file</param>
 		/// <returns>The numeric ID of the uploaded track</returns>
 		public long CreateAudioTrack(BrightcoveAudioTrack audioTrack, string fileName, byte[] fileBytes)
 		{
