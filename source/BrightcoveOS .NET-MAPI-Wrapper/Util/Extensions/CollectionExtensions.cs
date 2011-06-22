@@ -31,7 +31,7 @@ namespace BrightcoveMapiWrapper.Util.Extensions
 				return "";
 			}
 
-			// The search_videos API call uses these parameters, but does support multiple values 
+			// The search_videos API call uses these parameters, but doesn't support multiple values 
 			// being comman separated, so they must be split-out
 			string[] splitOnCommas = new[] { "all", "any", "none" }; 
 
