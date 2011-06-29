@@ -353,7 +353,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 						break;
 
 					case "cuePoints":
-						CuePoints = serializer.ConvertToType<BrightcoveCuePoint[]>(dictionary[key]);
+						CuePoints = serializer.ConvertToType<List<BrightcoveCuePoint>>(dictionary[key]);
 						break;
 
 					case "customFields":
@@ -441,7 +441,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 					case "tags":
 						Tags.Clear();
-						Tags.AddRange(serializer.ConvertToType<string[]>(dictionary[key])); 
+						Tags.AddRange(serializer.ConvertToType<List<string>>(dictionary[key])); 
 						break;
 
 					case "thumbnailURL":

@@ -301,7 +301,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 					case "tags":
 						Tags.Clear();
-						Tags.AddRange(serializer.ConvertToType<string[]>(dictionary[key]));
+						Tags.AddRange(serializer.ConvertToType<List<string>>(dictionary[key]));
 						break;
 
 					case "thumbnailURL":

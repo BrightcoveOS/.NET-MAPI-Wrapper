@@ -159,15 +159,15 @@ namespace BrightcoveMapiWrapper.Model.Items
 						break;
 
 					case "audioTracks":
-						AudioTracks = serializer.ConvertToType<BrightcoveAudioTrack[]>(dictionary[key]);
+						AudioTracks = serializer.ConvertToType<List<BrightcoveAudioTrack>>(dictionary[key]);
 						break;
 
 					case "audioTrackIds":
-						AudioTrackIds = serializer.ConvertToType<long[]>(dictionary[key]);
+						AudioTrackIds = serializer.ConvertToType<List<long>>(dictionary[key]);
 						break;
 
 					case "filterTags":
-						FilterTags = serializer.ConvertToType<string[]>(dictionary[key]);
+						FilterTags = serializer.ConvertToType<List<string>>(dictionary[key]);
 						break;
 
 					case "id":

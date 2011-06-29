@@ -178,7 +178,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 						break;
 
 					case "filterTags":
-						FilterTags = serializer.ConvertToType<string[]>(dictionary[key]);
+						FilterTags = serializer.ConvertToType<List<string>>(dictionary[key]);
 						break;
 
 					case "id":
@@ -210,11 +210,11 @@ namespace BrightcoveMapiWrapper.Model.Items
 						break;
 
 					case "videos":
-						Videos = serializer.ConvertToType<BrightcoveVideo[]>(dictionary[key]);
+						Videos = serializer.ConvertToType<List<BrightcoveVideo>>(dictionary[key]);
 						break;
 
 					case "videoIds":
-						VideoIds = serializer.ConvertToType<long[]>(dictionary[key]);
+						VideoIds = serializer.ConvertToType<List<long>>(dictionary[key]);
 						break;
 				}
 			}
