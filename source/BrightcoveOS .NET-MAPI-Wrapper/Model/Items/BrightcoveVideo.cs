@@ -11,6 +11,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 {
 	/// <summary>
 	/// The BrightcoveVideo object is an aggregate of metadata and asset information associated with a video.
+    /// reference: http://support.brightcove.com/en/docs/media-api-objects-reference#Video
 	/// </summary>
 	public class BrightcoveVideo : BrightcoveItem, IJavaScriptConvertable
 	{
@@ -24,6 +25,17 @@ namespace BrightcoveMapiWrapper.Model.Items
 			get;
 			private set;
 		}
+
+        /// <summary>
+        /// A string representing the ad key/value pairs assigned to the video. Key/value pairs are formatted 
+        /// as key=value and are separated by ampersands (&). For example:
+        /// "adKeys":"category=sports&live=true" 
+        /// </summary>
+        public string AdKeys
+        {
+            get;
+            set;
+        }
 
 		/// <summary>
 		/// The date this Video was created.
@@ -40,7 +52,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<BrightcoveCuePoint> CuePoints
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -49,10 +61,12 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public CustomFieldCollection CustomFields
 		{
 			get;
-			private set;
+			set;
 		}
 
-		/// <summary>
+     
+        
+        /// <summary>
 		/// Either FREE or AD_SUPPORTED. AD_SUPPORTED means that ad requests are enabled for the Video.
 		/// </summary>
 		public Economics Economics
@@ -80,6 +94,41 @@ namespace BrightcoveMapiWrapper.Model.Items
 			get;
 			private set;
 		}
+
+        /// <summary>
+        /// True indicates that the video is geo-restricted.
+        /// http://support.brightcove.com/en/docs/geo-filtering-media-api
+        /// </summary>
+        public bool GeoRestricted
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// A list of the ISO-3166
+        /// two-letter codes of the countries to enforce geo-restriction rules on. Use lowercase for the country code
+        /// more info => http://support.brightcove.com/en/docs/geo-filtering-media-api
+        /// <code>
+        /// .net example:
+        ///  CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+        ///  foreach (CultureInfo culture in cultures)
+        ///  {
+        ///     RegionInfo region = new RegionInfo(culture.LCID);
+        ///     if (region.ThreeLetterISORegionName.ToUpper() == name)
+        ///         {
+        ///             return region.TwoLetterISORegionName;
+        ///         }
+        ///  }*/
+        /// </code>
+        /// </summary>
+        public List<string> GeoFilteredCountries { get; set; }
+
+        /// <summary>
+        /// If true, the video can be viewed in all countries except those listed in geoFilteredCountries;
+        /// if false, the video can be viewed only in the countries listed in geoFilteredCountries.
+        /// http://support.brightcove.com/en/docs/geo-filtering-media-api
+        /// </summary>
+        public bool GeoFilterExclude { get; set; }
 
 		/// <summary>
 		/// A number that uniquely identifies this Video, assigned by Brightcove when the Video is created.
@@ -204,7 +253,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<BrightcoveRendition> Renditions
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -233,7 +282,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<string> Tags
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -269,10 +318,19 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#endregion
 
+        /// <summary>
+        /// Creates an object representing a single video within Brightcove's system.
+        /// </summary>
+        [Obsolete("ShortDescription is a required property")]
+        public BrightcoveVideo():this(".")
+        {
+        }
+
+
 		/// <summary>
 		/// Creates an object representing a single video within Brightcove's system.
 		/// </summary>
-		public BrightcoveVideo()
+		public BrightcoveVideo(string shortDescription)
 		{
 			Tags = new List<string>();
 			CustomFields = new CustomFieldCollection();
@@ -280,6 +338,10 @@ namespace BrightcoveMapiWrapper.Model.Items
 			CuePoints = new List<BrightcoveCuePoint>();
 			ItemState = ItemState.Active;
 			Economics = Economics.Free;
+            if(string.IsNullOrEmpty(shortDescription)  || shortDescription.Trim()==string.Empty)
+                throw new ArgumentNullException(shortDescription);
+            //required field
+            ShortDescription = shortDescription;
 		}
 
 		#region IJavaScriptConvertable implementation
