@@ -51,88 +51,54 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 		}
 
 		/// <remarks>
-		/// Much of this file upload implementation found was taken from a forum post (and then refactored a bit).
-		/// The original post can be found here:
-		/// http://forum.brightcove.com/t5/Media-APIs/ASP-NET-C-Upload-Create-Video-Example/td-p/3048
-		/// but the original author of the code is unclear. 
-		///
-		/// Google the random number used as part of the
-		/// "form-data boundary" (http://www.google.com/search?q=28947758029299) and one can see that this 
-		/// code has been copied & pasted many times over between many projects, often without citing a source. 
-		/// 
-		/// It might be originally from here:
-		/// http://stackoverflow.com/questions/219827/multipart-forms-from-c-client
-		/// http://www.briangrinstead.com/blog/multipart-form-post-in-c
-		/// 
-		/// If so, thanks Brian Grinstead!
+		///  multipart upload orginal source: http://stackoverflow.com/questions/566462/upload-files-with-httpwebrequest-multipart-form-data
+		///  Author: 	Cristian Romanescu  http:/www.romanescu.ro
 		/// </remarks>
-		public virtual HttpWebRequest BuildMultipartFormDataPostRequest(string postUrl, NameValueCollection postParameters, FileParameter fileParameter)
+		public virtual HttpWebRequest BuildMultipartFormDataPostRequest(string postUrl, string fileToPost, NameValueCollection postParameters)
 		{
-			const string formDataBoundary = "-----------------------------28947758029299";
-			const string contentType = "multipart/form-data; boundary=" + formDataBoundary;
+				string boundary = "---------------------------" + DateTime.Now.Ticks.ToString("x");
+                byte[] boundarybytes = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "\r\n");
 
-			byte[] formData = GetMultipartFormData(postParameters, fileParameter, formDataBoundary);
+                HttpWebRequest wr = BuildRequest(postUrl);
+                wr.ContentType = "multipart/form-data; boundary=" + boundary;
+                wr.Method = "POST";
+                wr.KeepAlive = true;
+                wr.Credentials = System.Net.CredentialCache.DefaultCredentials;
 
-			HttpWebRequest request = BuildRequest(postUrl);
+                Stream rs = wr.GetRequestStream();
 
-			// request properties
-			request.Method = "POST";
-			request.ContentType = contentType;
-			request.CookieContainer = new CookieContainer();
-			request.ContentLength = formData.Length;
+                string formdataTemplate = "Content-Disposition: form-data; name=\"{0}\"\r\n\r\n{1}";
+                foreach (string key in postParameters.Keys)
+                {
+                    rs.Write(boundarybytes, 0, boundarybytes.Length);
+                    string formitem = string.Format(formdataTemplate, key, postParameters[key]);
+                    byte[] formitembytes = System.Text.Encoding.UTF8.GetBytes(formitem);
+                    rs.Write(formitembytes, 0, formitembytes.Length);
+                }
+                rs.Write(boundarybytes, 0, boundarybytes.Length);
 
-			using (Stream requestStream = request.GetRequestStream())
-			{
-				requestStream.Write(formData, 0, formData.Length);
-				requestStream.Close();
-			}
+                string headerTemplate = "Content-Disposition: form-data; name=\"{0}\"; filename=\"{1}\"\r\nContent-Type: {2}\r\n\r\n";
+		        var fileName = new FileInfo(fileToPost).Name;
+                string header = string.Format(headerTemplate, "file", fileName, "application/octet-stream");
+                byte[] headerbytes = System.Text.Encoding.UTF8.GetBytes(header);
+                rs.Write(headerbytes, 0, headerbytes.Length);
 
-			return request;
+                using (FileStream fileStream = new FileStream(fileToPost, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] buffer = new byte[4096];
+                    int bytesRead = 0;
+                    while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
+                    {
+                        rs.Write(buffer, 0, bytesRead);
+                    }
+                }
+
+                byte[] trailer = System.Text.Encoding.ASCII.GetBytes("\r\n--" + boundary + "--\r\n");
+                rs.Write(trailer, 0, trailer.Length);
+                rs.Close();
+
+		        return wr;
 		}
 
-		protected virtual byte[] GetMultipartFormData(NameValueCollection postParameters, FileParameter fileParameter, string boundary)
-		{
-			using(Stream formDataStream = new MemoryStream())
-			{
-				// handle the regular parameters
-				foreach (string key in postParameters)
-				{
-					string postData = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"\r\n\r\n{2}\r\n",
-					                                boundary,
-					                                key,
-					                                postParameters[key]);
-					formDataStream.Write(Configuration.Encoding.GetBytes(postData), 0, postData.Length);
-				}
-
-
-				if (fileParameter != null)
-				{
-					// handle the file parameter
-					// Add just the first part of this param, since we will write the file data directly to the Stream
-					string header =
-						string.Format(
-							"--{0}\r\nContent-Disposition: form-data; name=\"{1}\"; filename=\"{2}\";\r\nContent-Type: {3}\r\n\r\n",
-							boundary,
-							"file",
-							fileParameter.FileName ?? "file",
-							fileParameter.ContentType ?? "application/octet-stream");
-
-					formDataStream.Write(Configuration.Encoding.GetBytes(header), 0, header.Length);
-
-					// Write the file data directly to the Stream, rather than serializing it to a string.
-					formDataStream.Write(fileParameter.File, 0, fileParameter.File.Length);
-				}
-
-				// Add the end of the request
-				string footer = "\r\n--" + boundary + "--\r\n";
-				formDataStream.Write(Configuration.Encoding.GetBytes(footer), 0, footer.Length);
-
-				// Dump the Stream into a byte[]
-				formDataStream.Position = 0;
-				byte[] formData = new byte[formDataStream.Length];
-				formDataStream.Read(formData, 0, formData.Length);
-				return formData;
-			}
-		}
 	}
 }
