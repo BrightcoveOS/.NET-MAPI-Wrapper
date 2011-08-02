@@ -50,22 +50,6 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			return request;
 		}
 
-		/// <remarks>
-		/// Much of this file upload implementation found was taken from a forum post (and then refactored a bit).
-		/// The original post can be found here:
-		/// http://forum.brightcove.com/t5/Media-APIs/ASP-NET-C-Upload-Create-Video-Example/td-p/3048
-		/// but the original author of the code is unclear. 
-		///
-		/// Google the random number used as part of the
-		/// "form-data boundary" (http://www.google.com/search?q=28947758029299) and one can see that this 
-		/// code has been copied & pasted many times over between many projects, often without citing a source. 
-		/// 
-		/// It might be originally from here:
-		/// http://stackoverflow.com/questions/219827/multipart-forms-from-c-client
-		/// http://www.briangrinstead.com/blog/multipart-form-post-in-c
-		/// 
-		/// If so, thanks Brian Grinstead!
-		/// </remarks>
 		public virtual HttpWebRequest BuildMultipartFormDataPostRequest(string postUrl, NameValueCollection postParameters, FileUploadInfo fileToUpload)
 		{
 			string boundary = "-----------------------------" + DateTime.Now.Ticks.ToString("x");
@@ -114,6 +98,7 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			contentLength += fileHeaderBytes.Length;
 
 			// tell the request how much data to expect
+			contentLength += fileToUpload.FileData.Length;
 			request.ContentLength = contentLength;
 
 			// write everything to the request stream
