@@ -8,6 +8,6 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 		BrightcoveApiConfig Configuration { get; set; }
 		string GetResponseJson(NameValueCollection requestParams);
 		string GetPostResponseJson(string postJson);
-		string GetFilePostResponseJson(string postJson, string fileName, byte[] fileData);
+		string GetFilePostResponseJson(string postJson, FileUploadInfo fileUploadInfo);
 	}
 }

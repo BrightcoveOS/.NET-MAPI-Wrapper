@@ -89,7 +89,7 @@
     <Compile Include="Api\Connectors\BasicRequestBuilder.cs" />
     <Compile Include="Api\Connectors\BrightcoveApiConnector.cs" />
     <Compile Include="Api\BrightcoveApiFactory.cs" />
-    <Compile Include="Api\Connectors\FileParameter.cs" />
+    <Compile Include="Api\Connectors\FileUploadInfo.cs" />
     <Compile Include="Api\Connectors\IBrightcoveApiConnector.cs" />
     <Compile Include="Api\Connectors\IRequestBuilder.cs" />
     <Compile Include="Model\BrightcoveEnumerations.cs" />
