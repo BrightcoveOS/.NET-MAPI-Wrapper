@@ -29,8 +29,8 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 		/// </summary>
 		/// <param name="postUrl">The URL to request</param>
 		/// <param name="postParameters">The parameters to POST</param>
-		/// <param name="fileParameter">The file data to POST</param>
+		/// <param name="fileUploadInfo">Information about the file to be uploaded</param>
 		/// <returns></returns>
-		HttpWebRequest BuildMultipartFormDataPostRequest(string postUrl, NameValueCollection postParameters, FileParameter fileParameter);
+		HttpWebRequest BuildMultipartFormDataPostRequest(string postUrl, NameValueCollection postParameters, FileUploadInfo fileUploadInfo);
 	}
 }

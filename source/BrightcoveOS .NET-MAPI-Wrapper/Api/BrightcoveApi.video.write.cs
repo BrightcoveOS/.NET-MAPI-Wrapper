@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using BrightcoveMapiWrapper.Api.Connectors;
 using BrightcoveMapiWrapper.Model;
 using BrightcoveMapiWrapper.Model.Containers;
 using BrightcoveMapiWrapper.Model.Items;
@@ -17,8 +18,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// Creates a new video by uploading a file.
 		/// </summary>
 		/// <param name="video">The metadata for the video you want to create.</param>
-		/// <param name="fileName">The full path to the file to be uploaded.</param>
-		/// <param name="fileBytes">The contents of the file</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
 		/// <param name="encodeTo">If the file requires transcoding, use this parameter to specify the target encoding. 
 		/// Valid values are MP4 or FLV, representing the H264 and VP6 codecs respectively. Note that transcoding of 
 		/// FLV files to another codec is not currently supported. This parameter is optional and defaults to FLV.</param>
@@ -31,7 +31,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="h264NoProcessing">Use this option to prevent H.264 source files from being transcoded. This parameter cannot
 		/// be used in combination with create_multiple_renditions. It is optional and defaults to false.</param>
 		/// <returns>The numeric ID of the newly created video.</returns>
-		public long CreateVideo(BrightcoveVideo video, string fileName, byte[] fileBytes, EncodeTo encodeTo, bool createMultipleRenditions, bool preserveSourceRendition, bool h264NoProcessing)
+		public long CreateVideo(BrightcoveVideo video, FileUploadInfo fileUploadInfo, EncodeTo encodeTo, bool createMultipleRenditions, bool preserveSourceRendition, bool h264NoProcessing)
 		{
 			BrightcoveParamCollection parms = CreateWriteParamCollection("create_video",
 																		 methodParams =>
@@ -45,7 +45,7 @@ namespace BrightcoveMapiWrapper.Api
 																			 methodParams.Add("preserve_source_rendition", preserveSourceRendition.ToString().ToLower());
 																			 methodParams.Add("H264NoProcessing ", h264NoProcessing.ToString().ToLower());
 																		 });
-			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileName, fileBytes).Result;
+			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileUploadInfo).Result;
 		}
 
 		/// <summary>
@@ -67,12 +67,12 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The numeric ID of the newly created video.</returns>
 		public long CreateVideo(BrightcoveVideo video, string fileToUpload, EncodeTo encodeTo, bool createMultipleRenditions, bool preserveSourceRendition, bool h264NoProcessing)
 		{
-			string fileName;
-			byte[] fileBytes;
-			GetFileUploadInfo(fileToUpload, out fileName, out fileBytes);
-
-			return CreateVideo(video, fileName, fileBytes, encodeTo, createMultipleRenditions, preserveSourceRendition,
+			using (FileStream fs = File.OpenRead(fileToUpload))
+			{
+				string fileName = new FileInfo(fileToUpload).Name;
+				return CreateVideo(video, new FileUploadInfo(fs, fileName), encodeTo, createMultipleRenditions, preserveSourceRendition,
 			                   h264NoProcessing);
+			}
 		}
 
 		/// <summary>
@@ -277,6 +277,34 @@ namespace BrightcoveMapiWrapper.Api
 		/// Add a new thumbnail or video still image to a video, or assign an existing image to another video.
 		/// </summary>
 		/// <param name="image">The metadata for the image you'd like to create (or update).</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
+		/// <param name="videoId">The ID of the video to which you'd like to assign the image.</param>
+		/// <param name="resize">Set this to false if you don't want your image to be automatically resized to the default size for its type. 
+		/// By default images will be resized.</param>
+		/// <returns>The image that was added or updated</returns>
+		public BrightcoveImage AddImage(BrightcoveImage image, FileUploadInfo fileUploadInfo, long videoId, bool resize)
+		{
+			return DoAddImage(image, fileUploadInfo, videoId, null, resize);
+		}
+
+		/// <summary>
+		/// Add a new thumbnail or video still image to a video, or assign an existing image to another video.
+		/// </summary>
+		/// <param name="image">The metadata for the image you'd like to create (or update).</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
+		/// <param name="videoReferenceId">The reference ID of the video to which you'd like to assign the image.</param>
+		/// <param name="resize">Set this to false if you don't want your image to be automatically resized to the default size for its type. 
+		/// By default images will be resized.</param>
+		/// <returns>The image that was added or updated</returns>
+		public BrightcoveImage AddImage(BrightcoveImage image, FileUploadInfo fileUploadInfo, string videoReferenceId, bool resize)
+		{
+			return DoAddImage(image, fileUploadInfo, -1, videoReferenceId, resize);
+		}
+
+		/// <summary>
+		/// Add a new thumbnail or video still image to a video, or assign an existing image to another video.
+		/// </summary>
+		/// <param name="image">The metadata for the image you'd like to create (or update).</param>
 		/// <param name="fileToUpload">The full path of the file to be uploaded.</param>
 		/// <param name="videoId">The ID of the video to which you'd like to assign the image.</param>
 		/// <param name="resize">Set this to false if you don't want your image to be automatically resized to the default size for its type. 
@@ -284,7 +312,11 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The image that was added or updated</returns>
 		public BrightcoveImage AddImage(BrightcoveImage image, string fileToUpload, long videoId, bool resize)
 		{
-			return DoAddImage(image, fileToUpload, videoId, null, resize);
+			using (FileStream fs = File.OpenRead(fileToUpload))
+			{
+				string fileName = new FileInfo(fileToUpload).Name;
+				return AddImage(image, new FileUploadInfo(fs, fileName), videoId, resize);
+			}
 		}
 
 		/// <summary>
@@ -298,7 +330,11 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The image that was added or updated</returns>
 		public BrightcoveImage AddImage(BrightcoveImage image, string fileToUpload, string videoReferenceId, bool resize)
 		{
-			return DoAddImage(image, fileToUpload, -1, videoReferenceId, resize);
+			using (FileStream fs = File.OpenRead(fileToUpload))
+			{
+				string fileName = new FileInfo(fileToUpload).Name;
+				return AddImage(image, new FileUploadInfo(fs, fileName), videoReferenceId, resize);
+			}
 		}
 
 		/// <summary>
@@ -325,12 +361,9 @@ namespace BrightcoveMapiWrapper.Api
 			return AddImage(image, fileToUpload, videoReferenceId, true);
 		}
 
-		private BrightcoveImage DoAddImage(BrightcoveImage image, string fileToUpload, long videoId, string videoReferenceId, bool resize)
-		{
-			string fileName;
-			byte[] fileBytes;
-			GetFileUploadInfo(fileToUpload, out fileName, out fileBytes);
 
+		private BrightcoveImage DoAddImage(BrightcoveImage image, FileUploadInfo fileUploadInfo, long videoId, string videoReferenceId, bool resize)
+		{
 			string propName;
 			object propValue;
 			GetIdValuesForUpload(videoId, videoReferenceId, "video_id", "video_reference_id", out propName, out propValue);
@@ -343,7 +376,7 @@ namespace BrightcoveMapiWrapper.Api
 																			 methodParams.Add(propName, propValue);
 																		 });
 
-			return RunFilePost<BrightcoveResultContainer<BrightcoveImage>>(parms, fileName, fileBytes).Result;
+			return RunFilePost<BrightcoveResultContainer<BrightcoveImage>>(parms, fileUploadInfo).Result;
 		}
 
 		#endregion
@@ -354,12 +387,40 @@ namespace BrightcoveMapiWrapper.Api
 		/// Adds a logo overlay image to a video.
 		/// </summary>
 		/// <param name="logoOverlay">The metadata for the logo overlay you'd like to create (or update).</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
+		/// <param name="videoId">The ID of the video you want to assign a logo overlay to.</param>
+		/// <returns>The newly created or updated BrightcoveLogoOverlay</returns>
+		public BrightcoveLogoOverlay AddLogoOverlay(BrightcoveLogoOverlay logoOverlay, FileUploadInfo fileUploadInfo, long videoId)
+		{
+			return DoAddLogoOverlay(logoOverlay, fileUploadInfo, videoId, null);
+		}
+
+		/// <summary>
+		/// Adds a logo overlay image to a video.
+		/// </summary>
+		/// <param name="logoOverlay">The metadata for the logo overlay you'd like to create (or update).</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
+		/// <param name="videoReferenceId">The reference ID of the video you want to assign a logo overlay to.</param>
+		/// <returns>The newly created or updated BrightcoveLogoOverlay</returns>
+		public BrightcoveLogoOverlay AddLogoOverlay(BrightcoveLogoOverlay logoOverlay, FileUploadInfo fileUploadInfo, string videoReferenceId)
+		{
+			return DoAddLogoOverlay(logoOverlay, fileUploadInfo, -1, videoReferenceId);
+		}
+
+		/// <summary>
+		/// Adds a logo overlay image to a video.
+		/// </summary>
+		/// <param name="logoOverlay">The metadata for the logo overlay you'd like to create (or update).</param>
 		/// <param name="fileToUpload">The full path of the file to be uploaded.</param>
 		/// <param name="videoId">The ID of the video you want to assign a logo overlay to.</param>
 		/// <returns>The newly created or updated BrightcoveLogoOverlay</returns>
 		public BrightcoveLogoOverlay AddLogoOverlay(BrightcoveLogoOverlay logoOverlay, string fileToUpload, long videoId)
 		{
-			return DoAddLogoOverlay(logoOverlay, fileToUpload, videoId, null);
+			using (FileStream fs = File.OpenRead(fileToUpload))
+			{
+				string fileName = new FileInfo(fileToUpload).Name;
+				return AddLogoOverlay(logoOverlay, new FileUploadInfo(fs, fileName), videoId);
+			}
 		}
 
 		/// <summary>
@@ -371,15 +432,15 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The newly created or updated BrightcoveLogoOverlay</returns>
 		public BrightcoveLogoOverlay AddLogoOverlay(BrightcoveLogoOverlay logoOverlay, string fileToUpload, string videoReferenceId)
 		{
-			return DoAddLogoOverlay(logoOverlay, fileToUpload, -1, videoReferenceId);
+			using (FileStream fs = File.OpenRead(fileToUpload))
+			{
+				string fileName = new FileInfo(fileToUpload).Name;
+				return AddLogoOverlay(logoOverlay, new FileUploadInfo(fs, fileName), videoReferenceId);
+			}
 		}
 
-		private BrightcoveLogoOverlay DoAddLogoOverlay(BrightcoveLogoOverlay logoOverlay, string fileToUpload, long videoId, string videoReferenceId)
+		private BrightcoveLogoOverlay DoAddLogoOverlay(BrightcoveLogoOverlay logoOverlay, FileUploadInfo fileUploadInfo, long videoId, string videoReferenceId)
 		{
-			string fileName;
-			byte[] fileBytes;
-			GetFileUploadInfo(fileToUpload, out fileName, out fileBytes);
-
 			string propName;
 			object propValue;
 			GetIdValuesForUpload(videoId, videoReferenceId, "video_id", "video_reference_id", out propName, out propValue);
@@ -391,7 +452,7 @@ namespace BrightcoveMapiWrapper.Api
 																			 methodParams.Add(propName, propValue);
 																		 });
 
-			return RunFilePost<BrightcoveResultContainer<BrightcoveLogoOverlay>>(parms, fileName, fileBytes).Result;
+			return RunFilePost<BrightcoveResultContainer<BrightcoveLogoOverlay>>(parms, fileUploadInfo).Result;
 		}
 
 		#endregion

@@ -70,21 +70,20 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 		/// Performs an API Write (HTTP POST) request that includes file data
 		/// </summary>
 		/// <param name="postJson"></param>
-		/// <param name="fileName"></param>
-		/// <param name="fileData"></param>
+		/// <param name="fileUploadInfo"></param>
 		/// <returns></returns>
-		public virtual string GetFilePostResponseJson(string postJson, string fileName, byte[] fileData)
+		public virtual string GetFilePostResponseJson(string postJson, FileUploadInfo fileUploadInfo)
 		{
-			return GetPostResponseJson(postJson, new FileParameter(fileData, fileName));
+			return GetPostResponseJson(postJson, fileUploadInfo);
 		}
 
 		/// <summary>
 		/// Performs an API Write (HTTP POST) request, with an optional callback to add extra request params
 		/// </summary>
 		/// <param name="postJson"></param>
-		/// <param name="fileParameter"></param>
+		/// <param name="fileUploadInfo"></param>
 		/// <returns></returns>
-		protected virtual string GetPostResponseJson(string postJson, FileParameter fileParameter)
+		protected virtual string GetPostResponseJson(string postJson, FileUploadInfo fileUploadInfo)
 		{
 			// Build the URL
 			string url = Configuration.ApiWriteUrl;
@@ -96,9 +95,9 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			postParameters.Add("json", postJson);
 
 			HttpWebRequest request;
-			if (fileParameter != null)
+			if (fileUploadInfo != null)
 			{
-				request = RequestBuilder.BuildMultipartFormDataPostRequest(url, postParameters, fileParameter);
+				request = RequestBuilder.BuildMultipartFormDataPostRequest(url, postParameters, fileUploadInfo);
 			}
 			else
 			{

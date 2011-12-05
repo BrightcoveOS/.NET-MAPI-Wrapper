@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
+using BrightcoveMapiWrapper.Api.Connectors;
 using BrightcoveMapiWrapper.Model;
 using BrightcoveMapiWrapper.Model.Containers;
 using BrightcoveMapiWrapper.Model.Items;
@@ -16,14 +17,13 @@ namespace BrightcoveMapiWrapper.Api
 		/// Creates a new audio track in Brightcove by uploading a file.
 		/// </summary>
 		/// <param name="audioTrack">The audio track to create</param>
-		/// <param name="fileName">The name of the file being uploaded.</param>
-		/// <param name="fileBytes">The contents of the file</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
 		/// <returns>The numeric ID of the uploaded track</returns>
-		public long CreateAudioTrack(BrightcoveAudioTrack audioTrack, string fileName, byte[] fileBytes)
+		public long CreateAudioTrack(BrightcoveAudioTrack audioTrack, FileUploadInfo fileUploadInfo)
 		{
 			BrightcoveParamCollection parms = CreateWriteParamCollection("create_audiotrack",
 																		 methodParams => methodParams.Add("audiotrack", audioTrack));
-			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileName, fileBytes).Result;
+			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileUploadInfo).Result;
 		}
 
 		/// <summary>
@@ -34,14 +34,42 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The numeric ID of the uploaded track</returns>
 		public long CreateAudioTrack(BrightcoveAudioTrack audioTrack, string fileToUpload)
 		{
-			string fileName;
-			byte[] fileBytes;
-			GetFileUploadInfo(fileToUpload, out fileName, out fileBytes);
-
-			return CreateAudioTrack(audioTrack, fileName, fileBytes);
+			using (FileStream fs = File.OpenRead(fileToUpload))
+			{
+				string fileName = new FileInfo(fileToUpload).Name;
+				return CreateAudioTrack(audioTrack, new FileUploadInfo(fs, fileName));
+			}
 		}
 
 		#region AddAudioImage
+
+		/// <summary>
+		/// Add a thumbnail asset to the specified audio track.
+		/// </summary>
+		/// <param name="image">A BrightcoveImage containing the metadata for the image you'd like to create (or update).</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
+		/// <param name="audioTrackId">The ID of the audio track to which you'd like to assign the image.</param>
+		/// <param name="resize">Set this to false if you don't want your image to be automatically resized to the default size for its type. 
+		/// By default images will be resized.</param>
+		/// <returns>The image that was added or updated.</returns>
+		public BrightcoveImage AddAudioImage(BrightcoveImage image, FileUploadInfo fileUploadInfo, long audioTrackId, bool resize)
+		{
+			return DoAddAudioImage(image, fileUploadInfo, audioTrackId, null, resize);
+		}
+
+		/// <summary>
+		/// Add a thumbnail asset to the specified audio track.
+		/// </summary>
+		/// <param name="image">A BrightcoveImage containing the metadata for the image you'd like to create (or update).</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
+		/// <param name="audioTrackReferenceId">The reference ID of the audio track to which you'd like to assign the image.</param>
+		/// <param name="resize">Set this to false if you don't want your image to be automatically resized to the default size for its type. 
+		/// By default images will be resized.</param>
+		/// <returns>The image that was added or updated.</returns>
+		public BrightcoveImage AddAudioImage(BrightcoveImage image, FileUploadInfo fileUploadInfo, string audioTrackReferenceId, bool resize)
+		{
+			return DoAddAudioImage(image, fileUploadInfo, -1, audioTrackReferenceId, resize);
+		}
 
 		/// <summary>
 		/// Add a thumbnail asset to the specified audio track.
@@ -54,7 +82,11 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The image that was added or updated.</returns>
 		public BrightcoveImage AddAudioImage(BrightcoveImage image, string fileToUpload, long audioTrackId, bool resize)
 		{
-			return DoAddAudioImage(image, fileToUpload, audioTrackId, null, resize);
+			using (FileStream fs = File.OpenRead(fileToUpload))
+			{
+				string fileName = new FileInfo(fileToUpload).Name;
+				return AddAudioImage(image, new FileUploadInfo(fs, fileName), audioTrackId, resize);
+			}
 		}
 
 		/// <summary>
@@ -68,7 +100,11 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The image that was added or updated.</returns>
 		public BrightcoveImage AddAudioImage(BrightcoveImage image, string fileToUpload, string audioTrackReferenceId, bool resize)
 		{
-			return DoAddAudioImage(image, fileToUpload, -1, audioTrackReferenceId, resize);
+			using (FileStream fs = File.OpenRead(fileToUpload))
+			{
+				string fileName = new FileInfo(fileToUpload).Name;
+				return AddAudioImage(image, new FileUploadInfo(fs, fileName), audioTrackReferenceId, resize);
+			}
 		}
 
 		/// <summary>
@@ -99,18 +135,14 @@ namespace BrightcoveMapiWrapper.Api
 		/// Add a thumbnail asset to the specified audio track.
 		/// </summary>
 		/// <param name="image">A BrightcoveImage containing the metadata for the image you'd like to create (or update).</param>
-		/// <param name="fileToUpload">The full path of the file to be uploaded.</param>
+		/// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
 		/// <param name="audioTrackId">The ID of the audio track to which you'd like to assign the image.</param>
 		/// <param name="audioTrackReferenceId">The reference ID of the audio track to which you'd like to assign the image.</param>
 		/// <param name="resize">Set this to false if you don't want your image to be automatically resized to the default size for its type. 
 		/// By default images will be resized.</param>
 		/// <returns>The image that was added or updated.</returns>
-		private BrightcoveImage DoAddAudioImage(BrightcoveImage image, string fileToUpload, long audioTrackId, string audioTrackReferenceId, bool resize)
+		private BrightcoveImage DoAddAudioImage(BrightcoveImage image, FileUploadInfo fileUploadInfo, long audioTrackId, string audioTrackReferenceId, bool resize)
 		{
-			string fileName;
-			byte[] fileBytes;
-			GetFileUploadInfo(fileToUpload, out fileName, out fileBytes);
-
 			string propName;
 			object propValue;
 			GetIdValuesForUpload(audioTrackId, audioTrackReferenceId, "audiotrack_id", "audiotrack_reference_id", out propName, out propValue);
@@ -123,7 +155,7 @@ namespace BrightcoveMapiWrapper.Api
 																			 methodParams.Add(propName, propValue);
 																		 });
 
-			return RunFilePost<BrightcoveResultContainer<BrightcoveImage>>(parms, fileName, fileBytes).Result;
+			return RunFilePost<BrightcoveResultContainer<BrightcoveImage>>(parms, fileUploadInfo).Result;
 		}
 
 		#endregion

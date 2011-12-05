@@ -98,13 +98,12 @@ namespace BrightcoveMapiWrapper.Api
 		/// Runs an API write (HTTP POST) that includes file data 
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="fileName"></param>
-		/// <param name="fileData"></param>
+		/// <param name="fileToUpload"></param>
 		/// <param name="postParams"></param>
 		/// <returns></returns>
-		protected T RunFilePost<T>(BrightcoveParamCollection postParams, string fileName, byte[] fileData) where T : IJavaScriptConvertable
+		protected T RunFilePost<T>(BrightcoveParamCollection postParams, FileUploadInfo fileToUpload) where T : IJavaScriptConvertable
 		{
-			string json = Connector.GetFilePostResponseJson(SerializeJson(postParams), fileName, fileData);
+			string json = Connector.GetFilePostResponseJson(SerializeJson(postParams), fileToUpload);
 			return DeserializeJson<T>(json);
 		}
 
@@ -163,18 +162,6 @@ namespace BrightcoveMapiWrapper.Api
 			{
 				propValue = numericId;
 			}
-		}
-
-		private static void GetFileUploadInfo(string fileToUpload, out string fileName, out byte[] fileBytes)
-		{
-			FileInfo fileInfo = new FileInfo(fileToUpload);
-			if (!fileInfo.Exists)
-			{
-				throw new ArgumentException(String.Format("The specified file to upload does not exist: \"{0}\"", fileInfo.FullName));
-			}
-
-			fileName = fileInfo.Name;
-			fileBytes = File.ReadAllBytes(fileInfo.FullName);
 		}
 	}
 }
