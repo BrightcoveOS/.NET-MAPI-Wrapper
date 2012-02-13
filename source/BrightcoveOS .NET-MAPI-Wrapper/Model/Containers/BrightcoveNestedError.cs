@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using BrightcoveMapiWrapper.Util.Extensions;
@@ -6,9 +6,11 @@ using BrightcoveMapiWrapper.Serialization;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
-	public class BrightcoveNestedError : IJavaScriptConvertable
-	{
-		public string Message
+    public class BrightcoveNestedError : IBrightcoveError, IJavaScriptConvertable
+    {
+        #region IBrightcoveError implementation
+        
+        public string Message
 		{
 			get;
 			private set;
@@ -24,9 +26,11 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		{
 			get;
 			private set;
-		}
+        }
 
-		public BrightcoveNestedError()
+        #endregion IBrightcoveError implementation
+
+        public BrightcoveNestedError()
 		{
 			Errors = new List<BrightcoveNestedError>();
 		}
