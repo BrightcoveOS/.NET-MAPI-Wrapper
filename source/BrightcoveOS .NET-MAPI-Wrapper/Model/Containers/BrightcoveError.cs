@@ -5,15 +5,27 @@ using BrightcoveMapiWrapper.Serialization;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
-	public class BrightcoveError : IJavaScriptConvertable
-	{
-		public string Message
-		{
-			get;
-			private set;
-		}
+	public interface IBrightcoveError
+        {
+	        int Code { get; }
+	        string Message { get; }
+	}
+    
+    public class BrightcoveError : IBrightcoveError, IJavaScriptConvertable
+    {
+        #region Properties
 
-		public string Name
+        public string Name
+        {
+            get;
+            private set;
+        }
+
+        #endregion Properties
+
+        #region IBrightcoveError implementation
+
+        public string Message
 		{
 			get;
 			private set;
@@ -23,11 +35,13 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		{
 			get;
 			private set;
-		}
+        }
 
-		#region IJavaScriptConvertable implementation
+        #endregion IBrightcoveError implementation
 
-		public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
+        #region IJavaScriptConvertable implementation
+
+        public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
 		{
 			throw new NotImplementedException();
 		}
