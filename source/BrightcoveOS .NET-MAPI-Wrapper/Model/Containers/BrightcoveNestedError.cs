@@ -6,11 +6,11 @@ using BrightcoveMapiWrapper.Serialization;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
-    public class BrightcoveNestedError : IBrightcoveError, IJavaScriptConvertable
-    {
-        #region IBrightcoveError implementation
-        
-        public string Message
+	public class BrightcoveNestedError : IBrightcoveError, IJavaScriptConvertable
+	{
+		#region IBrightcoveError implementation
+
+		public string Message
 		{
 			get;
 			private set;
@@ -26,11 +26,11 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		{
 			get;
 			private set;
-        }
+		}
 
-        #endregion IBrightcoveError implementation
+		#endregion IBrightcoveError implementation
 
-        public BrightcoveNestedError()
+		public BrightcoveNestedError()
 		{
 			Errors = new List<BrightcoveNestedError>();
 		}
