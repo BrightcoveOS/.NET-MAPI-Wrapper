@@ -5,27 +5,21 @@ using BrightcoveMapiWrapper.Serialization;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
-	public interface IBrightcoveError
-        {
-	        int Code { get; }
-	        string Message { get; }
-	}
-    
-    public class BrightcoveError : IBrightcoveError, IJavaScriptConvertable
-    {
-        #region Properties
+	public class BrightcoveError : IBrightcoveError, IJavaScriptConvertable
+	{
+		#region Properties
 
-        public string Name
-        {
-            get;
-            private set;
-        }
+		public string Name
+		{
+			get;
+			private set;
+		}
 
-        #endregion Properties
+		#endregion Properties
 
-        #region IBrightcoveError implementation
+		#region IBrightcoveError implementation
 
-        public string Message
+		public string Message
 		{
 			get;
 			private set;
@@ -35,13 +29,13 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		{
 			get;
 			private set;
-        }
+		}
 
-        #endregion IBrightcoveError implementation
+		#endregion IBrightcoveError implementation
 
-        #region IJavaScriptConvertable implementation
+		#region IJavaScriptConvertable implementation
 
-        public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
+		public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
 		{
 			throw new NotImplementedException();
 		}
@@ -61,7 +55,7 @@ namespace BrightcoveMapiWrapper.Model.Containers
 						break;
 
 					case "code":
-						Code = (int) dictionary[key];
+						Code = (int)dictionary[key];
 						break;
 				}
 			}
