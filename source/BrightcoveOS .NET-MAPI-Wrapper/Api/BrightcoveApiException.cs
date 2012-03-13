@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -19,18 +19,30 @@ namespace BrightcoveMapiWrapper.Api
 			}
 		}
 
+        private readonly IBrightcoveError _error = null;
+        public IBrightcoveError Error
+        {
+            get
+            {
+                return _error;
+            }
+        }
+
 		public BrightcoveApiException()
 		{
 		}
 
 		public BrightcoveApiException(BrightcoveError error)
 		{
+            _error = error;
 			_message = String.Format("An error was returned by the server while accessing the API: {0} - {1} (code {2})",
 			              error.Name, error.Message, error.Code);
 		}
 
 		public BrightcoveApiException(BrightcoveNestedError nestedError)
 		{
+            _error = nestedError;
+
 			StringBuilder sb = new StringBuilder();
 			sb.AppendFormat("An error was returned by the server while accessing the API: {0} (code {1})",
 			                nestedError.Message, nestedError.Code);
