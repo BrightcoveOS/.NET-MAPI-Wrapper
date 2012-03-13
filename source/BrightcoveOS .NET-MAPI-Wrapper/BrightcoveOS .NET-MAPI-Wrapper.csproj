@@ -100,6 +100,7 @@
     <Compile Include="Model\Containers\BrightcoveResultContainer.cs" />
     <Compile Include="Model\Containers\CustomFieldCollection.cs" />
     <Compile Include="Model\Containers\FieldValuePair.cs" />
+    <Compile Include="Model\Containers\IBrightcoveError.cs" />
     <Compile Include="Model\Items\BrightcoveAudioTrackPlaylist.cs" />
     <Compile Include="Model\Items\BrightcoveCuePoint.cs" />
     <Compile Include="Model\Items\BrightcoveImage.cs" />
