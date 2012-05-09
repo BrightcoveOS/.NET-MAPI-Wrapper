@@ -16,6 +16,7 @@ namespace BrightcoveMapiWrapper.Serialization
 		static BrightcoveSerializerFactory()
 		{
 			_serializer = new JavaScriptSerializer();
+			_serializer.MaxJsonLength = Int32.MaxValue;
 
 			// Although we only need a single generic converter, BrightcoveItemConverter<T>, we must
 			// register all possible types for T or the JavaScriptSerializer will not be able to find 
