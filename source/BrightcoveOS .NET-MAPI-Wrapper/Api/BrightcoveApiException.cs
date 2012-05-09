@@ -15,7 +15,7 @@ namespace BrightcoveMapiWrapper.Api
 		{
 			get
 			{
-				return _message;
+                return string.IsNullOrEmpty(_message) ? base.Message : _message;
 			}
 		}
 
