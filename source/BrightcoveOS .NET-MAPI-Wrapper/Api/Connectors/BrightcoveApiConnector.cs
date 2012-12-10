@@ -11,7 +11,8 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 {
 	public class BrightcoveApiConnector : IBrightcoveApiConnector
 	{
-		public IRequestBuilder RequestBuilder
+
+	    public IRequestBuilder RequestBuilder
 		{
 			get; 
 			set;
@@ -22,6 +23,12 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			get;
 			set;
 		}
+
+	    public string RequestUrl
+	    {
+	        get;
+            set;
+        }
 
 		public BrightcoveApiConnector(BrightcoveApiConfig configuration) : 
 			this(configuration, new BasicRequestBuilder(configuration))
@@ -42,13 +49,13 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 		public virtual string GetResponseJson(NameValueCollection requestParams)
 		{
 			// Build the URL
-			string url = String.Format("{0}?{1}", Configuration.ApiReadUrl, requestParams.ToQueryString());
+		    RequestUrl = String.Format("{0}?{1}", Configuration.ApiReadUrl, requestParams.ToQueryString());
 
 			// Log the request URL
-			Debug.WriteLine(String.Format("Request URL: {0}", url));
+            Debug.WriteLine(String.Format("Request URL: {0}", RequestUrl));
 
 			// Make the request
-			HttpWebRequest request = RequestBuilder.BuildRequest(url);
+            HttpWebRequest request = RequestBuilder.BuildRequest(RequestUrl);
 			string json = PerformRequest(request);
 
 			Debug.WriteLine(String.Format("JSON Response: \n{0}", json));

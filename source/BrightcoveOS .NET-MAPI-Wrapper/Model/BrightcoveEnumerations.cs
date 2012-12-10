@@ -16,27 +16,67 @@
 	public enum SortBy
 	{
 		None = 0,
+        /// <summary>
+        /// Date title was created.
+        /// </summary>
 		CreationDate,
+        /// <summary>
+        /// Date title was last modified.
+        /// </summary>
 		ModifiedDate,
+        /// <summary>
+        /// Date title was published.
+        /// </summary>
 		PublishDate,
+        /// <summary>
+        /// Date title is scheduled to be available. Video only.
+        /// </summary>
+        StartDate,
+        /// <summary>
+        /// Number of times this title has been viewed.
+        /// </summary>
 		PlaysTotal,
-		PlaysTrailingWeek
+        /// <summary>
+        /// Number of times this title has been viewed in the past 7 days (excluding today).
+        /// </summary>
+		PlaysTrailingWeek,
+        /// <summary>
+        /// Name of the title. Video only.
+        /// </summary>
+        DisplayName,
+        /// <summary>
+        /// Reference ID of the title.
+        /// </summary>
+        ReferenceId
 	}
 
+
 	/// <summary>
-	/// The possible upload statuses returned from brightcove
+	/// The possible upload statuses returned from Brightcove.
 	/// 
-	/// Complete: Video upload and processing have completed
-	/// Processing: Video is being processed after upload for transcoding
-	/// Uploading: Video is still in the process of being uploaded
-	/// Error: Indicates an error during upload or processing
+	/// Complete: Video upload and processing have completed.
+	/// Processing: Video is being processed after upload for transcoding.
+	/// Uploading: Video is still in the process of being uploaded.
+	/// Error: Indicates an error during upload or processing.
 	/// </summary>
 	public enum BrightcoveUploadStatus
 	{
 		None = 0,
+        /// <summary>
+        /// Video upload and processing have completed.
+        /// </summary>
 		Complete,
+        /// <summary>
+        /// Indicates an error during upload or processing.
+        /// </summary>
 		Error,
+        /// <summary>
+        /// Video is being processed after upload for transcoding.
+        /// </summary>
 		Processing,
+        /// <summary>
+        /// Video is still in the process of being uploaded.
+        /// </summary>
 		Uploading 
 	}
 
@@ -67,13 +107,37 @@
 	public enum PlaylistType
 	{
 		None = 0,
+        /// <summary>
+        /// A manual playlist, the videos of which were added individually.
+        /// </summary>
 		Explicit,
+        /// <summary>
+        /// A smart playlist, ordered from oldest to newest, by published date.
+        /// </summary>
 		OldestToNewest,
+        /// <summary>
+        /// A smart playlist, ordered from newest to oldest, by published date.
+        /// </summary>
 		NewestToOldest,
+        /// <summary>
+        /// A smart playlist, ordered alphabetically.
+        /// </summary>
 		Alphabetical,
+        /// <summary>
+        /// A smart playlist, ordered by total plays.
+        /// </summary>
 		PlaysTotal,
+        /// <summary>
+        /// A smart playlist, ordered by most plays in the past week.
+        /// </summary>
 		PlaysTrailingWeek,
+        /// <summary>
+        /// A smart playlist, ordered from oldest to newest, by start date.
+        /// </summary>
 		StartDateOldestToNewest,
+        /// <summary>
+        /// A smart playlist, ordered from newest to oldest, by start date.
+        /// </summary>
 		StartDateNewestToOldest
 	}
 
@@ -174,4 +238,37 @@
 		BottomRight
 	}
 
+    /// <summary>
+    /// The valid values of the output argument for the read methods.
+    /// </summary>
+    public enum Output
+    {
+        /// <summary>
+        /// Default.
+        /// </summary>
+        Json,
+        /// <summary>
+        /// RSS with Media RSS and Video Cloud extensions.
+        /// </summary>
+        Mrss,
+        /// <summary>
+        /// For distribution through TubeMogul OneLoad.
+        /// </summary>
+        Tm
+    }
+
+    /// <summary>
+    /// Specify the region for setting the general service URL.
+    /// </summary>
+    public enum BrightcoveRegion
+    {
+        /// <summary>
+        /// Any unspecified region. Mapped to the .com generic top-level domain.
+        /// </summary>
+        Generic = 0,
+        /// <summary>
+        /// Japan. Mapped to the .co.jp country code top-level domain.
+        /// </summary>
+        Japan
+    }
 }

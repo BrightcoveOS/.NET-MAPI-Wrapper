@@ -39,6 +39,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -50,7 +51,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\VideoRead\SearchVideosTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\SearchVideosUrlConstructionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\source\BrightcoveOS .NET-MAPI-Wrapper\BrightcoveOS .NET-MAPI-Wrapper.csproj">
+      <Project>{EAD350C8-FFED-40E2-AE86-182C71B585DF}</Project>
+      <Name>BrightcoveOS .NET-MAPI-Wrapper</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UnitTests\" />
