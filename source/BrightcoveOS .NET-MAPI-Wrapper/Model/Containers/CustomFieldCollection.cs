@@ -5,6 +5,9 @@ using BrightcoveMapiWrapper.Serialization;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
+	/// <summary>
+	/// A collection of custom field values.
+	/// </summary>
 	public class CustomFieldCollection : Dictionary<string, string>, IJavaScriptConvertable
 	{
 		#region IJavaScriptConvertable implementation

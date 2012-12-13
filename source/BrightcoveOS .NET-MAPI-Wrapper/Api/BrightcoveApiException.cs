@@ -8,25 +8,34 @@ using BrightcoveMapiWrapper.Model.Containers;
 
 namespace BrightcoveMapiWrapper.Api
 {
+	/// <summary>
+	/// An Brightcove specific Exception class.
+	/// </summary>
 	public class BrightcoveApiException : Exception
 	{
 		private readonly string _message;
+		/// <summary>
+		/// Returns the message of the exception.
+		/// </summary>
 		public override string Message
 		{
 			get
 			{
-                return string.IsNullOrEmpty(_message) ? base.Message : _message;
+				return string.IsNullOrEmpty(_message) ? base.Message : _message;
 			}
 		}
 
-        private readonly IBrightcoveError _error = null;
-        public IBrightcoveError Error
-        {
-            get
-            {
-                return _error;
-            }
-        }
+		private readonly IBrightcoveError _error = null;
+		/// <summary>
+		/// The error passed to this exception.
+		/// </summary>
+		public IBrightcoveError Error
+		{
+			get
+			{
+				return _error;
+			}
+		}
 
 		public BrightcoveApiException()
 		{
@@ -34,18 +43,18 @@ namespace BrightcoveMapiWrapper.Api
 
 		public BrightcoveApiException(BrightcoveError error)
 		{
-            _error = error;
+			_error = error;
 			_message = String.Format("An error was returned by the server while accessing the API: {0} - {1} (code {2})",
-			              error.Name, error.Message, error.Code);
+						  error.Name, error.Message, error.Code);
 		}
 
 		public BrightcoveApiException(BrightcoveNestedError nestedError)
 		{
-            _error = nestedError;
+			_error = nestedError;
 
 			StringBuilder sb = new StringBuilder();
 			sb.AppendFormat("An error was returned by the server while accessing the API: {0} (code {1})",
-			                nestedError.Message, nestedError.Code);
+							nestedError.Message, nestedError.Code);
 			
 			if (nestedError.Errors.Count > 0)
 			{

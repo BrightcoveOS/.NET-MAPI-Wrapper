@@ -4,6 +4,9 @@ using BrightcoveMapiWrapper.Serialization;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
+	/// <summary>
+	/// A dictionary of Brightcove parameters.
+	/// </summary>
 	public class BrightcoveParamCollection : Dictionary<string, object>, IJavaScriptConvertable
 	{
 		#region IJavaScriptConvertable implementation

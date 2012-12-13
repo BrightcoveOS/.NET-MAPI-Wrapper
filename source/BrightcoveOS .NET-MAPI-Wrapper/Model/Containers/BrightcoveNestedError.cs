@@ -6,22 +6,34 @@ using BrightcoveMapiWrapper.Serialization;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
+	/// <summary>
+	/// A nested error returned by the Brightcove.
+	/// </summary>
 	public class BrightcoveNestedError : IBrightcoveError, IJavaScriptConvertable
 	{
 		#region IBrightcoveError implementation
 
+		/// <summary>
+		/// The error message.
+		/// </summary>
 		public string Message
 		{
 			get;
 			private set;
 		}
 
+		/// <summary>
+		/// The error code number.
+		/// </summary>
 		public int Code
 		{
 			get;
 			private set;
 		}
 
+		/// <summary>
+		/// A collection of nested errors.
+		/// </summary>
 		public ICollection<BrightcoveNestedError> Errors
 		{
 			get;

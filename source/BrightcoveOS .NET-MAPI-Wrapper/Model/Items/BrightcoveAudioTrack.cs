@@ -104,7 +104,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 			get;
 			set;
 		}
-        
+		
 		/// <summary>
 		/// Link URL
 		/// </summary>
@@ -171,7 +171,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 			get;
 			set;
 		}
-               
+			   
 		/// <summary>
 		/// Start date
 		/// </summary>
@@ -187,7 +187,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<string> Tags
 		{
 			get; 
-			private set;
+			set;
 		}
 
 		/// <summary>

@@ -15,6 +15,9 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 	/// </summary>
 	public class BasicRequestBuilder : IRequestBuilder
 	{
+		/// <summary>
+		/// An instance of <see cref="BrightcoveApiConfig"/>.
+		/// </summary>
 		public BrightcoveApiConfig Configuration
 		{
 			get;
@@ -33,7 +36,7 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			request.UserAgent = Configuration.UserAgent;
 			return request;
 		}
-        
+		
 		public virtual HttpWebRequest BuildPostFormRequest(string postUrl, NameValueCollection postParameters)
 		{
 			HttpWebRequest request = BuildRequest(postUrl);
@@ -76,9 +79,9 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			foreach (string key in postParameters)
 			{
 				string paramData = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"\r\n\r\n{2}\r\n",
-				                                boundary,
-				                                key,
-				                                postParameters[key]);
+												boundary,
+												key,
+												postParameters[key]);
 				byte[] bytes = Configuration.Encoding.GetBytes(paramData);
 				parameterBytes.Add(bytes);
 				contentLength += bytes.Length;
@@ -112,7 +115,7 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 				
 				// file header
 				requestStream.Write(fileHeaderBytes, 0, fileHeaderBytes.Length);
-                               
+							   
 				// file data
 				byte[] buffer = new byte[4096];
 				int bytesRead;

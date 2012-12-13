@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightcoveOS .NET-MAPI-Wrapper", "source\BrightcoveOS .NET-MAPI-Wrapper\BrightcoveOS .NET-MAPI-Wrapper.csproj", "{EAD350C8-FFED-40E2-AE86-182C71B585DF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightcoveOS .NET-MAPI-Wrapper.Tests", "tests\BrightcoveOS .NET-MAPI-Wrapper.Tests\BrightcoveOS .NET-MAPI-Wrapper.Tests.csproj", "{55E43500-DED9-49BC-B217-215770DB8A56}"

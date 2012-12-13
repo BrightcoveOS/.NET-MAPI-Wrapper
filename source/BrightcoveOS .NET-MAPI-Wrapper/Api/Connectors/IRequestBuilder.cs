@@ -7,6 +7,9 @@ using System.Text;
 
 namespace BrightcoveMapiWrapper.Api.Connectors
 {
+	/// <summary>
+	/// Defines how to build requests to Brightcove's REST API.
+	/// </summary>
 	public interface IRequestBuilder
 	{
 		/// <summary>

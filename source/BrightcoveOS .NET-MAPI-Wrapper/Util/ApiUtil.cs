@@ -9,8 +9,17 @@ using BrightcoveMapiWrapper.Model.Containers;
 
 namespace BrightcoveMapiWrapper.Util
 {
+	/// <summary>
+	/// Checks for errors and throws exceptions where applicable.
+	/// </summary>
 	public static class ApiUtil
 	{
+		/// <summary>
+		/// Throws an exception if certain conditions are met.
+		/// </summary>
+		/// <param name="dictionary"></param>
+		/// <param name="key"></param>
+		/// <param name="serializer"></param>
 		public static void ThrowIfError(IDictionary<string, object> dictionary, string key, JavaScriptSerializer serializer)
 		{
 			// Errors are returned in two different formats. For now, we can tell the difference 
@@ -28,6 +37,11 @@ namespace BrightcoveMapiWrapper.Util
 			}
 		}
 
+		/// <summary>
+		/// Throws an exception if certain conditions are met.
+		/// </summary>
+		/// <param name="objError"></param>
+		/// <param name="serializer"></param>
 		private static void ThrowIfNestedError(object objError, JavaScriptSerializer serializer)
 		{
 			if (objError != null)
@@ -37,6 +51,11 @@ namespace BrightcoveMapiWrapper.Util
 			}
 		}
 
+		/// <summary>
+		/// Throws an exception if certain conditions are met.
+		/// </summary>
+		/// <param name="objError"></param>
+		/// <param name="serializer"></param>
 		private static void ThrowIfError(object objError, JavaScriptSerializer serializer)
 		{
 			if (objError != null)

@@ -23,6 +23,9 @@ namespace BrightcoveMapiWrapper.Api
 	{
 		private const string _methodParamsKey = "params";
 
+		/// <summary>
+		/// The pointer to the Configuration of the <see cref="Connector"/>. />
+		/// </summary>
 		public BrightcoveApiConfig Configuration
 		{
 			get
@@ -31,6 +34,9 @@ namespace BrightcoveMapiWrapper.Api
 			}
 		}
 
+		/// <summary>
+		/// The Connector used for Brightcove connections.
+		/// </summary>
 		public IBrightcoveApiConnector Connector
 		{
 			get;

@@ -420,20 +420,20 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
 		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
 		/// must be present to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
-        /// to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="pageSize">Number of items returned per page. (max 100)</param>
 		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
 		/// <param name="exact">If true, disables fuzzy search and requires an exact match of search terms. 
 		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
 		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
 		/// available only if your account is based in the United States.</param>
-        /// <param name="sortFields">Specifies the list of fields by which to sort results.</param>
+		/// <param name="sortFields">Specifies the <see cref="SortedFieldDictionary"/> by which to sort results.</param>
 		/// <param name="videoFields">A list of the fields you wish to have populated in the Videos contained 
 		/// in the returned object. If you omit this parameter, the method returns the following fields of 
 		/// the video: id, name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, 
@@ -446,35 +446,35 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="getItemCount">If true, also return how many total results there are.</param>
 		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
-                                                                      int pageSize, int pageNumber, bool exact, Dictionary<SortBy, SortOrder> sortFields,
+																	  int pageSize, int pageNumber, bool exact, SortedFieldDictionary sortFields,
 																	  IEnumerable<string> videoFields, IEnumerable<string> customFields, bool getItemCount)
 		{
 			NameValueCollection parms = BuildBasicReadParams("search_videos");
 
-            if (all != null)
-            {
-                parms.AddRange("all", all.Select(o => o.ToBrightcoveString()));
-            }
+			if (all != null)
+			{
+				parms.AddRange("all", all.Select(o => o.ToBrightcoveString()));
+			}
 
-            if (any != null)
-            {
-                parms.AddRange("any", any.Select(o => o.ToBrightcoveString()));
-            }
+			if (any != null)
+			{
+				parms.AddRange("any", any.Select(o => o.ToBrightcoveString()));
+			}
 
-            if (none != null)
-            {
-                parms.AddRange("none", none.Select(o => o.ToBrightcoveString()));
-            }
+			if (none != null)
+			{
+				parms.AddRange("none", none.Select(o => o.ToBrightcoveString()));
+			}
 
-            if (sortFields != null)
-            {
-                parms.Add("sort_by", String.Join(",", sortFields.Select(x => string.Format("{0}:{1}", x.Key.ToBrightcoveName(), x.Value.ToBrightcoveName())).ToArray()));
-            }
+			if (sortFields != null)
+			{
+				parms.Add("sort_by", String.Join(",", sortFields.OrderedDictionary.Select(x => string.Format("{0}:{1}", x.Key.ToBrightcoveName(), x.Value.ToBrightcoveName())).ToArray()));
+			}
 
 			parms.Add("exact", exact.ToString().ToLower());
 			parms.Add("page_size", pageSize.ToString());
 			parms.Add("page_number", pageNumber.ToString());
-            parms.Add("get_item_count", getItemCount.ToString().ToLower());
+			parms.Add("get_item_count", getItemCount.ToString().ToLower());
 
 			if (videoFields != null)
 			{
@@ -486,7 +486,6 @@ namespace BrightcoveMapiWrapper.Api
 				parms.AddRange("custom_fields", customFields);
 			}
 
-			
 			return RunQuery<BrightcoveItemCollection<BrightcoveVideo>>(parms);
 		}
 
@@ -495,10 +494,10 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
 		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
 		/// must be present to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
 		/// to return a hit in the result set. If the field's name is not present, it will 
 		/// search among the name, shortDescription, and longDescription fields by default.</param>
@@ -508,7 +507,142 @@ namespace BrightcoveMapiWrapper.Api
 		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
 		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
 		/// available only if your account is based in the United States.</param>
-        /// <param name="sortFields">Specifies the list of fields by which to sort results.</param>
+		/// <param name="sortFields">Specifies the unique list of fields by which to sort results.</param>
+		/// <param name="videoFields">A list of the fields you wish to have populated in the Videos contained 
+		/// in the returned object. If you omit this parameter, the method returns the following fields of 
+		/// the video: id, name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, 
+		/// linkURL, linkText, tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, 
+		/// playsTrailingWeek. If you use a token with URL access, this method also returns FLVURL, renditions, 
+		/// FLVFullLength, videoFullLength.</param>
+		/// <param name="customFields">A list of the custom fields you wish to have populated in the videos 
+		/// contained in the returned object. If you omit this parameter, no custom fields are returned, unless you 
+		/// include the value 'customFields' in the video_fields parameter.</param>
+		/// <returns></returns>
+		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
+																	  int pageSize, int pageNumber, bool exact, SortedFieldDictionary sortFields,
+																	  IEnumerable<string> videoFields, IEnumerable<string> customFields)
+		{
+			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortFields, videoFields, customFields, true);
+		}
+
+		/// <summary>
+		/// Searches videos according to the criteria provided by the user.
+		/// </summary>
+		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
+		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
+		/// must be present to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
+		/// to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="pageSize">Number of items returned per page. (max 100)</param>
+		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
+		/// <param name="exact">If true, disables fuzzy search and requires an exact match of search terms. 
+		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
+		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
+		/// available only if your account is based in the United States.</param>
+		/// <param name="sortFields">Specifies the unique list of fields by which to sort results.</param>
+		/// <param name="videoFields">A list of the fields you wish to have populated in the Videos contained 
+		/// in the returned object. If you omit this parameter, the method returns the following fields of 
+		/// the video: id, name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, 
+		/// linkURL, linkText, tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, 
+		/// playsTrailingWeek. If you use a token with URL access, this method also returns FLVURL, renditions, 
+		/// FLVFullLength, videoFullLength.</param>
+		/// <returns></returns>
+		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
+																	  int pageSize, int pageNumber, bool exact, SortedFieldDictionary sortFields,
+																	  IEnumerable<string> videoFields)
+		{
+			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortFields, videoFields, null);
+		}
+
+		/// <summary>
+		/// Searches videos according to the criteria provided by the user.
+		/// </summary>
+		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
+		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
+		/// must be present to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
+		/// to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="pageSize">Number of items returned per page. (max 100)</param>
+		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
+		/// <param name="exact">If true, disables fuzzy search and requires an exact match of search terms. 
+		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
+		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
+		/// available only if your account is based in the United States.</param>
+		/// <param name="sortFields">Specifies the unique list of fields by which to sort results.</param>
+		/// <returns></returns>
+		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
+																	  int pageSize, int pageNumber, bool exact, SortedFieldDictionary sortFields)
+		{
+			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortFields, null);
+		}
+
+		/// <summary>
+		/// Searches videos according to the criteria provided by the user.
+		/// </summary>
+		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
+		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
+		/// must be present to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
+		/// to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="pageSize">Number of items returned per page. (max 100)</param>
+		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
+		/// <param name="exact">If true, disables fuzzy search and requires an exact match of search terms. 
+		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
+		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
+		/// available only if your account is based in the United States.</param>
+		/// <param name="sortBy">Specifies the field by which to sort results.</param>
+		/// <param name="sortOrder">Specifies the direction in which to sort results.</param>
+		/// <param name="videoFields">A list of the fields you wish to have populated in the Videos contained 
+		/// in the returned object. If you omit this parameter, the method returns the following fields of 
+		/// the video: id, name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, 
+		/// linkURL, linkText, tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, 
+		/// playsTrailingWeek. If you use a token with URL access, this method also returns FLVURL, renditions, 
+		/// FLVFullLength, videoFullLength.</param>
+		/// <param name="customFields">A list of the custom fields you wish to have populated in the videos 
+		/// contained in the returned object. If you omit this parameter, no custom fields are returned, unless you 
+		/// include the value 'customFields' in the video_fields parameter.</param>
+		/// <param name="getItemCount">If true, also return how many total results there are.</param>
+		/// <returns>A collection of videos matching the specified criteria.</returns>
+		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
+																	  int pageSize, int pageNumber, bool exact, SortBy sortBy, SortOrder sortOrder,
+																	  IEnumerable<string> videoFields, IEnumerable<string> customFields, bool getItemCount)
+		{
+			return SearchVideos(all, any, none, pageSize, pageNumber, exact, new SortedFieldDictionary(sortBy, sortOrder), videoFields,
+			                    customFields, getItemCount);
+		}
+
+		/// <summary>
+		/// Searches videos according to the criteria provided by the user.
+		/// </summary>
+		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
+		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
+		/// must be present to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
+		/// to return a hit in the result set. If the field's name is not present, it will 
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// <param name="pageSize">Number of items returned per page. (max 100)</param>
+		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
+		/// <param name="exact">If true, disables fuzzy search and requires an exact match of search terms. 
+		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
+		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
+		/// available only if your account is based in the United States.</param>
+		/// <param name="sortBy">Specifies the field by which to sort results.</param>
+		/// <param name="sortOrder">Specifies the direction in which to sort results.</param>
 		/// <param name="videoFields">A list of the fields you wish to have populated in the Videos contained 
 		/// in the returned object. If you omit this parameter, the method returns the following fields of 
 		/// the video: id, name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, 
@@ -520,10 +654,10 @@ namespace BrightcoveMapiWrapper.Api
 		/// include the value 'customFields' in the video_fields parameter.</param>
 		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
-                                                                      int pageSize, int pageNumber, bool exact, Dictionary<SortBy, SortOrder> sortFields,
+																	  int pageSize, int pageNumber, bool exact, SortBy sortBy, SortOrder sortOrder,
 																	  IEnumerable<string> videoFields, IEnumerable<string> customFields)
 		{
-			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortFields, videoFields, customFields, true);
+			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortBy, sortOrder, videoFields, customFields, true);
 		}
 
 		/// <summary>
@@ -531,10 +665,10 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
 		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
 		/// must be present to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
 		/// to return a hit in the result set. If the field's name is not present, it will 
 		/// search among the name, shortDescription, and longDescription fields by default.</param>
@@ -544,7 +678,8 @@ namespace BrightcoveMapiWrapper.Api
 		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
 		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
 		/// available only if your account is based in the United States.</param>
-        /// <param name="sortFields">Specifies the list of fields by which to sort results.</param>
+		/// <param name="sortBy">Specifies the field by which to sort results.</param>
+		/// <param name="sortOrder">Specifies the direction in which to sort results.</param>
 		/// <param name="videoFields">A list of the fields you wish to have populated in the Videos contained 
 		/// in the returned object. If you omit this parameter, the method returns the following fields of 
 		/// the video: id, name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, 
@@ -553,10 +688,10 @@ namespace BrightcoveMapiWrapper.Api
 		/// FLVFullLength, videoFullLength.</param>
 		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
-                                                                      int pageSize, int pageNumber, bool exact, Dictionary<SortBy, SortOrder> sortFields,
+																	  int pageSize, int pageNumber, bool exact, SortBy sortBy, SortOrder sortOrder,
 																	  IEnumerable<string> videoFields)
 		{
-			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortFields, videoFields, null);
+		    return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortBy, sortOrder, videoFields, null);
 		}
 
 		/// <summary>
@@ -564,10 +699,10 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
 		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
 		/// must be present to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
 		/// to return a hit in the result set. If the field's name is not present, it will 
 		/// search among the name, shortDescription, and longDescription fields by default.</param>
@@ -577,12 +712,13 @@ namespace BrightcoveMapiWrapper.Api
 		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
 		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
 		/// available only if your account is based in the United States.</param>
-        /// <param name="sortFields">Specifies the list of fields by which to sort results.</param>
-        /// <returns>A collection of videos matching the specified criteria.</returns>
+		/// <param name="sortBy">Specifies the field by which to sort results.</param>
+		/// <param name="sortOrder">Specifies the direction in which to sort results.</param>
+		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
-                                                                      int pageSize, int pageNumber, bool exact, Dictionary<SortBy, SortOrder> sortFields)
+																	  int pageSize, int pageNumber, bool exact, SortBy sortBy, SortOrder sortOrder)
 		{
-			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortFields, null, null);
+			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortBy, sortOrder, null);
 		}
 
 		/// <summary>
@@ -590,10 +726,10 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
 		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
 		/// must be present to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
 		/// to return a hit in the result set. If the field's name is not present, it will 
 		/// search among the name, shortDescription, and longDescription fields by default.</param>
@@ -603,11 +739,11 @@ namespace BrightcoveMapiWrapper.Api
 		/// A fuzzy search does not require an exact match of the indexed terms, but will return a hit for 
 		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
 		/// available only if your account is based in the United States.</param>
-        /// <returns>A collection of videos matching the specified criteria.</returns>
+		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
 																	  int pageSize, int pageNumber, bool exact)
 		{
-		    return SearchVideos(all, any, none, pageSize, pageNumber, exact, new Dictionary<SortBy, SortOrder> {{SortBy.CreationDate, SortOrder.Ascending}});
+			return SearchVideos(all, any, none, pageSize, pageNumber, exact, SortBy.CreationDate, SortOrder.Ascending);
 		}
 
 		/// <summary>
@@ -615,16 +751,16 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
 		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
 		/// must be present to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
 		/// to return a hit in the result set. If the field's name is not present, it will 
 		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="pageSize">Number of items returned per page. (max 100)</param>
 		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
-        /// <returns>A collection of videos matching the specified criteria.</returns>
+		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
 																	  int pageSize, int pageNumber)
 		{
@@ -636,10 +772,10 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="all">Specifies the field:value pairs for search criteria that MUST be present in 
 		/// the index in order to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="any">Specifies the field:value pairs for search criteria AT LEAST ONE of which 
 		/// must be present to return a hit in the result set. If the field's name is not present, it will 
-        /// search among the name, shortDescription, and longDescription fields by default.</param>
+		/// search among the name, shortDescription, and longDescription fields by default.</param>
 		/// <param name="none">Specifies the field:value pairs for search criteria that MUST NOT be present 
 		/// to return a hit in the result set. If the field's name is not present, it will 
 		/// search among the name, shortDescription, and longDescription fields by default.</param>

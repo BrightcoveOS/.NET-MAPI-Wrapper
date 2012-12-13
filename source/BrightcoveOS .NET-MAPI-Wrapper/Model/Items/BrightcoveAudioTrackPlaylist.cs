@@ -29,7 +29,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<long> AudioTrackIds
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<BrightcoveAudioTrack> AudioTracks
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<string> FilterTags
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>

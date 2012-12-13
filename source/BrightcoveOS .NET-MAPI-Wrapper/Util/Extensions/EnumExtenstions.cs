@@ -6,6 +6,9 @@ using BrightcoveMapiWrapper.Model;
 
 namespace BrightcoveMapiWrapper.Util.Extensions
 {
+	/// <summary>
+	/// Manipulates enums as extension methods.
+	/// </summary>
 	public static class EnumExtenstions
 	{
 		/// <summary>

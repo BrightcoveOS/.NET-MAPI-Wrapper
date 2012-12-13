@@ -32,7 +32,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<string> FilterTags
 		{
 			get;
-			private set;
+			set;
 		}
 
 
@@ -120,7 +120,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<long> VideoIds
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -129,7 +129,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<BrightcoveVideo> Videos
 		{
 			get;
-			private set;
+			set;
 		}
 
 		#endregion

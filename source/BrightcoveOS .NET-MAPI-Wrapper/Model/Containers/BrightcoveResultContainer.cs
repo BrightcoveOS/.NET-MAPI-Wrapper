@@ -6,8 +6,15 @@ using BrightcoveMapiWrapper.Util;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
+	/// <summary>
+	/// A container for items contained within the POST response container.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class BrightcoveResultContainer<T> : IJavaScriptConvertable
 	{
+		/// <summary>
+		/// A type of result.
+		/// </summary>
 		public T Result
 		{
 			get;

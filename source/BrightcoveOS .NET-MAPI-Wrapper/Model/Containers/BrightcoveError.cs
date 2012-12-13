@@ -5,10 +5,16 @@ using BrightcoveMapiWrapper.Serialization;
 
 namespace BrightcoveMapiWrapper.Model.Containers
 {
+	/// <summary>
+	/// An error returned from the Brightcove API.
+	/// </summary>
 	public class BrightcoveError : IBrightcoveError, IJavaScriptConvertable
 	{
 		#region Properties
 
+		/// <summary>
+		/// The name of the error.
+		/// </summary>
 		public string Name
 		{
 			get;
@@ -19,12 +25,18 @@ namespace BrightcoveMapiWrapper.Model.Containers
 
 		#region IBrightcoveError implementation
 
+		/// <summary>
+		/// The error code message.
+		/// </summary>
 		public string Message
 		{
 			get;
 			private set;
 		}
 
+		/// <summary>
+		/// The error code number.
+		/// </summary>
 		public int Code
 		{
 			get;
