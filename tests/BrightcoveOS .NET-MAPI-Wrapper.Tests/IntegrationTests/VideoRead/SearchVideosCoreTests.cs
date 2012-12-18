@@ -14,7 +14,7 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 	/// <summary>
 	/// Integration tests of video search results.
 	/// </summary>
-	[TestFixture(ApiKeys.VideoReadKey)]
+	[TestFixture(ApiKeys.ReadToken)]
 	public class SearchVideosCoreTests
 	{
 		public BrightcoveApi Api;

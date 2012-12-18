@@ -66,6 +66,8 @@
     <Compile Include="IntegrationTests\VideoRead\FindVideosByTextTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\SearchVideosCoreTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\SearchVideosUrlConstructionTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\VideoReadTestBase.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\VideoWriteTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

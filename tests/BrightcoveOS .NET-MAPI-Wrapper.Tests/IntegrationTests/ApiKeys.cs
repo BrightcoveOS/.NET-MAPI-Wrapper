@@ -8,8 +8,13 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests
 	public class ApiKeys
 	{
 		/// <summary>
-		/// Read token taken from Brightcoves media API sample @ http://docs.brightcove.com/en/media/samples/search_videos.html.
+		/// Read token taken from Brightcoves media API sample @ http://docs.brightcove.com/en/media/samples/search_videos.html
 		/// </summary>
-		public const string VideoReadKey = "ZY4Ls9Hq6LCBgleGDTaFRDLWWBC8uoXQun0xEEXtlDUHBDPZBCOzbw..";
+		public const string ReadToken = "ZY4Ls9Hq6LCBgleGDTaFRDLWWBC8uoXQun0xEEXtlDUHBDPZBCOzbw..";
+
+		/// <summary>
+		/// Write token taken from Brightcoves media API sample @ http://docs.brightcove.com/en/media/samples/update_video.html
+		/// </summary>
+		public const string WriteToken = "ZY4Ls9Hq6LCBgleGDTaFRDLWWBC8uoXQHkhGuDebKvjFPjHb3iT-4g..";
 	}
 }

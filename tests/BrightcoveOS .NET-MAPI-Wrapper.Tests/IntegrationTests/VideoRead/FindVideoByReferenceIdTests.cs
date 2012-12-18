@@ -9,17 +9,9 @@ using NUnit.Framework;
 namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 {
 	[TestFixture]
-	public class FindVideoByReferenceIdTests
+	public class FindVideoByReferenceIdTests : VideoReadTestBase
 	{
 		private string _refId = "1939643268001";
-		private BrightcoveApi _api;
-
-		[SetUp]
-		public void SetUp()
-		{
-			// Reset to default configuration
-			_api = BrightcoveApiFactory.CreateApi(ApiKeys.VideoReadKey);
-		}
 
 		[Test]
 		public void FindVideoByRefId_Basic()

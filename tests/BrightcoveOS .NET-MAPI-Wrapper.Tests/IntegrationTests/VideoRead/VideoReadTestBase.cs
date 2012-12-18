@@ -9,15 +9,15 @@ using NUnit.Framework;
 
 namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 {
-	[TestFixture]
-	public class FindModifiedVideosTests : VideoReadTestBase
+	public abstract class VideoReadTestBase
 	{
-		[Test]
-		public void FindModifiedVideos_Basic()
-		{
-			_videos = _api.FindModifiedVideos(DateTime.Now.AddMonths(-2), null, 1, 0);
+		protected BrightcoveApi _api;
+		protected BrightcoveItemCollection<BrightcoveVideo> _videos;
 
-			Assert.Greater(_videos.Count, 0);
+		[SetUp]
+		public void SetUp()
+		{
+			_api = BrightcoveApiFactory.CreateApi(ApiKeys.ReadToken);
 		}
 	}
 }
