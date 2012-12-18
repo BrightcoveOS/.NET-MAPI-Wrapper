@@ -55,6 +55,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\ApiKeys.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindAllVideosTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindModifiedVideosTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindRelatedVideosTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideoByIdTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideoByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByIdsTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByReferenceIdsTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByTagsTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByTextTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\SearchVideosCoreTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\SearchVideosUrlConstructionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
