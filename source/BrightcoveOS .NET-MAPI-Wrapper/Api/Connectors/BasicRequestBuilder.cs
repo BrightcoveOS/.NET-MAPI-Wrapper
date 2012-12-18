@@ -34,6 +34,7 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.Timeout = Configuration.RequestTimeout;
 			request.UserAgent = Configuration.UserAgent;
+			
 			return request;
 		}
 		
@@ -63,6 +64,9 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			// request properties
 			request.Method = "POST";
 			request.ContentType = contentType;
+
+			// Turn off write stream buffering for file uploads to reduce memory usage
+			request.AllowWriteStreamBuffering = false;
 			
 			WriteMultipartFormData(request, postParameters, fileToUpload, boundary);
 
