@@ -1013,6 +1013,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="getItemCount">If true, also return how many total results there are.</param>
 		/// <returns>An ItemCollection representing the requested page of Videos uploaded by the specified user, 
 		/// in the order specified.</returns>
+		[Obsolete("The find_videos_by_user_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByUserId(string userId, int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder,
 																			IEnumerable<string> videoFields, IEnumerable<string> customFields, bool getItemCount)
 		{
@@ -1059,6 +1060,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// returned, unless you include the value 'customFields' in the video_fields parameter.</param>
 		/// <returns>An ItemCollection representing the requested page of Videos uploaded by the specified user, 
 		/// in the order specified.</returns>
+		[Obsolete("The find_videos_by_user_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByUserId(string userId, int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder,
 																			IEnumerable<string> videoFields, IEnumerable<string> customFields)
 		{
@@ -1083,6 +1085,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
 		/// <returns>An ItemCollection representing the requested page of Videos uploaded by the specified user, 
 		/// in the order specified.</returns>
+		[Obsolete("The find_videos_by_user_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByUserId(string userId, int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder,
 																			IEnumerable<string> videoFields)
 		{
@@ -1101,6 +1104,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="sortOrder">How to order the results: ascending or descending.</param>
 		/// <returns>An ItemCollection representing the requested page of Videos uploaded by the specified user, 
 		/// in the order specified.</returns>
+		[Obsolete("The find_videos_by_user_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByUserId(string userId, int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder)
 		{
 			return FindVideosByUserId(userId, pageSize, pageNumber, sortBy, sortOrder, null);
@@ -1117,6 +1121,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="sortBy">The field by which to sort the results.</param>
 		/// <returns>An ItemCollection representing the requested page of Videos uploaded by the specified user, 
 		/// in the order specified.</returns>
+		[Obsolete("The find_videos_by_user_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByUserId(string userId, int pageSize, int pageNumber, SortBy sortBy)
 		{
 			return FindVideosByUserId(userId, pageSize, pageNumber, sortBy, SortOrder.Ascending);
@@ -1132,6 +1137,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
 		/// <returns>An ItemCollection representing the requested page of Videos uploaded by the specified user, 
 		/// in the order specified.</returns>
+		[Obsolete("The find_videos_by_user_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByUserId(string userId, int pageSize, int pageNumber)
 		{
 			return FindVideosByUserId(userId, pageSize, pageNumber, SortBy.CreationDate);
@@ -1144,6 +1150,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="userId">The id of the user whose videos we'd like to retrieve.</param>
 		/// <returns>An ItemCollection representing the requested page of Videos uploaded by the specified user, 
 		/// in the order specified.</returns>
+		[Obsolete("The find_videos_by_user_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByUserId(string userId)
 		{
 			return FindVideosByUserId(userId, 100, 0);
@@ -1173,6 +1180,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// returned, unless you include the value 'customFields' in the video_fields parameter.</param>
 		/// <param name="getItemCount">If true, also return how many total results there are in this campaign.</param>
 		/// <returns>The requested subset of all videos for the given campaign.</returns>
+		[Obsolete("The find_videos_by_campaign_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByCampaignId(long campaignId, int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder, 
 																				IEnumerable<string> videoFields, IEnumerable<string> customFields, bool getItemCount)
 		{
@@ -1217,6 +1225,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// in the videos contained in the returned object. If you omit this parameter, no custom fields are 
 		/// returned, unless you include the value 'customFields' in the video_fields parameter.</param>
 		/// <returns>The requested subset of all videos for the given campaign.</returns>
+		[Obsolete("The find_videos_by_campaign_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByCampaignId(long campaignId, int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder,
 																				IEnumerable<string> videoFields, IEnumerable<string> customFields)
 		{
@@ -1239,6 +1248,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// referenceId, length, economics, playsTotal, playsTrailingWeek. If you use a token with URL 
 		/// access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
 		/// <returns>The requested subset of all videos for the given campaign.</returns>
+		[Obsolete("The find_videos_by_campaign_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByCampaignId(long campaignId, int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder,
 																				IEnumerable<string> videoFields)
 		{
@@ -1255,6 +1265,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="sortBy">The field by which to sort the results.</param>
 		/// <param name="sortOrder">How to order the results: ascending or descending.</param>
 		/// <returns>The requested subset of all videos for the given campaign.</returns>
+		[Obsolete("The find_videos_by_campaign_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByCampaignId(long campaignId, int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder)
 		{
 			return FindVideosByCampaignId(campaignId, pageSize, pageNumber, sortBy, sortOrder, null);
@@ -1269,6 +1280,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
 		/// <param name="sortBy">The field by which to sort the results.</param>
 		/// <returns>The requested subset of all videos for the given campaign.</returns>
+		[Obsolete("The find_videos_by_campaign_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByCampaignId(long campaignId, int pageSize, int pageNumber, SortBy sortBy)
 		{
 			return FindVideosByCampaignId(campaignId, pageSize, pageNumber, sortBy, SortOrder.Ascending);
@@ -1282,6 +1294,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// maximum page size is 100.</param>
 		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
 		/// <returns>The requested subset of all videos for the given campaign.</returns>
+		[Obsolete("The find_videos_by_campaign_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByCampaignId(long campaignId, int pageSize, int pageNumber)
 		{
 			return FindVideosByCampaignId(campaignId, pageSize, pageNumber, SortBy.CreationDate);
@@ -1292,6 +1305,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="campaignId">The id of the campaign you'd like to fetch videos for.</param>
 		/// <returns>The requested subset of all videos for the given campaign.</returns>
+		[Obsolete("The find_videos_by_campaign_id call has been deprecated by Brightcove")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByCampaignId(long campaignId)
 		{
 			return FindVideosByCampaignId(campaignId, 100, 0);
@@ -1499,6 +1513,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// returned, unless you include the value 'customFields' in the video_fields parameter.</param>
 		/// <param name="getItemCount">If true, also return how many total results there are.</param>
 		/// <returns>A collection of videos whose name, short description, or long description contain a match for the text specified.</returns>
+		[Obsolete("The find_videos_by_text call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByText(string text, int pageSize, int pageNumber, IEnumerable<string> videoFields, IEnumerable<string> customFields, bool getItemCount)
 		{
 			NameValueCollection parms = BuildBasicReadParams("find_videos_by_text");
@@ -1539,6 +1554,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// in the videos contained in the returned object. If you omit this parameter, no custom fields are 
 		/// returned, unless you include the value 'customFields' in the video_fields parameter.</param>
 		/// <returns>A collection of videos whose name, short description, or long description contain a match for the text specified.</returns>
+		[Obsolete("The find_videos_by_text call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByText(string text, int pageSize, int pageNumber, IEnumerable<string> videoFields, IEnumerable<string> customFields)
 		{
 			return FindVideosByText(text, pageSize, pageNumber, videoFields, customFields, true);
@@ -1559,6 +1575,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// referenceId, length, economics, playsTotal, playsTrailingWeek. If you use a token with URL 
 		/// access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
 		/// <returns>A collection of videos whose name, short description, or long description contain a match for the text specified.</returns>
+		[Obsolete("The find_videos_by_text call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByText(string text, int pageSize, int pageNumber, IEnumerable<string> videoFields)
 		{
 			return FindVideosByText(text, pageSize, pageNumber, videoFields, null);
@@ -1573,6 +1590,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// request. The maximum page size is 100.</param>
 		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
 		/// <returns>A collection of videos whose name, short description, or long description contain a match for the text specified.</returns>
+		[Obsolete("The find_videos_by_text call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByText(string text, int pageSize, int pageNumber)
 		{
 			return FindVideosByText(text, pageSize, pageNumber, null);
@@ -1584,6 +1602,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// </summary>
 		/// <param name="text">The text to search for.</param>
 		/// <returns>A collection of videos whose name, short description, or long description contain a match for the text specified.</returns>
+		[Obsolete("The find_videos_by_text call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByText(string text)
 		{
 			return FindVideosByText(text, 100, 0);
@@ -1592,7 +1611,7 @@ namespace BrightcoveMapiWrapper.Api
 		#endregion
 
 		#region FindVideosByTags
-
+		
 		/// <summary>
 		/// Performs a search on all the tags of the videos in this account, and returns a collection of videos that 
 		/// contain the specified tags. Note that tags are not case-sensitive.
@@ -1615,6 +1634,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// returned, unless you include the value 'customFields' in the video_fields parameter.</param>
 		/// <param name="getItemCount">If true, also return how many total results there are.</param>
 		/// <returns>A collection of videos whose tags match the tags specified.</returns>
+		[Obsolete("The find_videos_by_tags call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByTags(IEnumerable<string> andTags, IEnumerable<string> orTags, int pageSize, int pageNumber, SortBy sortBy, 
 			SortOrder sortOrder, IEnumerable<string> videoFields, IEnumerable<string> customFields, bool getItemCount)
 		{
@@ -1670,6 +1690,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// in the videos contained in the returned object. If you omit this parameter, no custom fields are 
 		/// returned, unless you include the value 'customFields' in the video_fields parameter.</param>
 		/// <returns>A collection of videos whose tags match the tags specified.</returns>
+		[Obsolete("The find_videos_by_tags call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByTags(IEnumerable<string> andTags, IEnumerable<string> orTags, int pageSize, int pageNumber, SortBy sortBy,
 			SortOrder sortOrder, IEnumerable<string> videoFields, IEnumerable<string> customFields)
 		{
@@ -1694,6 +1715,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// referenceId, length, economics, playsTotal, playsTrailingWeek. If you use a token with URL 
 		/// access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
 		/// <returns>A collection of videos whose tags match the tags specified.</returns>
+		[Obsolete("The find_videos_by_tags call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByTags(IEnumerable<string> andTags, IEnumerable<string> orTags, int pageSize, int pageNumber, SortBy sortBy,
 			SortOrder sortOrder, IEnumerable<string> videoFields)
 		{
@@ -1712,6 +1734,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="sortBy">The field by which to sort the results.</param>
 		/// <param name="sortOrder">How to order the results: ascending or descending.</param>
 		/// <returns>A collection of videos whose tags match the tags specified.</returns>
+		[Obsolete("The find_videos_by_tags call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByTags(IEnumerable<string> andTags, IEnumerable<string> orTags, int pageSize, int pageNumber, SortBy sortBy,
 			SortOrder sortOrder)
 		{
@@ -1729,6 +1752,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
 		/// <param name="sortBy">The field by which to sort the results.</param>
 		/// <returns>A collection of videos whose tags match the tags specified.</returns>
+		[Obsolete("The find_videos_by_tags call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByTags(IEnumerable<string> andTags, IEnumerable<string> orTags, int pageSize, int pageNumber, SortBy sortBy)
 		{
 			return FindVideosByTags(andTags, orTags, pageSize, pageNumber, sortBy, SortOrder.Ascending);
@@ -1744,6 +1768,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// that satisfy the request. The maximum page size is 100.</param>
 		/// <param name="pageNumber">The zero-indexed number of the page to return.</param>
 		/// <returns>A collection of videos whose tags match the tags specified.</returns>
+		[Obsolete("The find_videos_by_tags call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByTags(IEnumerable<string> andTags, IEnumerable<string> orTags, int pageSize, int pageNumber)
 		{
 			return FindVideosByTags(andTags, orTags, pageSize, pageNumber, SortBy.CreationDate);
@@ -1756,6 +1781,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="andTags">Limit the results to those that contain all of these tags.</param>
 		/// <param name="orTags">Limit the results to those that contain at least one of these tags.</param>
 		/// <returns>A collection of videos whose tags match the tags specified.</returns>
+		[Obsolete("The find_videos_by_tags call has been deprecated by Brightcove in favor of the search_videos call")]
 		public BrightcoveItemCollection<BrightcoveVideo> FindVideosByTags(IEnumerable<string> andTags, IEnumerable<string> orTags)
 		{
 			return FindVideosByTags(andTags, orTags, 100, 0);
