@@ -62,6 +62,10 @@
     <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistsByReferenceIdsTests.cs" />
     <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistsForPlayerIdTests.cs" />
     <Compile Include="IntegrationTests\PlaylistRead\PlaylistReadTestBase.cs" />
+    <Compile Include="IntegrationTests\PlaylistWrite\CreatePlaylistTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistWrite\DeletePlaylistTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistWrite\PlaylistWriteTestBase.cs" />
+    <Compile Include="IntegrationTests\PlaylistWrite\UpdatePlaylistTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindAllVideosTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindModifiedVideosTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindRelatedVideosTests.cs" />
@@ -91,9 +95,7 @@
       <Name>BrightcoveOS .NET-MAPI-Wrapper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UnitTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Assets\Building_On_The_Past.mov" />
     <Content Include="Assets\test-image.png" />
