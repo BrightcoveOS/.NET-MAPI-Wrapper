@@ -55,6 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\ApiKeys.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindAllPlaylistsTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistByIdTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistsByIdsTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistsByReferenceIdsTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistsForPlayerIdTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\PlaylistReadTestBase.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindAllVideosTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindModifiedVideosTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindRelatedVideosTests.cs" />
