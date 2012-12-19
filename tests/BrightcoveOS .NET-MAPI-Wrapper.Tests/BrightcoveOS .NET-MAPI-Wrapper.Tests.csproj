@@ -67,6 +67,14 @@
     <Compile Include="IntegrationTests\VideoRead\SearchVideosCoreTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\SearchVideosUrlConstructionTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\VideoReadTestBase.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\AddImageTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\AddLogoOverlayTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\CreateVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\DeleteVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\GetUploadStatusTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\RemoveLogoOverlayTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\ShareVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\UpdateVideoTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\VideoWriteTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -78,6 +86,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UnitTests\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Building_On_The_Past.mov" />
+    <Content Include="Assets\test-image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
