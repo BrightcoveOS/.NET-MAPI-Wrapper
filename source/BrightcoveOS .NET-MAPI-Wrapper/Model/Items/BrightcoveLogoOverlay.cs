@@ -63,6 +63,9 @@ namespace BrightcoveMapiWrapper.Model.Items
 			set;
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BrightcoveLogoOverlay()
 		{
 			Alignment = LogoOverlayAlignment.BottomRight;

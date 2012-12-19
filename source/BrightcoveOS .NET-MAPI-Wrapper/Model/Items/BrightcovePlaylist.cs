@@ -134,6 +134,9 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#endregion
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BrightcovePlaylist()
 		{
 			FilterTags = new List<string>();

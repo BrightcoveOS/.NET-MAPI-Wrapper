@@ -56,8 +56,6 @@
   <ItemGroup>
     <Compile Include="Api\BrightcoveApi.cs" />
     <Compile Include="Api\BrightcoveApiConfig.cs" />
-    <Compile Include="Model\Containers\IOrderedDictionary.cs" />
-    <Compile Include="Model\Containers\OrderedDictionary.cs" />
     <Compile Include="Model\Containers\SortedFieldDictionary.cs" />
     <Compile Include="Model\Items\BrightcoveAudioTrack.cs" />
     <Compile Include="Model\Items\BrightcoveItem.cs" />

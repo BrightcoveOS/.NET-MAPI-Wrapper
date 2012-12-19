@@ -42,6 +42,9 @@ namespace BrightcoveMapiWrapper.Model.Containers
 
 		#endregion IBrightcoveError implementation
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BrightcoveNestedError()
 		{
 			Errors = new List<BrightcoveNestedError>();

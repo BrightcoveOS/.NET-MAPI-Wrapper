@@ -37,10 +37,17 @@ namespace BrightcoveMapiWrapper.Api
 			}
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BrightcoveApiException()
 		{
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="error">An encountered <see cref="BrightcoveError"/>.</param>
 		public BrightcoveApiException(BrightcoveError error)
 		{
 			_error = error;
@@ -48,6 +55,10 @@ namespace BrightcoveMapiWrapper.Api
 						  error.Name, error.Message, error.Code);
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="nestedError">An encountered <see cref="BrightcoveNestedError"/>.</param>
 		public BrightcoveApiException(BrightcoveNestedError nestedError)
 		{
 			_error = nestedError;
@@ -68,14 +79,30 @@ namespace BrightcoveMapiWrapper.Api
 			_message = sb.ToString();
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="message">The message that describes the error.</param>
 		public BrightcoveApiException(string message) : base(message)
 		{
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="message">The message that describes the error.</param>
+		/// <param name="innerException">The exception that is the cause of the current exception, or a null reference (Nothing in Visual Basic) if no inner exception is specified.</param>
 		public BrightcoveApiException(string message, Exception innerException) : base(message, innerException)
 		{
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+		/// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+		/// <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is null.</exception>
+		/// <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0).</exception>
 		protected BrightcoveApiException(SerializationInfo info, StreamingContext context) : base(info, context)
 		{
 		}

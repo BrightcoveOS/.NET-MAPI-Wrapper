@@ -210,6 +210,9 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#endregion
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BrightcoveAudioTrack ()
 		{
 			Tags = new List<string>();

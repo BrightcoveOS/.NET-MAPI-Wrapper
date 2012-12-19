@@ -362,33 +362,18 @@
 	}
 
 	/// <summary>
-	/// The valid values of the output argument for the read methods.
-	/// </summary>
-	public enum Output
-	{
-		/// <summary>
-		/// Default.
-		/// </summary>
-		Json,
-		/// <summary>
-		/// RSS with Media RSS and Video Cloud extensions.
-		/// </summary>
-		Mrss,
-		/// <summary>
-		/// For distribution through TubeMogul OneLoad.
-		/// </summary>
-		Tm
-	}
-
-	/// <summary>
 	/// Specify the region for setting the general service URL.
 	/// </summary>
 	public enum BrightcoveRegion
 	{
 		/// <summary>
+		/// No option specified.
+		/// </summary>
+		None = 0,
+		/// <summary>
 		/// Any unspecified region. Mapped to the .com generic top-level domain.
 		/// </summary>
-		Generic = 0,
+		Generic,
 		/// <summary>
 		/// Japan. Mapped to the .co.jp country code top-level domain.
 		/// </summary>

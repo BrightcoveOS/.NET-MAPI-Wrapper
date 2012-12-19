@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
@@ -14,16 +15,16 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		/// <summary>
 		/// A dictionary that preserves both uniqueness of SortBy (you can only sort by one field in a single request) and insertion order (the order by which you sort directly affects which items are returned by a single API call).
 		/// </summary>
-		public IOrderedDictionary<SortBy, SortOrder> OrderedDictionary { get; protected set; }
+		public IOrderedDictionary OrderedDictionary { get; protected set; }
 
 		/// <summary>
 		/// Constructor.
 		/// </summary>
-		/// <param name="orderedDictionary">A properly constructed <see cref="IOrderedDictionary{SortBy,SortOrder}"></see></param>
+		/// <param name="orderedDictionary">A properly constructed <see cref="IOrderedDictionary"></see></param>
 		/// <example>
 		/// The below snippet demonstrates how to pass in objects to this constructor.
 		/// <code>
-		/// var dict = new <see cref="OrderedDictionary{SortBy, SortOrder}"/>
+		/// var dict = new <see cref="OrderedDictionary"/>
 		///	{
 		///		{ SortBy.CreationDate, SortOrder.Ascending },
 		///		{ SortBy.CreationDate, SortOrder.Descending }
@@ -31,7 +32,7 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		///	SortedFieldDictionary sortFields = new SortedFieldDictionary(dict);
 		/// </code>
 		/// </example>
-		public SortedFieldDictionary(IOrderedDictionary<SortBy, SortOrder> orderedDictionary)
+		public SortedFieldDictionary(IOrderedDictionary orderedDictionary)
 		{
 			OrderedDictionary = orderedDictionary;
 		}
@@ -55,10 +56,10 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		/// Parses the parameters passed to the constructor.
 		/// </summary>
 		/// <param name="fields">The object[] passed to the constructor.</param>
-		/// <exception cref="ArgumentException">Either the length of <see cref="fields"/> is odd, each pair of objects within <see cref="fields"/> do not each comprise a valid <see cref="KeyValuePair{SortBy,SortOrder}"/>, or there is a duplicate <see cref="SortBy"/> key within <see cref="fields"/>.</exception>
+		/// <exception cref="ArgumentException">Either the length of the params argument is odd, each pair of objects within the params argument do not each comprise a valid <see cref="KeyValuePair{SortBy,SortOrder}"/>, or there is a duplicate <see cref="SortBy"/> key within the params argument.</exception>
 		private void ParseParams(ref object[] fields)
 		{
-			var orderedDictionary = new OrderedDictionary<SortBy, SortOrder>();
+			var orderedDictionary = new OrderedDictionary();
 			
 			// Must have an even number of items in the array.
 			if (fields.Length % 2 != 0)

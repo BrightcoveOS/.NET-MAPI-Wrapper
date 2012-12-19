@@ -117,6 +117,9 @@ namespace BrightcoveMapiWrapper.Model.Items
 			set;
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BrightcoveAudioTrackPlaylist()
 		{
 			AudioTrackIds = new List<long>();
