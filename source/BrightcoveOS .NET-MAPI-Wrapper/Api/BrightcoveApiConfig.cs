@@ -10,11 +10,6 @@ namespace BrightcoveMapiWrapper.Api
 	public class BrightcoveApiConfig
 	{
 		/// <summary>
-		/// A preformatted url stem to Brightcove's API.
-		/// </summary>
-		private const string ApiStem = "http://api.brightcove.{0}/services/{1}";
-
-		/// <summary>
 		/// The token that allows API reads for your account
 		/// </summary>
 		public string ReadToken
@@ -133,9 +128,12 @@ namespace BrightcoveMapiWrapper.Api
 		{
 			ReadToken = readToken;
 			WriteToken = writeToken;
+
 			string domain = region == BrightcoveRegion.Japan ? "co.jp" : "com";
-			ApiReadUrl = String.Format(ApiStem, domain, "library");
-			ApiWriteUrl = String.Format(ApiStem, domain, "post");
+			string apiStem = "http://api.brightcove.{0}/services/{1}";
+			ApiReadUrl = String.Format(apiStem, domain, "library");
+			ApiWriteUrl = String.Format(apiStem, domain, "post");
+
 			RequestTimeout = 100000; // .NET default
 			Encoding = Encoding.UTF8;
 			UserAgent = "Brightcove .NET MAPI Wrapper";
