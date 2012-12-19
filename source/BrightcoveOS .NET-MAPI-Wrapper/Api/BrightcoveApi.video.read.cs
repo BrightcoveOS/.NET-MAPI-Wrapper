@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -468,7 +469,13 @@ namespace BrightcoveMapiWrapper.Api
 
 			if (sortFields != null)
 			{
-				parms.Add("sort_by", String.Join(",", sortFields.OrderedDictionary.Select(x => string.Format("{0}:{1}", x.Key.ToBrightcoveName(), x.Value.ToBrightcoveName())).ToArray()));
+				string[] orderedFields = sortFields.OrderedDictionary.Cast<DictionaryEntry>()
+					.Where(x => x.Key is SortBy)
+					.Where(x => x.Value is SortOrder)
+					.Select(x => String.Format("{0}:{1}", ( (SortBy)x.Key ).ToBrightcoveName(), ( (SortOrder)x.Value ).ToBrightcoveName()))
+					.ToArray();
+
+				parms.Add("sort_by", String.Join(",", orderedFields));
 			}
 
 			parms.Add("exact", exact.ToString().ToLower());
@@ -517,7 +524,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="customFields">A list of the custom fields you wish to have populated in the videos 
 		/// contained in the returned object. If you omit this parameter, no custom fields are returned, unless you 
 		/// include the value 'customFields' in the video_fields parameter.</param>
-		/// <returns></returns>
+		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
 																	  int pageSize, int pageNumber, bool exact, SortedFieldDictionary sortFields,
 																	  IEnumerable<string> videoFields, IEnumerable<string> customFields)
@@ -550,7 +557,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// linkURL, linkText, tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, 
 		/// playsTrailingWeek. If you use a token with URL access, this method also returns FLVURL, renditions, 
 		/// FLVFullLength, videoFullLength.</param>
-		/// <returns></returns>
+		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
 																	  int pageSize, int pageNumber, bool exact, SortedFieldDictionary sortFields,
 																	  IEnumerable<string> videoFields)
@@ -577,7 +584,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// terms that are closely related based on language-specific criteria. The fuzzy search is 
 		/// available only if your account is based in the United States.</param>
 		/// <param name="sortFields">Specifies the unique list of fields by which to sort results.</param>
-		/// <returns></returns>
+		/// <returns>A collection of videos matching the specified criteria.</returns>
 		public BrightcoveItemCollection<BrightcoveVideo> SearchVideos(IEnumerable<FieldValuePair> all, IEnumerable<FieldValuePair> any, IEnumerable<FieldValuePair> none,
 																	  int pageSize, int pageNumber, bool exact, SortedFieldDictionary sortFields)
 		{
