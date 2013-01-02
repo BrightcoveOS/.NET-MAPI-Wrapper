@@ -13,7 +13,7 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.PlaylistRead
 		[Test]
 		public void FindPlaylistById_Test_Basic()
 		{
-			BrightcovePlaylist playlist = _api.FindPlaylistById(1963943648001);
+			BrightcovePlaylist playlist = _api.FindPlaylistById(1963943649001);
 
 			Assert.NotNull(playlist);
 			Assert.Greater(playlist.VideoIds.Count, 0);

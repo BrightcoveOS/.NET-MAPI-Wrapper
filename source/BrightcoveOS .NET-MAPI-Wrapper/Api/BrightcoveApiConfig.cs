@@ -130,7 +130,7 @@ namespace BrightcoveMapiWrapper.Api
 			WriteToken = writeToken;
 
 			string domain = region == BrightcoveRegion.Japan ? "co.jp" : "com";
-			string apiStem = "http://api.brightcove.{0}/services/{1}";
+			const string apiStem = "http://api.brightcove.{0}/services/{1}";
 			ApiReadUrl = String.Format(apiStem, domain, "library");
 			ApiWriteUrl = String.Format(apiStem, domain, "post");
 

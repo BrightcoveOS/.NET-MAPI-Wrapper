@@ -9,10 +9,19 @@ using BrightcoveMapiWrapper.Model.Items;
 
 namespace BrightcoveMapiWrapper.Serialization
 {
+	/// <summary>
+	/// Creates a <see cref="JavaScriptSerializer"/> suitable for Brightcove model items.
+	/// </summary>
 	public class BrightcoveSerializerFactory
 	{
+		/// <summary>
+		/// The static serializer.
+		/// </summary>
 		private static JavaScriptSerializer _serializer;
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		static BrightcoveSerializerFactory()
 		{
 			_serializer = new JavaScriptSerializer();
@@ -61,6 +70,10 @@ namespace BrightcoveMapiWrapper.Serialization
 						                              	});
 		}
 
+		/// <summary>
+		/// Gets the Brightcove serializer.
+		/// </summary>
+		/// <returns>The Brightcove serializer.</returns>
 		public static JavaScriptSerializer GetSerializer()
 		{
 			return _serializer;

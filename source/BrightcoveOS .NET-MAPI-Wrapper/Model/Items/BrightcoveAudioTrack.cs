@@ -220,6 +220,11 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#region IJavaScriptConvertable implementation
 
+		/// <summary>
+		/// Deserializes the specified dictionary.
+		/// </summary>
+		/// <param name="dictionary">The <see cref="IDictionary{String,Object}" />.</param>
+		/// <param name="serializer">The <see cref="JavaScriptSerializer" />.</param>
 		public void Deserialize(IDictionary<string, object> dictionary, JavaScriptSerializer serializer)
 		{
 			foreach (string key in dictionary.Keys)
@@ -318,6 +323,13 @@ namespace BrightcoveMapiWrapper.Model.Items
 			}
 		}
 
+		/// <summary>
+		/// Serializes the specified serializer.
+		/// </summary>
+		/// <param name="serializer">The serializer.</param>
+		/// <returns>
+		/// A serialized <see cref="IDictionary{String,Object}" />.
+		/// </returns>
 		public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
 		{
 			//Add each entry to the dictionary.
@@ -326,6 +338,8 @@ namespace BrightcoveMapiWrapper.Model.Items
 			dictionary.Add("referenceId", ReferenceId);
 			dictionary.Add("shortDescription", ShortDescription);
 			dictionary.Add("longDescription", LongDescription);
+			dictionary.Add("id", Id);
+			dictionary.Add("tags", Tags);
 
 			return dictionary;
 		}

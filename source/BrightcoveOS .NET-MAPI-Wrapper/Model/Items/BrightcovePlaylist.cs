@@ -148,6 +148,11 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#region Implementation of IJavaScriptConvertable
 
+		/// <summary>
+		/// Serializes the <see cref="BrightcovePlaylist"/>. Note that the <see cref="Videos"/> property is not serialized with the rest of the other properties, as including this property on updates causes an exception.
+		/// </summary>
+		/// <param name="serializer"></param>
+		/// <returns></returns>
 		public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
 		{
 			IDictionary<string, object> serialized = new Dictionary<string, object>();
@@ -162,10 +167,15 @@ namespace BrightcoveMapiWrapper.Model.Items
 			serialized["thumbnailURL"] = ThumbnailUrl;
 			serialized["videoIds"] = VideoIds;
 			serialized["videos"] = Videos;
-			
+
 			return serialized;
 		}
 
+		/// <summary>
+		/// Deserializes the specified dictionary.
+		/// </summary>
+		/// <param name="dictionary">The <see cref="IDictionary{String,Object}" />.</param>
+		/// <param name="serializer">The <see cref="JavaScriptSerializer" />.</param>
 		public void Deserialize(IDictionary<string, object> dictionary, JavaScriptSerializer serializer)
 		{
 			foreach (string key in dictionary.Keys)

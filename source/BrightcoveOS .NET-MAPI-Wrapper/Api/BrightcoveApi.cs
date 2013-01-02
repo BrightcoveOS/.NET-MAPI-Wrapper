@@ -17,7 +17,7 @@ using BrightcoveMapiWrapper.Serialization;
 namespace BrightcoveMapiWrapper.Api
 {
 	/// <summary>
-	/// .NET Wrapper for Brightcove's REST Media API
+	/// .NET Wrapper for Brightcove's REST Media API.
 	/// </summary>
 	public partial class BrightcoveApi
 	{
@@ -44,7 +44,7 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// .NET Wrapper for Brightcove's REST Media API
+		/// .NET Wrapper for Brightcove's REST Media API.
 		/// </summary>
 		/// <param name="connector"></param>
 		public BrightcoveApi(IBrightcoveApiConnector connector)
@@ -65,7 +65,7 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// Converts a wrapper model class into the corresponding json representation
+		/// Converts a wrapper model class into the corresponding JSON representation.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="obj"></param>
@@ -77,7 +77,7 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// Runs an API read query (HTTP GET) 
+		/// Runs an API read query (HTTP GET).
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="parms"></param>
@@ -101,7 +101,7 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// Runs an API write (HTTP POST) that includes file data 
+		/// Runs an API write (HTTP POST) that includes file data.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="fileToUpload"></param>
@@ -114,14 +114,15 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// Builds a collection of params common to all API read requests
+		/// Builds a collection of params common to all API read requests.
 		/// </summary>
-		/// <param name="command"></param>
-		/// <returns></returns>
-		protected NameValueCollection BuildBasicReadParams(string command)
+		/// <typeparam name="T">An enum of type <see cref="BrightcoveReadMethod"/>.</typeparam>
+		/// <param name="method">A valid <see cref="BrightcoveReadMethod"/> value to perform.</param>
+		/// <returns>A <see cref="NameValueCollection"/> containing the basic GET parameters.</returns>
+		protected NameValueCollection BuildBasicReadParams<T>(T method) where T : struct, IConvertible
 		{
 			NameValueCollection parms = new NameValueCollection();
-			parms.Add("command", command);
+			parms.Add("command", method.ToBrightcoveName().ToLower());
 			parms.Add("token", Configuration.ReadToken);
 
 			if (!String.IsNullOrEmpty(Configuration.MediaDelivery))
@@ -131,25 +132,68 @@ namespace BrightcoveMapiWrapper.Api
 			return parms;
 		}
 
+		///// <summary>
+		///// Builds a collection of params common to all API read requests
+		///// </summary>
+		///// <param name="command"></param>
+		///// <returns></returns>
+		//protected NameValueCollection BuildBasicReadParams(string command)
+		//{
+		//    NameValueCollection parms = new NameValueCollection();
+		//    parms.Add("command", command);
+		//    parms.Add("token", Configuration.ReadToken);
+
+		//    if (!String.IsNullOrEmpty(Configuration.MediaDelivery))
+		//    {
+		//        parms.Add("media_delivery", Configuration.MediaDelivery);
+		//    }
+		//    return parms;
+		//}
+
+
 		/// <summary>
-		/// Builds a collection of params common to all API write requests
+		/// Builds a collection of params common to all API write requests.
 		/// </summary>
-		/// <param name="method"></param>
-		/// <returns></returns>
-		private BrightcoveParamCollection BuildBasicWriteParams(string method)
+		/// <typeparam name="T">An enum of type <see cref="BrightcoveWriteMethod"/>.</typeparam>
+		/// <param name="method">A valid <see cref="BrightcoveWriteMethod"/> value to perform.</param>
+		/// <returns>A <see cref="NameValueCollection"/> containing the basic POST parameters.</returns>
+		private BrightcoveParamCollection BuildBasicWriteParams<T>(T method) where T : struct, IConvertible
 		{
 			BrightcoveParamCollection methodParams = new BrightcoveParamCollection();
 			methodParams.Add("token", Configuration.WriteToken);
 
 			BrightcoveParamCollection parms = new BrightcoveParamCollection();
-			parms.Add("method", method);
+			parms.Add("method", method.ToBrightcoveName().ToLower());
 			parms.Add(_methodParamsKey, methodParams);
 
 			return parms;
 		}
 
-		private BrightcoveParamCollection CreateWriteParamCollection(string method, Action<IDictionary<string, object>> addMethodParamsCallback)
+		///// <summary>
+		///// Builds a collection of params common to all API write requests
+		///// </summary>
+		///// <param name="method"></param>
+		///// <returns></returns>
+		//private BrightcoveParamCollection BuildBasicWriteParams(string method)
+		//{
+		//    BrightcoveParamCollection methodParams = new BrightcoveParamCollection();
+		//    methodParams.Add("token", Configuration.WriteToken);
+
+		//    BrightcoveParamCollection parms = new BrightcoveParamCollection();
+		//    parms.Add("method", method);
+		//    parms.Add(_methodParamsKey, methodParams);
+
+		//    return parms;
+		//}
+
+		
+		private BrightcoveParamCollection CreateWriteParamCollection<T>(T method, Action<IDictionary<string, object>> addMethodParamsCallback) where T : struct, IConvertible
 		{
+			if (!typeof(T).IsEnum)
+			{
+				throw new ArgumentException("T must be an enumerated type");
+			}
+
 			BrightcoveParamCollection parms = BuildBasicWriteParams(method);
 			if (addMethodParamsCallback != null)
 			{
@@ -158,6 +202,17 @@ namespace BrightcoveMapiWrapper.Api
 			}
 			return parms;
 		}
+
+		//private BrightcoveParamCollection CreateWriteParamCollection(string method, Action<IDictionary<string, object>> addMethodParamsCallback)
+		//{
+		//    BrightcoveParamCollection parms = BuildBasicWriteParams(method);
+		//    if (addMethodParamsCallback != null)
+		//    {
+		//        BrightcoveParamCollection methodParams = (BrightcoveParamCollection)parms[_methodParamsKey];
+		//        addMethodParamsCallback(methodParams);
+		//    }
+		//    return parms;
+		//}
 
 
 		private static void GetIdValuesForUpload(long numericId, string referenceId, string idPropName, string refPropName, out string propName, out object propValue)

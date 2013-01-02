@@ -41,11 +41,20 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			protected set;
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="configuration">An instance of <see cref="BrightcoveApiConfig"/> to set as an instance property.</param>
 		public BrightcoveApiConnector(BrightcoveApiConfig configuration) : 
 			this(configuration, new BasicRequestBuilder(configuration))
 		{	
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="configuration">An instance of <see cref="BrightcoveApiConfig"/> to set as an instance property.</param>
+		/// <param name="requestBuilder"></param>
 		public BrightcoveApiConnector(BrightcoveApiConfig configuration, IRequestBuilder requestBuilder)
 		{
 			Configuration = configuration;

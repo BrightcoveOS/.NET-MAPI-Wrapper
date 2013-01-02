@@ -17,7 +17,7 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoWrite
 		[SetUp]
 		public void SetUp()
 		{
-			_api = BrightcoveApiFactory.CreateApi(ApiKeys.ReadToken, ApiKeys.WriteToken);	
+			_api = BrightcoveApiFactory.CreateApi(ApiKeys.ReadToken, ApiKeys.WriteToken);
 		}
 	}
 }

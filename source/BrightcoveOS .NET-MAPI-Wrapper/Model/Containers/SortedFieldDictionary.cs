@@ -13,16 +13,16 @@ namespace BrightcoveMapiWrapper.Model.Containers
 	public class SortedFieldDictionary
 	{
 		/// <summary>
-		/// A dictionary that preserves both uniqueness of SortBy (you can only sort by one field in a single request) and insertion order (the order by which you sort directly affects which items are returned by a single API call).
+		/// A dictionary that preserves both uniqueness of <see cref="SortBy"/> (you can only sort by one field in a single request) and insertion order (the order by which you sort directly affects which items are returned by a single API call).
 		/// </summary>
 		public IOrderedDictionary OrderedDictionary { get; protected set; }
 
 		/// <summary>
 		/// Constructor.
 		/// </summary>
-		/// <param name="orderedDictionary">A properly constructed <see cref="IOrderedDictionary"></see></param>
+		/// <param name="orderedDictionary">A properly constructed <see cref="IOrderedDictionary"/>.</param>
 		/// <example>
-		/// The below snippet demonstrates how to pass in objects to this constructor.
+		/// The example below demonstrates how to pass in objects to this constructor.
 		/// <code>
 		/// var dict = new <see cref="OrderedDictionary"/>
 		///	{
@@ -42,7 +42,7 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		/// </summary>
 		/// <param name="fields">The <see cref="object"/> array passed to the constructor.</param>
 		/// <example>
-		/// The below snippet demonstrates how to pass in objects to this constructor.
+		/// The example below demonstrates how to pass in objects to this constructor.
 		/// <code>
 		/// SortedFieldDictionary sortFields = new SortedFieldDictionary(SortBy.DisplayName, SortOrder.Ascending, SortBy.CreationDate, SortOrder.Descending);
 		/// </code>
@@ -55,7 +55,7 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		/// <summary>
 		/// Parses the parameters passed to the constructor.
 		/// </summary>
-		/// <param name="fields">The object[] passed to the constructor.</param>
+		/// <param name="fields">The <see cref="T:Object[]"/> passed to the constructor.</param>
 		/// <exception cref="ArgumentException">Either the length of the params argument is odd, each pair of objects within the params argument do not each comprise a valid <see cref="KeyValuePair{SortBy,SortOrder}"/>, or there is a duplicate <see cref="SortBy"/> key within the params argument.</exception>
 		private void ParseParams(ref object[] fields)
 		{

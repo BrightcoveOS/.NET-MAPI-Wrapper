@@ -55,6 +55,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntegrationTests\ApiKeys.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\AudioTrackPlaylistReadTestBase.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAllAudioTrackPlaylistsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAudioTrackPlaylistByIdTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAudioTrackPlaylistByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAudioTrackPlaylistsByReferenceIds.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAudioTracksByPlaylistIdsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistWrite\AudioTrackPlaylistWriteTestBase.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistWrite\CreateAudioTrackPlaylistTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistWrite\DeleteAudioTrackPlaylistTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistWrite\UpdateAudioTrackPlaylistTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\AudioTrackReadTestBase.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAllAudioTracksTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTrackByIdTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTrackByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTracksByIdsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTracksByReferenceIdsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTracksByTagsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTracksByTextTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindModifiedAudioTracksTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\AddAudioImageTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\AudioTrackWriteTestBase.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\AudioTrackWriteTestBase.Samples.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\CreateAudioTrackTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\DeleteAudioTrackTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\GetAudioTrackUploadStatusTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\UpdateAudioTrackTests.cs" />
     <Compile Include="IntegrationTests\PlaylistRead\FindAllPlaylistsTests.cs" />
     <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistByIdTests.cs" />
     <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistByReferenceIdTests.cs" />
@@ -70,9 +96,13 @@
     <Compile Include="IntegrationTests\VideoRead\FindModifiedVideosTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindRelatedVideosTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindVideoByIdTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideoByIdUnfilteredTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindVideoByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideoByReferenceIdUnfilteredTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindVideosByIdsTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByIdsUnfilteredTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindVideosByReferenceIdsTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByReferenceIdsUnfilteredTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindVideosByTagsTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\FindVideosByTextTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\SearchVideosCoreTests.cs" />
@@ -85,6 +115,7 @@
     <Compile Include="IntegrationTests\VideoWrite\GetUploadStatusTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\RemoveLogoOverlayTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\ShareVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\UnshareVideoTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\UpdateVideoTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\VideoWriteTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,9 +126,15 @@
       <Name>BrightcoveOS .NET-MAPI-Wrapper</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="IntegrationTests\AudioTrackRead\AudioTrackReadTestBase.Samples.cs" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Building_On_The_Past.mov" />
+    <Content Include="Assets\FDR_Declares_War_19411208.mp3" />
+    <Content Include="Assets\GWBush_Oval_Office_Address_20010911.mp3" />
+    <Content Include="Assets\jfk_1963_0626_berliner_64kb.mp3" />
+    <Content Include="Assets\rslane32_-_SAX_STRING.mp3" />
     <Content Include="Assets\test-image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

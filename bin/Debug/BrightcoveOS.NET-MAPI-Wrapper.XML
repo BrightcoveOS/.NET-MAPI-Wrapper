@@ -13,29 +13,29 @@
             <summary>
             Builds a GET request for the specified URL.
             </summary>
-            <param name="url">The URL to request</param>
+            <param name="url">The URL to request.</param>
             <returns>An HttpWebRequest for GETing the specified URL.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.Connectors.IRequestBuilder.BuildPostFormRequest(System.String,System.Collections.Specialized.NameValueCollection)">
             <summary>
-            Builds a POST request for the specified URL and parameters
+            Builds a POST request for the specified URL and parameters.
             </summary>
-            <param name="postUrl">The URL to request</param>
-            <param name="postParameters">The parameters to POST</param>
+            <param name="postUrl">The URL to request.</param>
+            <param name="postParameters">The parameters to POST.</param>
             <returns>An HttpWebRequest that will POST the specified parameters.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.Connectors.IRequestBuilder.BuildMultipartFormDataPostRequest(System.String,System.Collections.Specialized.NameValueCollection,BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo)">
             <summary>
             Builds a POST request for the specified URL, parameters, and file data.
             </summary>
-            <param name="postUrl">The URL to request</param>
-            <param name="postParameters">The parameters to POST</param>
-            <param name="fileUploadInfo">Information about the file to be uploaded</param>
+            <param name="postUrl">The URL to request.</param>
+            <param name="postParameters">The parameters to POST.</param>
+            <param name="fileUploadInfo">Information about the file to be uploaded.</param>
             <returns></returns>
         </member>
         <member name="T:BrightcoveMapiWrapper.Api.BrightcoveApi">
             <summary>
-            .NET Wrapper for Brightcove's REST Media API
+            .NET Wrapper for Brightcove's REST Media API.
             </summary>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindAllAudioTracks(System.Int32,System.Int32,BrightcoveMapiWrapper.Model.SortBy,BrightcoveMapiWrapper.Model.SortOrder,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
@@ -491,6 +491,40 @@
             <param name="referenceId">The reference id.</param>
             <returns>The status of the upload</returns>
         </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DeleteAudioTrack(System.Int64,System.Boolean,System.Boolean)">
+            <summary>
+            Deletes an <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see>, specified by ID.
+            </summary>
+            <param name="audioTrackId">The ID of the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> you'd like to delete</param>
+            <param name="cascade">If true, <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> will be deleted even if it is part of a manual playlist or assigned to 
+            a player. The <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> will be removed from all playlists and players in which it appears, then deleted.</param>
+            <param name="deleteShares">Set this to true if you want also to delete shared copies of this <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see>. Note that 
+            this will delete all shared copies from your account, as well as from all accounts with which the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> has 
+            been shared, regardless of whether or not those accounts are currently using the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> in playlists or players.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DeleteAudioTrack(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Deletes a <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see>, specified by the reference ID.
+            </summary>
+            <param name="referenceId">The reference ID of the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> you'd like to delete</param>
+            <param name="cascade">If true, <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> will be deleted even if it is part of a manual playlist or assigned to 
+            a player. The <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> will be removed from all playlists and players in which it appears, then deleted.</param>
+            <param name="deleteShares">Set this to true if you want also to delete shared copies of this <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see>. Note that 
+            this will delete all shared copies from your account, as well as from all accounts with which the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> has 
+            been shared, regardless of whether or not those accounts are currently using the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> in playlists or players.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DoDeleteAudioTrack(System.Int64,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Figures out whether the user wants to delete an audio track by ID or reference Id, then performs the action.
+            </summary>
+            <param name="audioTrackId">The ID of the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> you'd like to delete</param>
+            <param name="referenceId">The reference ID of the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> you'd like to delete</param>
+            <param name="cascade">If true, <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> will be deleted even if it is part of a manual playlist or assigned to 
+            a player. The <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> will be removed from all playlists and players in which it appears, then deleted.</param>
+            <param name="deleteShares">Set this to true if you want also to delete shared copies of this <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see>. Note that 
+            this will delete all shared copies from your account, as well as from all accounts with which the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> has 
+            been shared, regardless of whether or not those accounts are currently using the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack">audio track</see> in playlists or players.</param>
+        </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.CreatePlaylist(BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist)">
             <summary>
             Creates a playlist
@@ -634,7 +668,7 @@
             <summary>
             Find multiple videos based on their publisher-assigned reference ids.
             </summary>
-            <param name="referenceIds">The list of reference ids for the videos to retrieve</param>
+            <param name="referenceIds">The list of reference ids for the videos to retrieve.</param>
             <param name="videoFields">A list of the fields you wish to have populated in the videos contained in the 
             returned object. If you omit this parameter, the method returns the following fields of the Video: id, 
             name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, 
@@ -651,7 +685,7 @@
             <summary>
             Find multiple videos based on their publisher-assigned reference ids.
             </summary>
-            <param name="referenceIds">The list of reference ids for the videos to retrieve</param>
+            <param name="referenceIds">The list of reference ids for the videos to retrieve.</param>
             <param name="videoFields">A list of the fields you wish to have populated in the videos contained in the 
             returned object. If you omit this parameter, the method returns the following fields of the Video: id, 
             name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, 
@@ -665,7 +699,7 @@
             <summary>
             Find multiple videos based on their publisher-assigned reference ids.
             </summary>
-            <param name="referenceIds">The list of reference ids for the videos to retrieve</param>
+            <param name="referenceIds">The list of reference ids for the videos to retrieve.</param>
             <returns>A collection of videos matching the specified reference ids. Note that if you pass in ids 
             that belong to videos that are either not active or not playable because of schedule constraints, then 
             the collection will contain null elements for the ids that are filtered out.</returns>
@@ -1043,6 +1077,29 @@
             to return a hit in the result set. If the field's name is not present, it will 
             search among the name, shortDescription, and longDescription fields by default.</param>
             <returns>A collection of videos matching the specified criteria.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindRelatedVideos(System.String,System.String,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Finds videos related to the given video. Combines the name and short description of the given 
+            video and searches for any partial matches in the name, description, and tags of all videos in 
+            the Brightcove media library for this account.
+            </summary>
+            <param name="searchParam">The parameter by which related videos are determined.</param>
+            <param name="searchValue">The parameter value by which related videos are determined.</param>
+            <param name="pageSize">Number of items returned per page. A page is a subset of all of the items 
+            that satisfy the request. The maximum page size is 100.</param>
+            <param name="pageNumber">The zero-indexed number of the page to return</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the 
+            Videos contained in the returned object. If you omit this parameter, the method returns the 
+            following fields of the video: id, name, shortDescription, longDescription, creationDate, 
+            publisheddate, lastModifiedDate, linkURL, linkText, tags, videoStillURL, thumbnailURL, 
+            referenceId, length, economics, playsTotal, playsTrailingWeek. If you use a token with URL 
+            access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <param name="customFields">A list of the custom fields you wish to have populated 
+            in the videos contained in the returned object. If you omit this parameter, no custom fields are 
+            returned, unless you include the value 'customFields' in the video_fields parameter.</param>
+            <param name="getItemCount">If true, also return how many total results there are.</param>
+            <returns>A collection of videos, ordered by relevance to the provided video.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindRelatedVideosById(System.Int64,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
@@ -1719,6 +1776,140 @@
             <param name="orTags">Limit the results to those that contain at least one of these tags.</param>
             <returns>A collection of videos whose tags match the tags specified.</returns>
         </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByIdUnfiltered(System.Int64,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            Finds a single video with the specified ID. Unlike find_video_by_id, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            <param name="videoId">The ID of the video you want to retrieve.</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the videos contained in the 
+            returned object. If you omit this parameter, the method returns the following fields of the Videos: id, 
+            name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, 
+            tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, playsTrailingWeek. If 
+            you use a token with URL access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <param name="customFields">A list of the custom fields you wish to have populated in the videos 
+            contained in the returned object. If you omit this parameter, no custom fields are returned, unless you include 
+            the value 'customFields' in the video_fields parameter.</param>
+            <returns>The Video you requested, with the specified fields populated, or null, if there is no video with that id.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByIdUnfiltered(System.Int64,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Finds a single video with the specified ID. Unlike find_video_by_id, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="videoId">The ID of the video you want to retrieve.</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the videos contained in the 
+            returned object. If you omit this parameter, the method returns the following fields of the Videos: id, 
+            name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, 
+            tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, playsTrailingWeek. If 
+            you use a token with URL access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <returns>The Video you requested, with the specified fields populated, or null, if there is no video with that id.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByIdUnfiltered(System.Int64)">
+            <summary>
+            Finds a single video with the specified ID. Unlike find_video_by_id, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="videoId">The ID of the video you want to retrieve.</param>
+            <returns>The Video you requested, with the specified fields populated, or null, if there is no video with that id.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByIdsUnfiltered(System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Find multiple videos, given their IDs. Unlike find_videos_by_ids, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="videoIds">The list of video ids for the videos to retrieve.</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the videos contained in the 
+            returned object. If you omit this parameter, the method returns the following fields of the Video: id, 
+            name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, 
+            tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, playsTrailingWeek. If you
+            use a token with URL access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <param name="customFields">A list of the custom fields you wish to have populated in the 
+            videos contained in the returned object. If you omit this parameter, no custom fields are returned, unless 
+            you include the value 'customFields' in the video_fields parameter.</param>
+            <returns>A collection that contains the video objects corresponding to the video ids given.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByIdsUnfiltered(System.Collections.Generic.IEnumerable{System.Int64},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Find multiple videos, given their IDs. Unlike find_videos_by_ids, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="videoIds">The list of video ids for the videos to retrieve.</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the videos contained in the 
+            returned object. If you omit this parameter, the method returns the following fields of the Video: id, 
+            name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, 
+            tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, playsTrailingWeek. If you
+            use a token with URL access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <returns>A collection that contains the video objects corresponding to the video ids given.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByIdsUnfiltered(System.Collections.Generic.IEnumerable{System.Int64})">
+            <summary>
+            Find multiple videos, given their IDs. Unlike find_videos_by_ids, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="videoIds">The list of video ids for the videos to retrieve.</param>
+            <returns>A collection that contains the video objects corresponding to the video ids given.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByReferenceIdUnfiltered(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Find a video based on its publisher-assigned reference ID. Unlike <see cref="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByReferenceId(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})"/>, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="referenceId">The publisher-assigned reference id for the video we're searching for.</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the Videos contained in the returned object. 
+            If you omit this parameter, the method returns the following fields of the Video: id, name, shortDescription, 
+            longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, tags, videoStillURL, thumbnailURL,
+            referenceId, length, economics, playsTotal, playsTrailingWeek. If you use a token with URL access, this method also returns 
+            FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <param name="customFields">A list of the custom fields you wish to have populated in the videos contained in the returned 
+            object. If you omit this parameter, no custom fields are returned, unless you include the value 'customFields' in the 
+            video_fields parameter.</param>
+            <returns>The video whose reference id matches the one given.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByReferenceIdUnfiltered(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Find a video based on its publisher-assigned reference ID. Unlike <see cref="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByReferenceId(System.String,System.Collections.Generic.IEnumerable{System.String})"/>, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="referenceId">The publisher-assigned reference id for the video we're searching for.</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the Videos contained in the returned object. 
+            If you omit this parameter, the method returns the following fields of the Video: id, name, shortDescription, 
+            longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, tags, videoStillURL, thumbnailURL,
+            referenceId, length, economics, playsTotal, playsTrailingWeek. If you use a token with URL access, this method also returns 
+            FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <returns>The video whose reference id matches the one given.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByReferenceIdUnfiltered(System.String)">
+            <summary>
+            Find a video based on its publisher-assigned reference ID. Unlike <see cref="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoByReferenceId(System.String)"/>, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="referenceId">The publisher-assigned reference id for the video we're searching for.</param>
+            <returns>The video whose reference id matches the one given.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByReferenceIdsUnfiltered(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Find multiple videos based on their publisher-assigned reference IDs. Unlike <see cref="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByReferenceIds(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})"/>, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="referenceIds">The list of reference ids for the videos to retrieve.</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the videos contained in the 
+            returned object. If you omit this parameter, the method returns the following fields of the Video: id, 
+            name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, 
+            tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, playsTrailingWeek. If you
+            use a token with URL access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <param name="customFields">A list of the custom fields you wish to have populated in the 
+            videos contained in the returned object. If you omit this parameter, no custom fields are returned, unless 
+            you include the value 'customFields' in the video_fields parameter.</param>
+            <returns>A collection of videos matching the specified reference ids.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByReferenceIdsUnfiltered(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Find multiple videos based on their publisher-assigned reference IDs. Unlike <see cref="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByReferenceIds(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})"/>, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="referenceIds">The list of reference ids for the videos to retrieve.</param>
+            <param name="videoFields">A list of the fields you wish to have populated in the videos contained in the 
+            returned object. If you omit this parameter, the method returns the following fields of the Video: id, 
+            name, shortDescription, longDescription, creationDate, publisheddate, lastModifiedDate, linkURL, linkText, 
+            tags, videoStillURL, thumbnailURL, referenceId, length, economics, playsTotal, playsTrailingWeek. If you
+            use a token with URL access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
+            <returns>A collection of videos matching the specified reference ids.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByReferenceIdsUnfiltered(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Find multiple videos based on their publisher-assigned reference IDs. Unlike <see cref="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideosByReferenceIds(System.Collections.Generic.IEnumerable{System.String})"/>, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+            <param name="referenceIds">The list of reference ids for the videos to retrieve.</param>
+            <returns>A collection of videos matching the specified reference ids.</returns>
+        </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.CreateVideo(BrightcoveMapiWrapper.Model.Items.BrightcoveVideo,BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo,BrightcoveMapiWrapper.Model.EncodeTo,System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Creates a new video by uploading a file.
@@ -1855,7 +2046,7 @@
             <summary>
             Shares the specified video with a list of sharee accounts.
             </summary>
-            <param name="videoId">The id for video that will be shared.</param>
+            <param name="videoId">The id for the video that will be shared.</param>
             <param name="autoAccept">If the target account has the option enabled, setting this flag to true will bypass 
             the approval process, causing the shared video to automatically appear in the target account's library. If the 
             target account does not have the option enabled, or this flag is unspecified or false, then the shared video 
@@ -1864,6 +2055,14 @@
             library, it should be overwritten by the video in the sharer's account.</param>
             <param name="shareeAccountIds">List of Account IDs to share video with.</param>
             <returns>List of new video IDs (one for each account ID).</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.UnshareVideo(System.Int64,System.Collections.Generic.IEnumerable{System.Int64})">
+            <summary>
+            Deletes the specified previously shared video from a list of sharee accounts. If a shared version of the specified video does not exist in a sharee account, no action is taken.
+            </summary>
+            <param name="videoId">The id for the video that is shared.</param>
+            <param name="shareeAccountIds">List of Account IDs from which to stop sharing the video.</param>
+            <returns>A collection of sharee account IDs for accounts previously containing shared videos specifically removed by this method.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.AddImage(BrightcoveMapiWrapper.Model.Items.BrightcoveImage,BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo,System.Int64,System.Boolean)">
             <summary>
@@ -1978,7 +2177,7 @@
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.#ctor(BrightcoveMapiWrapper.Api.Connectors.IBrightcoveApiConnector)">
             <summary>
-            .NET Wrapper for Brightcove's REST Media API
+            .NET Wrapper for Brightcove's REST Media API.
             </summary>
             <param name="connector"></param>
         </member>
@@ -1992,7 +2191,7 @@
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.SerializeJson``1(``0)">
             <summary>
-            Converts a wrapper model class into the corresponding json representation
+            Converts a wrapper model class into the corresponding JSON representation.
             </summary>
             <typeparam name="T"></typeparam>
             <param name="obj"></param>
@@ -2000,7 +2199,7 @@
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.RunQuery``1(System.Collections.Specialized.NameValueCollection)">
             <summary>
-            Runs an API read query (HTTP GET) 
+            Runs an API read query (HTTP GET).
             </summary>
             <typeparam name="T"></typeparam>
             <param name="parms"></param>
@@ -2016,26 +2215,28 @@
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.RunFilePost``1(BrightcoveMapiWrapper.Model.Containers.BrightcoveParamCollection,BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo)">
             <summary>
-            Runs an API write (HTTP POST) that includes file data 
+            Runs an API write (HTTP POST) that includes file data.
             </summary>
             <typeparam name="T"></typeparam>
             <param name="fileToUpload"></param>
             <param name="postParams"></param>
             <returns></returns>
         </member>
-        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.BuildBasicReadParams(System.String)">
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.BuildBasicReadParams``1(``0)">
             <summary>
-            Builds a collection of params common to all API read requests
+            Builds a collection of params common to all API read requests.
             </summary>
-            <param name="command"></param>
-            <returns></returns>
+            <typeparam name="T">An enum of type <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveReadMethod"/>.</typeparam>
+            <param name="method">A valid <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveReadMethod"/> value to perform.</param>
+            <returns>A <see cref="T:System.Collections.Specialized.NameValueCollection"/> containing the basic GET parameters.</returns>
         </member>
-        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.BuildBasicWriteParams(System.String)">
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.BuildBasicWriteParams``1(``0)">
             <summary>
-            Builds a collection of params common to all API write requests
+            Builds a collection of params common to all API write requests.
             </summary>
-            <param name="method"></param>
-            <returns></returns>
+            <typeparam name="T">An enum of type <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod"/>.</typeparam>
+            <param name="method">A valid <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod"/> value to perform.</param>
+            <returns>A <see cref="T:System.Collections.Specialized.NameValueCollection"/> containing the basic POST parameters.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindAllPlaylists(System.Int32,System.Int32,BrightcoveMapiWrapper.Model.SortBy,BrightcoveMapiWrapper.Model.SortOrder,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
@@ -2470,17 +2671,33 @@
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.CreateAudioTrackPlaylist(BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist)">
             <summary>
-            Creates a playlist
+            Creates a playlist.
             </summary>
             <param name="playlist">The playlist you'd like to create.</param>
             <returns>The ID of the newly created playlist.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.UpdateAudioTrackPlaylist(BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist)">
             <summary>
-            Creates a playlist
+            Updates a playlist.
             </summary>
             <param name="playlist">The playlist you'd like to update.</param>
             <returns>The updated playlist.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DeleteAudioTrackPlaylist(System.Int64,System.Boolean)">
+            <summary>
+            Deletes a playlist, specified by playlist ID
+            </summary>
+            <param name="playlistId">The ID of the playlist you'd like to delete</param>
+            <param name="cascade">If true, playlist will be deleted even if it is referenced by players. The playlist will 
+            be removed from all players in which it appears, then deleted.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DeleteAudioTrackPlaylist(System.String,System.Boolean)">
+            <summary>
+            Deletes a playlist, specified by the playlist's Reference ID
+            </summary>
+            <param name="referenceId">The Reference ID of the playlist you'd like to delete</param>
+            <param name="cascade">If true, playlist will be deleted even if it is referenced by players. The playlist will 
+            be removed from all players in which it appears, then deleted.</param>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindAllAudioTrackPlaylists(System.Int32,System.Int32,BrightcoveMapiWrapper.Model.SortBy,BrightcoveMapiWrapper.Model.SortOrder,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
@@ -2677,9 +2894,45 @@
             The Connector used for Brightcove connections.
             </summary>
         </member>
+        <member name="T:BrightcoveMapiWrapper.Serialization.BrightcoveItemConverter`1">
+            <summary>
+            Converts Brightcove model items to JavaScript objects and back.
+            </summary>
+            <typeparam name="T">The type of model item to convert.</typeparam>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Serialization.BrightcoveItemConverter`1.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Type,System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            When overridden in a derived class, converts the provided dictionary into an object of the specified type.
+            </summary>
+            <param name="dictionary">An <see cref="T:System.Collections.Generic.IDictionary`2"/> instance of property data stored as name/value pairs.</param>
+            <param name="type">The type of the resulting object.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/> instance.</param>
+            <returns>
+            The deserialized object.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">dictionary</exception>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Serialization.BrightcoveItemConverter`1.Serialize(System.Object,System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            When overridden in a derived class, builds a dictionary of name/value pairs.
+            </summary>
+            <param name="obj">The object to serialize.</param>
+            <param name="serializer">The object that is responsible for the serialization.</param>
+            <returns>
+            An object that contains key/value pairs that represent the object’s data.
+            </returns>
+        </member>
+        <member name="P:BrightcoveMapiWrapper.Serialization.BrightcoveItemConverter`1.SupportedTypes">
+            <summary>
+            When overridden in a derived class, gets a collection of the supported types.
+            </summary>
+            <returns>
+            An object that implements <see cref="T:System.Collections.Generic.IEnumerable`1"/> that represents the types supported by the converter.
+              </returns>
+        </member>
         <member name="T:BrightcoveMapiWrapper.Model.Containers.BrightcoveError">
             <summary>
-            An error returned from the Brightcove API.
+            An error returned from the Brightcove API. See <a href="http://support.brightcove.com/en/video-cloud/docs/media-api-error-message-reference">Media API Error Message Reference</a> for a documented list of errors.
             </summary>
         </member>
         <member name="T:BrightcoveMapiWrapper.Model.Containers.IBrightcoveError">
@@ -2713,8 +2966,25 @@
             <summary>
             Deserializes the specified dictionary.
             </summary>
-            <param name="dictionary">The dictionary.</param>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveError.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
             <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveError.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.BrightcoveError.Name">
             <summary>
@@ -2772,6 +3042,19 @@
             <summary>
             Defines a <see cref="T:BrightcoveMapiWrapper.Api.BrightcoveApiConfig"/>
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.BrightcoveApiConnector.#ctor(BrightcoveMapiWrapper.Api.BrightcoveApiConfig)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="configuration">An instance of <see cref="T:BrightcoveMapiWrapper.Api.BrightcoveApiConfig"/> to set as an instance property.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.BrightcoveApiConnector.#ctor(BrightcoveMapiWrapper.Api.BrightcoveApiConfig,BrightcoveMapiWrapper.Api.Connectors.IRequestBuilder)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="configuration">An instance of <see cref="T:BrightcoveMapiWrapper.Api.BrightcoveApiConfig"/> to set as an instance property.</param>
+            <param name="requestBuilder"></param>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.Connectors.BrightcoveApiConnector.GetResponseJson(System.Collections.Specialized.NameValueCollection)">
             <summary>
@@ -2837,27 +3120,15 @@
             Prepares an ordered dictionary of fields for sorting by the SearchVideos method.
             </summary>
         </member>
-<<<<<<< HEAD
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.SortedFieldDictionary.#ctor(BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary{BrightcoveMapiWrapper.Model.SortBy,BrightcoveMapiWrapper.Model.SortOrder})">
-            <summary>
-            Constructor.
-            </summary>
-            <param name="orderedDictionary">A properly constructed <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2"></see></param>
-            <example>
-            The below snippet demonstrates how to pass in objects to this constructor.
-            <code>
-            var dict = new <see cref="!:OrderedDictionary&lt;SortBy, SortOrder&gt;"/>
-=======
         <member name="M:BrightcoveMapiWrapper.Model.Containers.SortedFieldDictionary.#ctor(System.Collections.Specialized.IOrderedDictionary)">
             <summary>
             Constructor.
             </summary>
-            <param name="orderedDictionary">A properly constructed <see cref="T:System.Collections.Specialized.IOrderedDictionary"></see></param>
+            <param name="orderedDictionary">A properly constructed <see cref="T:System.Collections.Specialized.IOrderedDictionary"/>.</param>
             <example>
-            The below snippet demonstrates how to pass in objects to this constructor.
+            The example below demonstrates how to pass in objects to this constructor.
             <code>
             var dict = new <see cref="P:BrightcoveMapiWrapper.Model.Containers.SortedFieldDictionary.OrderedDictionary"/>
->>>>>>> Added some documentation
             {
             	{ SortBy.CreationDate, SortOrder.Ascending },
             	{ SortBy.CreationDate, SortOrder.Descending }
@@ -2872,7 +3143,7 @@
             </summary>
             <param name="fields">The <see cref="T:System.Object"/> array passed to the constructor.</param>
             <example>
-            The below snippet demonstrates how to pass in objects to this constructor.
+            The example below demonstrates how to pass in objects to this constructor.
             <code>
             SortedFieldDictionary sortFields = new SortedFieldDictionary(SortBy.DisplayName, SortOrder.Ascending, SortBy.CreationDate, SortOrder.Descending);
             </code>
@@ -2882,16 +3153,12 @@
             <summary>
             Parses the parameters passed to the constructor.
             </summary>
-            <param name="fields">The object[] passed to the constructor.</param>
-<<<<<<< HEAD
-            <exception cref="T:System.ArgumentException">Either the length of <see cref="!:fields"/> is odd, each pair of objects within <see cref="!:fields"/> do not each comprise a valid <see cref="T:System.Collections.Generic.KeyValuePair`2"/>, or there is a duplicate <see cref="T:BrightcoveMapiWrapper.Model.SortBy"/> key within <see cref="!:fields"/>.</exception>
-=======
+            <param name="fields">The <see cref="T:Object[]"/> passed to the constructor.</param>
             <exception cref="T:System.ArgumentException">Either the length of the params argument is odd, each pair of objects within the params argument do not each comprise a valid <see cref="T:System.Collections.Generic.KeyValuePair`2"/>, or there is a duplicate <see cref="T:BrightcoveMapiWrapper.Model.SortBy"/> key within the params argument.</exception>
->>>>>>> Added some documentation
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.SortedFieldDictionary.OrderedDictionary">
             <summary>
-            A dictionary that preserves both uniqueness of SortBy (you can only sort by one field in a single request) and insertion order (the order by which you sort directly affects which items are returned by a single API call).
+            A dictionary that preserves both uniqueness of <see cref="T:BrightcoveMapiWrapper.Model.SortBy"/> (you can only sort by one field in a single request) and insertion order (the order by which you sort directly affects which items are returned by a single API call).
             </summary>
         </member>
         <member name="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist">
@@ -2909,6 +3176,22 @@
             <summary>
             Constructor.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist.AccountId">
             <summary>
@@ -2975,23 +3258,35 @@
         </member>
         <member name="T:BrightcoveMapiWrapper.Model.Containers.FieldValuePair">
             <summary>
-            Used to store field/value pairs of pertinent information.
+            Used to store field/value pairs of pertinent Brightcove parameter information.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.FieldValuePair.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.FieldValuePair.#ctor(System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="field">The name of the field.</param>
+            <param name="value">The string representation of the value.</param>
         </member>
         <member name="M:BrightcoveMapiWrapper.Model.Containers.FieldValuePair.ToBrightcoveString">
             <summary>
             Turns a field/value pair into a string formatted for Brightcove's API.
             </summary>
-            <returns></returns>
+            <returns>A correctly formatted string for Brightcove's API.</returns>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.FieldValuePair.Field">
             <summary>
-            The field.
+            The name of the field.
             </summary>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.FieldValuePair.Value">
             <summary>
-            The value.
+            The string representation of the value.
             </summary>
         </member>
         <member name="T:BrightcoveMapiWrapper.Model.Containers.BrightcoveParamCollection">
@@ -2999,10 +3294,41 @@
             A dictionary of Brightcove parameters.
             </summary>
         </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveParamCollection.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveParamCollection.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
+        </member>
         <member name="T:BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo">
             <summary>
             Helper class used to store file upload information.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo.#ctor(System.IO.Stream,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo"/> class.
+            </summary>
+            <param name="data">The data to upload.</param>
+            <param name="fileName">Name of the file.</param>
+            <param name="contentType">Type of the content.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo.#ctor(System.IO.Stream,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo"/> class.
+            </summary>
+            <param name="data">The data to upload.</param>
+            <param name="fileName">Name of the file.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo.FileData">
             <summary>
@@ -3028,6 +3354,22 @@
             <summary>
             Constructor.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack.AccountId">
             <summary>
@@ -3196,6 +3538,51 @@
             <param name="region">The region of the video publishing.</param>
             <returns>A configured BrightcoveApi object</returns>
         </member>
+        <member name="T:BrightcoveMapiWrapper.Util.DateUtil">
+            <summary>
+            Primarily functions to convert .NET time to Unix time.
+            </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.DateUtil.FromUnixMillisecondsUtc(System.Int64)">
+            <summary>
+            Adds a specified number of milliseconds to the start of the Unix epoch.
+            </summary>
+            <param name="milliseconds">The specified number of milliseconds to add.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.DateUtil.ToUnixMillisecondsUtc(System.DateTime)">
+            <summary>
+            Converts a <see cref="T:System.DateTime"/> object in UTC to Unix milliseconds.
+            </summary>
+            <param name="utcDateTime">The <see cref="T:System.DateTime"/> object in UTC.</param>
+            <returns>The number of milliseconds.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.DateUtil.ToUnixMinutesUtc(System.DateTime)">
+            <summary>
+            Converts a <see cref="T:System.DateTime"/> object in UTC to Unix minutes.
+            </summary>
+            <param name="utcDateTime">The <see cref="T:System.DateTime"/> object in UTC.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.DateUtil.ConvertAndSetDate(System.Object,System.Action{System.DateTime})">
+            <summary>
+            Converts the number of milliseconds represented as a string and adds it to the<see cref="T:System.DateTime"/> specified in the <paramref name="setterCallback"/> action.
+            </summary>
+            <param name="dateString">The number of milliseconds as a <see cref="T:System.String"/>.</param>
+            <param name="setterCallback">The action to perform.</param>
+            <exception cref="T:System.InvalidCastException"><paramref name="dateString"/> is not a string.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="dateString"/> is null.</exception>
+            <exception cref="T:System.FormatException"><paramref name="dateString"/> is in the wrong format.</exception>
+            <exception cref="T:System.OverflowException"><paramref name="dateString"/> represents a number less than MinValue or greater than MaxValue.</exception>
+        </member>
+        <member name="P:BrightcoveMapiWrapper.Util.DateUtil.UnixEpochStart">
+            <summary>
+            Gets the Unix epoch start.
+            </summary>
+            <value>
+            The Unix epoch start.
+            </value>
+        </member>
         <member name="T:BrightcoveMapiWrapper.Model.Items.BrightcoveLogoOverlay">
             <summary>
             The BrightcoveLogoOverlay object represents a logo overlay assigned to a video. The logo overlay is displayed 
@@ -3206,6 +3593,22 @@
             <summary>
             Constructor.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveLogoOverlay.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveLogoOverlay.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveLogoOverlay.Id">
             <summary>
@@ -3631,29 +4034,14 @@
             Align to the bottom right of the video display.
             </summary>
         </member>
-        <member name="T:BrightcoveMapiWrapper.Model.Output">
-            <summary>
-            The valid values of the output argument for the read methods.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.Output.Json">
-            <summary>
-            Default.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.Output.Mrss">
-            <summary>
-            RSS with Media RSS and Video Cloud extensions.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.Output.Tm">
-            <summary>
-            For distribution through TubeMogul OneLoad.
-            </summary>
-        </member>
         <member name="T:BrightcoveMapiWrapper.Model.BrightcoveRegion">
             <summary>
             Specify the region for setting the general service URL.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveRegion.None">
+            <summary>
+            No option specified.
             </summary>
         </member>
         <member name="F:BrightcoveMapiWrapper.Model.BrightcoveRegion.Generic">
@@ -3666,6 +4054,311 @@
             Japan. Mapped to the .co.jp country code top-level domain.
             </summary>
         </member>
+        <member name="T:BrightcoveMapiWrapper.Model.BrightcoveReadMethod">
+            <summary>
+            The read methods supported by Brightcove. Available method descriptions are taken from <a href="http://docs.brightcove.com/en/media/">Brightcove Video Cloud Media API Reference</a>.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.None">
+            <summary>
+            No option specified.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllAudiotrackPlaylists">
+            <summary>
+            Find all audio track playlists in this account.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackPlaylistById">
+            <summary>
+            Finds a particular audio track playlist based on its id.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackPlaylistByReferenceId">
+            <summary>
+            Retrieve an audio track playlist based on its publisher-assigned reference id.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackPlaylistsByIds">
+            <summary>
+            Retrieve a set of audio track playlists based on their ids.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackPlaylistsByReferenceIds">
+            <summary>
+            Retrieve multiple audio track playlists based on their publisher-assigned reference ids.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllAudiotracks">
+            <summary>
+            Find all audio tracks in the Brightcove media library for this account.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackById">
+            <summary>
+            Finds a single audio track with the specified id.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackByReferenceId">
+            <summary>
+            Find an audio track based on its publisher-assigned reference id.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotracksByIds">
+            <summary>
+            Find multiple audio tracks, given their ids.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotracksByReferenceIds">
+            <summary>
+            Find multiple audio tracks based on their publisher-assigned reference ids.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotracksByTags">
+            <summary>
+            Performs a search on all the tags of the audio tracks in this account, and returns a collection of audio tracks that contain the specified tags. Note that tags are case-sensitive.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotracksByText">
+            <summary>
+            Searches through all the audio tracks in this account, and returns a collection of audio tracks whose name, short description, or long description contain a match for the specified text.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindModifiedAudiotracks">
+            <summary>
+            Gets all the audio tracks that have been modified since the given time.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllPlaylists">
+            <summary>
+            Find all playlists in this account.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistById">
+            <summary>
+            Finds a particular playlist based on its ID.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistsByIds">
+            <summary>
+            Retrieve a set of playlists based on their IDs.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistByReferenceId">
+            <summary>
+            Retrieve a playlist based on its publisher-assigned reference ID.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistsByReferenceIds">
+            <summary>
+            Retrieve multiple playlists based on their publisher-assigned reference IDs.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistsForPlayerId">
+            <summary>
+            Given the ID of a player, returns all the playlists assigned to that player.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideoById">
+            <summary>
+            Finds a single video with the specified ID.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByIds">
+            <summary>
+            Find multiple videos, given their IDs.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideoByReferenceId">
+            <summary>
+            Find a video based on its publisher-assigned reference ID.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByReferenceIds">
+            <summary>
+            Find multiple videos based on their publisher-assigned reference IDs.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllVideos">
+            <summary>
+            Find all videos in the Video Cloud media library for this account. This method has the limitation of returning only videos available for play, and does not include videos marked as inactive, currently in the upload process, or outside the scheduled play time.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.SearchVideos">
+            <summary>
+            Searches videos according to the criteria provided by the user. The criteria are constructed using field/value pairs specified in the command. Consider using the search_videos method for video searches rather than using the other find_video read methods. The search_videos method offers more flexible search and sorting options than the find_video methods, and is especially more flexible than the find_videos_by_text and find_videos_by_tags methods.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindRelatedVideos">
+            <summary>
+            Finds videos related to the given video. Combines the name and short description of the given video and searches for any partial matches in the name, short description, long description, tags, and custom fields of all videos in the Video Cloud media library for this account. More precise ways of finding related videos include tagging your videos by subject and using the find_videos_by_tags method to find videos that share the same tags: or creating a playlist that includes videos that you know are related. Consider using the search_videos method, which offers more flexible search and sorting options.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByUserId">
+            <summary>
+            Retrieves the videos uploaded by the specified user id. This method can be used to find videos submitted using the old consumer-generated media (CGM) module in Brightcove 2.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByCampaignId">
+            <summary>
+            Gets all the videos associated with the given campaign ID. Campaigns are a feature of the old consumer-generated media (CGM) module in Brightcove 2.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindModifiedVideos">
+            <summary>
+            Gets all the videos that have been modified since the given time.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByText">
+            <summary>
+            Searches through all the videos in this account, and returns a collection of videos whose name, short description, or long description contain a match for the specified text. Unlike some other Read methods, this method does not provide parameters for sorting the result set. The result set is sorted by relevance. The find_videos_by_text method returns substring matches - words from your search string plus a wildcard (*) at the end; thus, if your search string is "war", the result set will include results such as "warrior", "warfare", and "warbler." Substrings that don't match the beginning of a word are not returned; thus, if your search string is "war", the result set would not include results such as "swarthy" or "inward".
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByTags">
+            <summary>
+            Performs a search on all the tags of the videos in this account, and returns a collection of videos that contain the specified tags. Note that tags are not case-sensitive. This method does not provide parameters for sorting the result set. 
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideoByIdUnfiltered">
+            <summary>
+            Finds a single video with the specified ID. Unlike find_video_by_id, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByIdsUnfiltered">
+            <summary>
+            Find multiple videos, given their IDs. Unlike find_videos_by_ids, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideoByReferenceIdUnfiltered">
+            <summary>
+            Find a video based on its publisher-assigned reference ID. Unlike find_video_by_reference_id, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByReferenceIdsUnfiltered">
+            <summary>
+            Find multiple videos based on their publisher-assigned reference IDs. Unlike find_videos_by_reference_ids, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
+            </summary>
+        </member>
+        <member name="T:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod">
+            <summary>
+            The write methods supported by Brightcove. Available method descriptions are taken from <a href="http://docs.brightcove.com/en/media/">Brightcove Video Cloud Media API Reference</a>.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.None">
+            <summary>
+            No option specified.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.CreateAudiotrackPlaylist">
+            <summary>
+            Creates a playlist.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UpdateAudiotrackPlaylist">
+            <summary>
+            Updates a playlist.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeleteAudiotrackPlaylist">
+            <summary>
+            Deletes a playlist, specified by playlist ID or reference ID.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.CreateAudiotrack">
+            <summary>
+            Creates a new audio track in Brightcove by uploading a file.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.AddAudioImage">
+            <summary>
+            Add a thumbnail asset to the specified audio track.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UpdateAudiotrack">
+            <summary>
+            Updates the audio track information for a Brightcove audio track.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeleteAudiotrack">
+            <summary>
+            Deletes an audio track.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.GetAudiotrackUploadStatus">
+            <summary>
+            Gets the audiotrack upload status. 
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.CreatePlaylist">
+            <summary>
+            Creates a playlist. This method must be called using an HTTP POST request and JSON parameters. If the playlistType property in the Playlist object you submit is explicit, that means it's a manual playlist. If the playlistType property is not explicit, that means it's a smart playlist.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UpdatePlaylist">
+            <summary>
+            Updates a playlist, specified by playlist ID or reference ID. Either a playlist ID or a reference ID must be supplied. If you are updating the value of the reference ID, then both the playlist ID and reference ID must be supplied. This method must be called using an HTTP POST request and JSON parameters.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeletePlaylist">
+            <summary>
+            Deletes a playlist, specified by playlist ID or reference ID.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.CreateVideo">
+            <summary>
+            Use this method to create a single video in your Video Cloud Media Library. You can either upload a new video file, or use the remote assets approach, in which you pass a reference to a video file on your own CDN.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UpdateVideo">
+            <summary>
+            Use this method to modify the metadata for a single video in your Video Cloud Media Library.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeleteVideo">
+            <summary>
+            Deletes a video.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.GetUploadStatus">
+            <summary>
+            Call this function in an HTTP POST request to determine the status of an upload. Note that there is a brief delay from the moment you submit a create_video method call and the moment the transaction for that method call is complete. During that interval, a get_upload_status method call will return an error message saying, "Illegal value - Cannot find any video", because the video has not yet been assigned an ID and begun uploading.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.ShareVideo">
+            <summary>
+            Shares the specified video with a list of sharee accounts.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UnshareVideo">
+            <summary>
+            Deletes the specified previously shared video from a list of sharee accounts. If a shared version of the specified video does not exist in a sharee account, no action is taken.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.AddImage">
+            <summary>
+            Add a new thumbnail or video still image to a video, or assign an existing image to another video.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.AddLogoOverlay">
+            <summary>
+            Add a logo overlay image to a video.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.RemoveLogoOverlay">
+            <summary>
+            Removes a logo overlay previously assigned to a video.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.AddCaptioning">
+            <summary>
+            Assigns Captioning to a video via uploading a caption file or providing URL of caption file. Deletes any Captioning previously assigned to a video.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeleteCaptioning">
+            <summary>
+            Assigns Captioning to a video via uploading a caption file or providing URL of caption file. Deletes any Captioning previously assigned to a video.
+            </summary>
+        </member>
         <member name="T:BrightcoveMapiWrapper.Model.Items.BrightcoveVideo">
             <summary>
             The BrightcoveVideo object is an aggregate of metadata and asset information associated with a video.
@@ -3675,6 +4368,22 @@
             <summary>
             Creates an object representing a single video within Brightcove's system.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveVideo.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveVideo.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveVideo.AccountId">
             <summary>
@@ -3823,6 +4532,25 @@
             The URL to the video still image associated with this Video. Video stills are 480x360 pixels.
             </summary>
         </member>
+        <member name="T:BrightcoveMapiWrapper.Util.FormUploadUtil">
+            <summary>
+            Calculates an <see cref="T:System.Security.Cryptography.MD5"/> hash for a given file.
+            </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.FormUploadUtil.CalculateMd5Hash(System.String)">
+            <summary>
+            Calculates an <see cref="T:System.Security.Cryptography.MD5"/> hash based on a given file path.
+            </summary>
+            <param name="filePath">The file path of a given file.</param>
+            <returns>The string representation of the <see cref="T:System.Security.Cryptography.MD5"/> hash.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.FormUploadUtil.CalculateMd5Hash(System.IO.FileInfo)">
+            <summary>
+            Calculates an <see cref="T:System.Security.Cryptography.MD5"/> hash based on a given <see cref="T:System.IO.FileInfo"/>.
+            </summary>
+            <param name="fileInfo">The <see cref="T:System.IO.FileInfo"/> of a given file.</param>
+            <returns>The string representation of the <see cref="T:System.Security.Cryptography.MD5"/> hash.</returns>
+        </member>
         <member name="T:BrightcoveMapiWrapper.Util.Extensions.EnumExtenstions">
             <summary>
             Manipulates enums as extension methods.
@@ -3837,10 +4565,92 @@
             <param name="enumeration"></param>
             <returns></returns>
         </member>
+        <member name="M:BrightcoveMapiWrapper.Util.Extensions.EnumExtenstions.ToBrightcoveEnum``1(System.String)">
+            <summary>
+            Converts a plain-text string to the specified Brightcove <see cref="T:System.Enum"/>.
+            </summary>
+            <typeparam name="T">The type of Brightcove <see cref="T:System.Enum"/>.</typeparam>
+            <param name="brightcoveEnum">A plain-text string.</param>
+            <returns>A correctly-parsed Brightcove <see cref="T:System.Enum"/> representation.</returns>
+        </member>
+        <member name="T:BrightcoveMapiWrapper.Util.Extensions.CollectionExtensions">
+            <summary>
+            A set of extension methods for various types of collections used through the wrapper.
+            </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.Extensions.CollectionExtensions.AddRange``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Adds the elements of the specified <see cref="T:System.Collections.Generic.IEnumerable`1"/> to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <typeparam name="T">The type of element to add.</typeparam>
+            <param name="collection">The initial collection.</param>
+            <param name="items">The items to add.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.Extensions.CollectionExtensions.ToQueryString(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Converts a <see cref="T:System.Collections.Specialized.NameValueCollection"/> to query string parameters.
+            </summary>
+            <param name="nvc">The initial <see cref="T:System.Collections.Specialized.NameValueCollection"/>.</param>
+            <returns>A properly formatted query string.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.Extensions.CollectionExtensions.AddRange(System.Collections.Specialized.NameValueCollection,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Adds the elements of the specified <see cref="T:System.Collections.Generic.IEnumerable`1"/> for the given <paramref name="key"/> to the <see cref="T:System.Collections.Specialized.NameValueCollection"/>.
+            </summary>
+            <param name="nvc">The given <see cref="T:System.Collections.Specialized.NameValueCollection"/>.</param>
+            <param name="key">The key for which to add additional values.</param>
+            <param name="values">The values to add to the given key.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Util.Extensions.CollectionExtensions.ToJson(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Converts an <see cref="T:System.Collections.Generic.IDictionary`2"/> to a JSON string.
+            </summary>
+            <param name="dict">The <see cref="T:System.Collections.Generic.IDictionary`2"/> to convert.</param>
+            <returns>A JSON string.</returns>
+        </member>
         <member name="T:BrightcoveMapiWrapper.Api.Connectors.BasicRequestBuilder">
             <summary>
             A basic implementation of IRequestBuilder
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.BasicRequestBuilder.#ctor(BrightcoveMapiWrapper.Api.BrightcoveApiConfig)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="configuration">A configured <see cref="T:BrightcoveMapiWrapper.Api.BrightcoveApiConfig"/>.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.BasicRequestBuilder.BuildRequest(System.String)">
+            <summary>
+            Builds a GET request for the specified URL.
+            </summary>
+            <param name="url">The URL to request.</param>
+            <returns>An HttpWebRequest for GETing the specified URL.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.BasicRequestBuilder.BuildPostFormRequest(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Builds a POST request for the specified URL and parameters.
+            </summary>
+            <param name="postUrl">The URL to request.</param>
+            <param name="postParameters">The parameters to POST.</param>
+            <returns>An HttpWebRequest that will POST the specified parameters.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.BasicRequestBuilder.BuildMultipartFormDataPostRequest(System.String,System.Collections.Specialized.NameValueCollection,BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo)">
+            <summary>
+            Builds the multipart form data post request.
+            </summary>
+            <param name="postUrl">The post URL.</param>
+            <param name="postParameters">The post parameters.</param>
+            <param name="fileToUpload">The file to upload.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.Connectors.BasicRequestBuilder.WriteMultipartFormData(System.Net.HttpWebRequest,System.Collections.Specialized.NameValueCollection,BrightcoveMapiWrapper.Api.Connectors.FileUploadInfo,System.String)">
+            <summary>
+            Writes the multipart form data.
+            </summary>
+            <param name="request">The request.</param>
+            <param name="postParameters">The post parameters.</param>
+            <param name="fileToUpload">The file to upload.</param>
+            <param name="boundary">The boundary.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Api.Connectors.BasicRequestBuilder.Configuration">
             <summary>
@@ -3849,7 +4659,7 @@
         </member>
         <member name="T:BrightcoveMapiWrapper.Util.EnumUtil">
             <summary>
-            Maniipulates enums.
+            Manipulates enums.
             </summary>
         </member>
         <member name="M:BrightcoveMapiWrapper.Util.EnumUtil.TryParse``1(System.String,``0@)">
@@ -3876,11 +4686,6 @@
         <member name="T:BrightcoveMapiWrapper.Api.BrightcoveApiConfig">
             <summary>
             Used to generate basic information about connections to Brightcove.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Api.BrightcoveApiConfig.ApiStem">
-            <summary>
-            A preformatted url stem to Brightcove's API.
             </summary>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApiConfig.#ctor">
@@ -3965,6 +4770,43 @@
             A collection of custom field values.
             </summary>
         </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.CustomFieldCollection.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.CustomFieldCollection.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
+        </member>
+        <member name="T:BrightcoveMapiWrapper.Serialization.BrightcoveSerializerFactory">
+            <summary>
+            Creates a <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/> suitable for Brightcove model items.
+            </summary>
+        </member>
+        <member name="F:BrightcoveMapiWrapper.Serialization.BrightcoveSerializerFactory._serializer">
+            <summary>
+            The static serializer.
+            </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Serialization.BrightcoveSerializerFactory.#cctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Serialization.BrightcoveSerializerFactory.GetSerializer">
+            <summary>
+            Gets the Brightcove serializer.
+            </summary>
+            <returns>The Brightcove serializer.</returns>
+        </member>
         <member name="T:BrightcoveMapiWrapper.Model.Items.BrightcoveCuePoint">
             <summary>
             The BrightcoveCuePoint object is a marker set at a precise time point in the duration of a video. You can 
@@ -3975,6 +4817,22 @@
             <summary>
             Constructor.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveCuePoint.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveCuePoint.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveCuePoint.Name">
             <summary>
@@ -4018,6 +4876,23 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveItemCollection`1.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveItemCollection`1.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.BrightcoveItemCollection`1.PageNumber">
             <summary>
             The current page of results. (Each page is limited to a max of 100 items)
@@ -4038,6 +4913,22 @@
             The BrightcoveRendition object represents one of the multi-bitrate streaming renditions of a video.
             A Video should have not more than 10 Rendition objects.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveRendition.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveRendition.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveRendition.ControllerType">
             <summary>
@@ -4156,382 +5047,6 @@
             The error passed to this exception.
             </summary>
         </member>
-<<<<<<< HEAD
-        <member name="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">
-            <summary>
-            Represents a generic collection of key/value pairs that are ordered independently of the key and value.
-            </summary>
-            <typeparam name="TKey">The type of the keys in the dictionary</typeparam>
-            <typeparam name="TValue">The type of the values in the dictionary</typeparam>
-        </member>
-        <member name="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">
-            <summary>
-            Represents a generic collection of key/value pairs that are ordered independently of the key and value.
-            </summary>
-            <typeparam name="TKey">The type of the keys in the dictionary</typeparam>
-            <typeparam name="TValue">The type of the values in the dictionary</typeparam>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2.Add(`0,`1)">
-            <summary>
-            Adds an entry with the specified key and value into the <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see> collection with the lowest available index.
-            </summary>
-            <param name="key">The key of the entry to add.</param>
-            <param name="value">The value of the entry to add.</param>
-            <returns>The index of the newly added entry</returns>
-            <remarks>
-            <para>You can also use the <see cref="P:System.Collections.Generic.IDictionary{TKey,TValue}.Item(TKey)"/> property to add new elements by setting the value of a key that does not exist in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see> collection; however, if the specified key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see>, setting the <see cref="P:Item(TKey)"/> property overwrites the old value. In contrast, the <see cref="M:Add"/> method does not modify existing elements.</para></remarks>
-            <exception cref="T:System.ArgumentException">An element with the same key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see></exception>
-            <exception cref="T:System.NotSupportedException">The <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see> is read-only.<br/>
-            -or-<br/>
-            The <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see> has a fized size.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2.Insert(System.Int32,`0,`1)">
-            <summary>
-            Inserts a new entry into the <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see> collection with the specified key and value at the specified index.
-            </summary>
-            <param name="index">The zero-based index at which the element should be inserted.</param>
-            <param name="key">The key of the entry to add.</param>
-            <param name="value">The value of the entry to add. The value can be <null/> if the type of the values in the dictionary is a reference type.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than 0.<br/>
-            -or-<br/>
-            <paramref name="index"/> is greater than <see cref="P:System.Collections.ICollection.Count"/>.</exception>
-            <exception cref="T:System.ArgumentException">An element with the same key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see>.</exception>
-            <exception cref="T:System.NotSupportedException">The <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see> is read-only.<br/>
-            -or-<br/>
-            The <see cref="T:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2">IOrderedDictionary&lt;TKey,TValue&gt;</see> has a fized size.</exception>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.IOrderedDictionary`2.Item(System.Int32)">
-            <summary>
-            Gets or sets the value at the specified index.
-            </summary>
-            <param name="index">The zero-based index of the value to get or set.</param>
-            <value>The value of the item at the specified index.</value>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than 0.<br/>
-            -or-<br/>
-            <paramref name="index"/> is equal to or greater than <see cref="P:System.Collections.ICollection.Count"/>.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> class.
-            </summary>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.#ctor(System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> class using the specified initial capacity.
-            </summary>
-            <param name="capacity">The initial number of elements that the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> can contain.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="capacity"/> is less than 0</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.#ctor(System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Initializes a new instance of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> class using the specified comparer.
-            </summary>
-            <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1">IEqualityComparer&lt;TKey&gt;</see> to use when comparing keys, or <null/> to use the default <see cref="T:System.Collections.Generic.EqualityComparer`1">EqualityComparer&lt;TKey&gt;</see> for the type of the key.</param>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.#ctor(System.Int32,System.Collections.Generic.IEqualityComparer{`0})">
-            <summary>
-            Initializes a new instance of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> class using the specified initial capacity and comparer.
-            </summary>
-            <param name="capacity">The initial number of elements that the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection can contain.</param>
-            <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1">IEqualityComparer&lt;TKey&gt;</see> to use when comparing keys, or <null/> to use the default <see cref="T:System.Collections.Generic.EqualityComparer`1">EqualityComparer&lt;TKey&gt;</see> for the type of the key.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="capacity"/> is less than 0</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.ConvertToKeyType(System.Object)">
-            <summary>
-            Converts the object passed as a key to the key type of the dictionary
-            </summary>
-            <param name="keyObject">The key object to check</param>
-            <returns>The key object, cast as the key type of the dictionary</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="keyObject"/> is <null/>.</exception>
-            <exception cref="T:System.ArgumentException">The key type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is not in the inheritance hierarchy of <paramref name="keyObject"/>.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.ConvertToValueType(System.Object)">
-            <summary>
-            Converts the object passed as a value to the value type of the dictionary
-            </summary>
-            <param name="value">The object to convert to the value type of the dictionary</param>
-            <returns>The value object, converted to the value type of the dictionary</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is <null/>, and the value type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is a value type.</exception>
-            <exception cref="T:System.ArgumentException">The value type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is not in the inheritance hierarchy of <paramref name="value"/>.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Insert(System.Int32,`0,`1)">
-            <summary>
-            Inserts a new entry into the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection with the specified key and value at the specified index.
-            </summary>
-            <param name="index">The zero-based index at which the element should be inserted.</param>
-            <param name="key">The key of the entry to add.</param>
-            <param name="value">The value of the entry to add. The value can be <null/> if the type of the values in the dictionary is a reference type.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than 0.<br/>
-            -or-<br/>
-            <paramref name="index"/> is greater than <see cref="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Count"/>.</exception>
-            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is <null/>.</exception>
-            <exception cref="T:System.ArgumentException">An element with the same key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#Specialized#IOrderedDictionary#Insert(System.Int32,System.Object,System.Object)">
-            <summary>
-            Inserts a new entry into the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection with the specified key and value at the specified index.
-            </summary>
-            <param name="index">The zero-based index at which the element should be inserted.</param>
-            <param name="key">The key of the entry to add.</param>
-            <param name="value">The value of the entry to add. The value can be <null/> if the type of the values in the dictionary is a reference type.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than 0.<br/>
-            -or-<br/>
-            <paramref name="index"/> is greater than <see cref="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Count"/>.</exception>
-            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is <null/>.<br/>
-            -or-<br/>
-            <paramref name="value"/> is <null/>, and the value type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is a value type.</exception>
-            <exception cref="T:System.ArgumentException">The key type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is not in the inheritance hierarchy of <paramref name="key"/>.<br/>
-            -or-<br/>
-            The value type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is not in the inheritance hierarchy of <paramref name="value"/>.<br/>
-            -or-<br/>
-            An element with the same key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.RemoveAt(System.Int32)">
-            <summary>
-            Removes the entry at the specified index from the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.
-            </summary>
-            <param name="index">The zero-based index of the entry to remove.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than 0.<br/>
-            -or-<br/>
-            index is equal to or greater than <see cref="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Count"/>.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#Generic#IDictionary{TKey@TValue}#Add(`0,`1)">
-            <summary>
-            Adds an entry with the specified key and value into the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection with the lowest available index.
-            </summary>
-            <param name="key">The key of the entry to add.</param>
-            <param name="value">The value of the entry to add. This value can be <null/>.</param>
-            <remarks>A key cannot be <null/>, but a value can be.
-            <para>You can also use the <see cref="P:OrderedDictionary{TKey,TValue}.Item(TKey)"/> property to add new elements by setting the value of a key that does not exist in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection; however, if the specified key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>, setting the <see cref="P:OrderedDictionary{TKey,TValue}.Item(TKey)"/> property overwrites the old value. In contrast, the <see cref="M:Add"/> method does not modify existing elements.</para></remarks>
-            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is <null/></exception>
-            <exception cref="T:System.ArgumentException">An element with the same key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see></exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Add(`0,`1)">
-            <summary>
-            Adds an entry with the specified key and value into the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection with the lowest available index.
-            </summary>
-            <param name="key">The key of the entry to add.</param>
-            <param name="value">The value of the entry to add. This value can be <null/>.</param>
-            <returns>The index of the newly added entry</returns>
-            <remarks>A key cannot be <null/>, but a value can be.
-            <para>You can also use the <see cref="P:OrderedDictionary{TKey,TValue}.Item(TKey)"/> property to add new elements by setting the value of a key that does not exist in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection; however, if the specified key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>, setting the <see cref="P:OrderedDictionary{TKey,TValue}.Item(TKey)"/> property overwrites the old value. In contrast, the <see cref="M:Add"/> method does not modify existing elements.</para></remarks>
-            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is <null/></exception>
-            <exception cref="T:System.ArgumentException">An element with the same key already exists in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see></exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#IDictionary#Add(System.Object,System.Object)">
-            <summary>
-            Adds an entry with the specified key and value into the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection with the lowest available index.
-            </summary>
-            <param name="key">The key of the entry to add.</param>
-            <param name="value">The value of the entry to add. This value can be <null/>.</param>
-            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is <null/>.<br/>
-            -or-<br/>
-            <paramref name="value"/> is <null/>, and the value type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is a value type.</exception>
-            <exception cref="T:System.ArgumentException">The key type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is not in the inheritance hierarchy of <paramref name="key"/>.<br/>
-            -or-<br/>
-            The value type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is not in the inheritance hierarchy of <paramref name="value"/>.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Clear">
-            <summary>
-            Removes all elements from the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.
-            </summary>
-            <remarks>The capacity is not changed as a result of calling this method.</remarks>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.ContainsKey(`0)">
-            <summary>
-            Determines whether the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection contains a specific key.
-            </summary>
-            <param name="key">The key to locate in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.</param>
-            <returns><see langword="true"/> if the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection contains an element with the specified key; otherwise, <see langword="false"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is <null/></exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#IDictionary#Contains(System.Object)">
-            <summary>
-            Determines whether the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection contains a specific key.
-            </summary>
-            <param name="key">The key to locate in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.</param>
-            <returns><see langword="true"/> if the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection contains an element with the specified key; otherwise, <see langword="false"/>.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is <null/></exception>
-            <exception cref="T:System.ArgumentException">The key type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is not in the inheritance hierarchy of <paramref name="key"/>.</exception>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.IndexOfKey(`0)">
-            <summary>
-            Returns the zero-based index of the specified key in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>
-            </summary>
-            <param name="key">The key to locate in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see></param>
-            <returns>The zero-based index of <paramref name="key"/>, if <paramref name="key"/> is found in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>; otherwise, -1</returns>
-            <remarks>This method performs a linear search; therefore it has a cost of O(n) at worst.</remarks>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Remove(`0)">
-            <summary>
-            Removes the entry with the specified key from the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.
-            </summary>
-            <param name="key">The key of the entry to remove</param>
-            <returns><see langword="true"/> if the key was found and the corresponding element was removed; otherwise, <see langword="false"/></returns>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#IDictionary#Remove(System.Object)">
-            <summary>
-            Removes the entry with the specified key from the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.
-            </summary>
-            <param name="key">The key of the entry to remove</param>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
-            <summary>
-            Copies the elements of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> elements to a one-dimensional Array object at the specified index.
-            </summary>
-            <param name="array">The one-dimensional <see cref="T:System.Array"/> object that is the destination of the <see cref="T:KeyValuePair`2&gt;"/> objects copied from the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
-            <param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param>
-            <remarks>The <see cref="M:CopyTo"/> method preserves the order of the elements in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see></remarks>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.TryGetValue(`0,`1@)">
-            <summary>
-            Gets the value associated with the specified key.
-            </summary>
-            <param name="key">The key of the value to get.</param>
-            <param name="value">When this method returns, contains the value associated with the specified key, if the key is found; otherwise, the default value for the type of <paramref name="value"/>. This parameter can be passed uninitialized.</param>
-            <returns><see langword="true"/> if the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> contains an element with the specified key; otherwise, <see langword="false"/>.</returns>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@TValue}}#Add(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Adds the specified value to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> with the specified key.
-            </summary>
-            <param name="item">The <see cref="T:KeyValuePair{TKey,TValue}">KeyValuePair&lt;TKey,TValue&gt;</see> structure representing the key and value to add to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</param>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@TValue}}#Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Determines whether the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> contains a specific key and value.
-            </summary>
-            <param name="item">The <see cref="T:KeyValuePair{TKey,TValue}">KeyValuePair&lt;TKey,TValue&gt;</see> structure to locate in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</param>
-            <returns><see langword="true"/> if <paramref name="item"/> is found in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>; otherwise, <see langword="false"/>.</returns>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@TValue}}#CopyTo(System.Collections.Generic.KeyValuePair{`0,`1}[],System.Int32)">
-            <summary>
-            Copies the elements of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> to an array of type <see cref="T:KeyValuePair`2&gt;"/>, starting at the specified index.
-            </summary>
-            <param name="array">The one-dimensional array of type <see cref="T:KeyValuePair{TKey,TValue}">KeyValuePair&lt;TKey,TValue&gt;</see> that is the destination of the <see cref="T:KeyValuePair{TKey,TValue}">KeyValuePair&lt;TKey,TValue&gt;</see> elements copied from the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>. The array must have zero-based indexing.</param>
-            <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#Generic#ICollection{System#Collections#Generic#KeyValuePair{TKey@TValue}}#Remove(System.Collections.Generic.KeyValuePair{`0,`1})">
-            <summary>
-            Removes a key and value from the dictionary.
-            </summary>
-            <param name="item">The <see cref="T:KeyValuePair{TKey,TValue}">KeyValuePair&lt;TKey,TValue&gt;</see> structure representing the key and value to remove from the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</param>
-            <returns><see langword="true"/> if the key and value represented by <paramref name="item"/> is successfully found and removed; otherwise, <see langword="false"/>. This method returns <see langword="false"/> if <paramref name="item"/> is not found in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</returns>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Dictionary">
-            <summary>
-            Gets the dictionary object that stores the keys and values
-            </summary>
-            <value>The dictionary object that stores the keys and values for the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see></value>
-            <remarks>Accessing this property will create the dictionary object if necessary</remarks>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.List">
-            <summary>
-            Gets the list object that stores the key/value pairs.
-            </summary>
-            <value>The list object that stores the key/value pairs for the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see></value>
-            <remarks>Accessing this property will create the list object if necessary.</remarks>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Item(System.Int32)">
-            <summary>
-            Gets or sets the value at the specified index.
-            </summary>
-            <param name="index">The zero-based index of the value to get or set.</param>
-            <value>The value of the item at the specified index.</value>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than 0.<br/>
-            -or-<br/>
-            index is equal to or greater than <see cref="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Count"/>.</exception>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#Specialized#IOrderedDictionary#Item(System.Int32)">
-            <summary>
-            Gets or sets the value at the specified index.
-            </summary>
-            <param name="index">The zero-based index of the value to get or set.</param>
-            <value>The value of the item at the specified index.</value>
-            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than 0.<br/>
-            -or-<br/>
-            index is equal to or greater than <see cref="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Count"/>.</exception>
-            <exception cref="T:System.ArgumentNullException"><paramref name="value"/> is a null reference, and the value type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is a value type.</exception>
-            <exception cref="T:System.ArgumentException">The value type of the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is not in the inheritance hierarchy of <paramref name="value"/>.</exception>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#IDictionary#IsFixedSize">
-            <summary>
-            Gets a value indicating whether the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> has a fixed size.
-            </summary>
-            <value><see langword="true"/> if the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> has a fixed size; otherwise, <see langword="false"/>. The default is <see langword="false"/>.</value>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.IsReadOnly">
-            <summary>
-            Gets a value indicating whether the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection is read-only.
-            </summary>
-            <value><see langword="true"/> if the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> is read-only; otherwise, <see langword="false"/>. The default is <see langword="false"/>.</value>
-            <remarks>
-            A collection that is read-only does not allow the addition, removal, or modification of elements after the collection is created.
-            <para>A collection that is read-only is simply a collection with a wrapper that prevents modification of the collection; therefore, if changes are made to the underlying collection, the read-only collection reflects those changes.</para>
-            </remarks>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#IDictionary#Keys">
-            <summary>
-            Gets an <see cref="T:System.Collections.ICollection"/> object containing the keys in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.
-            </summary>
-            <value>An <see cref="T:System.Collections.ICollection"/> object containing the keys in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</value>
-            <remarks>The returned <see cref="T:System.Collections.ICollection"/> object is not a static copy; instead, the collection refers back to the keys in the original <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>. Therefore, changes to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> continue to be reflected in the key collection.</remarks>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#IDictionary#Values">
-            <summary>
-            Gets an <see cref="T:System.Collections.ICollection"/> object containing the values in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.
-            </summary>
-            <value>An <see cref="T:System.Collections.ICollection"/> object containing the values in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.</value>
-            <remarks>The returned <see cref="T:System.Collections.ICollection"/> object is not a static copy; instead, the <see cref="T:System.Collections.ICollection"/> refers back to the values in the original <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection. Therefore, changes to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> continue to be reflected in the <see cref="T:System.Collections.ICollection"/>.</remarks>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Item(`0)">
-            <summary>
-            Gets or sets the value with the specified key.
-            </summary>
-            <param name="key">The key of the value to get or set.</param>
-            <value>The value associated with the specified key. If the specified key is not found, attempting to get it returns <null/>, and attempting to set it creates a new element using the specified key.</value>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#IDictionary#Item(System.Object)">
-            <summary>
-            Gets or sets the value with the specified key.
-            </summary>
-            <param name="key">The key of the value to get or set.</param>
-            <value>The value associated with the specified key. If the specified key is not found, attempting to get it returns <null/>, and attempting to set it creates a new element using the specified key.</value>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Count">
-            <summary>
-            Gets the number of key/values pairs contained in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.
-            </summary>
-            <value>The number of key/value pairs contained in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> collection.</value>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#ICollection#IsSynchronized">
-            <summary>
-            Gets a value indicating whether access to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> object is synchronized (thread-safe).
-            </summary>
-            <value>This method always returns false.</value>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.System#Collections#ICollection#SyncRoot">
-            <summary>
-            Gets an object that can be used to synchronize access to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> object.
-            </summary>
-            <value>An object that can be used to synchronize access to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> object.</value>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Keys">
-            <summary>
-            Gets an <see cref="T:System.Collections.Generic.ICollection{TKey}">ICollection&lt;TKey&gt;</see> object containing the keys in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.
-            </summary>
-            <value>An <see cref="T:System.Collections.Generic.ICollection{TKey}">ICollection&lt;TKey&gt;</see> object containing the keys in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</value>
-            <remarks>The returned <see cref="T:System.Collections.Generic.ICollection{TKey}">ICollection&lt;TKey&gt;</see> object is not a static copy; instead, the collection refers back to the keys in the original <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>. Therefore, changes to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> continue to be reflected in the key collection.</remarks>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2.Values">
-            <summary>
-            Gets an <see cref="T:ICollection{TValue}">ICollection&lt;TValue&gt;</see> object containing the values in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.
-            </summary>
-            <value>An <see cref="T:ICollection{TValue}">ICollection&lt;TValue&gt;</see> object containing the values in the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>.</value>
-            <remarks>The returned <see cref="T:ICollection{TValue}">ICollection&lt;TKey&gt;</see> object is not a static copy; instead, the collection refers back to the values in the original <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see>. Therefore, changes to the <see cref="T:BrightcoveMapiWrapper.Model.Containers.OrderedDictionary`2">OrderedDictionary&lt;TKey,TValue&gt;</see> continue to be reflected in the value collection.</remarks>
-        </member>
-=======
->>>>>>> Added some documentation
         <member name="T:BrightcoveMapiWrapper.Model.Items.BrightcoveImage">
             <summary>
             The BrightcoveImage object represents an image file in Brightcove's system. Images are associated with videos as 
@@ -4539,6 +5054,22 @@
             that when creating a new image asset, the only property that is required is type. If you are not uploading a file, 
             the remoteUrl property is also required.
             </summary>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveImage.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveImage.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveImage.Id">
             <summary>
@@ -4600,14 +5131,25 @@
             The BrightcovePlaylist object is a collection of BrightcoveVideos.
             </summary>
         </member>
-<<<<<<< HEAD
-=======
         <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.#ctor">
             <summary>
             Constructor.
             </summary>
         </member>
->>>>>>> Added some documentation
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist"/>. Note that the <see cref="P:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Videos"/> property is not serialized with the rest of the other properties, as including this property on updates causes an exception.
+            </summary>
+            <param name="serializer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
+        </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.AccountId">
             <summary>
             A number that uniquely identifies the account to which this Playlist belongs, assigned by Brightcove.
@@ -4684,6 +5226,23 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveResultContainer`1.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveResultContainer`1.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
+        </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.BrightcoveResultContainer`1.Result">
             <summary>
             A type of result.
@@ -4694,14 +5253,28 @@
             A nested error returned by the Brightcove.
             </summary>
         </member>
-<<<<<<< HEAD
-=======
         <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveNestedError.#ctor">
             <summary>
             Constructor.
             </summary>
         </member>
->>>>>>> Added some documentation
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveNestedError.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Serializes the specified serializer.
+            </summary>
+            <param name="serializer">The serializer.</param>
+            <returns>
+            A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveNestedError.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
+            <summary>
+            Deserializes the specified dictionary.
+            </summary>
+            <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
+            <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
+        </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.BrightcoveNestedError.Message">
             <summary>
             The error message.

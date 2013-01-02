@@ -68,6 +68,12 @@ namespace BrightcoveMapiWrapper.Util.Extensions
 			return sb.ToString().ToUpper();
 		}
 
+		/// <summary>
+		/// Converts a plain-text string to the specified Brightcove <see cref="Enum" />.
+		/// </summary>
+		/// <typeparam name="T">The type of Brightcove <see cref="Enum"/>.</typeparam>
+		/// <param name="brightcoveEnum">A plain-text string.</param>
+		/// <returns>A correctly-parsed Brightcove <see cref="Enum"/> representation.</returns>
 		public static T ToBrightcoveEnum<T>(this string brightcoveEnum) where T : struct, IConvertible
 		{
 			if (!typeof(T).IsEnum)

@@ -15,7 +15,9 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 		[Test]
 		public void FindVideosByText_Basic()
 		{
+#pragma warning disable 612,618
 			_videos = _api.FindVideosByText("test");
+#pragma warning restore 612,618
 
 			Assert.Greater(_videos.Count, 0);
 		}
