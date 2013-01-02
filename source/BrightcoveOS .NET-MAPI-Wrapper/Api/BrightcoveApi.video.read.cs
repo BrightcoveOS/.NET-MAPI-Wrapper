@@ -731,7 +731,11 @@ namespace BrightcoveMapiWrapper.Api
 				string[] orderedFields = sortFields.OrderedDictionary.Cast<DictionaryEntry>()
 					.Where(x => x.Key is SortBy)
 					.Where(x => x.Value is SortOrder)
+<<<<<<< HEAD
 					.Select(x => String.Format("{0}:{1}", ((SortBy)x.Key).ToBrightcoveName(), ((SortOrder)x.Value).ToBrightcoveName()))
+=======
+					.Select(x => String.Format("{0}:{1}", ( (SortBy)x.Key ).ToBrightcoveName(), ( (SortOrder)x.Value ).ToBrightcoveName()))
+>>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
 					.ToArray();
 
 				parms.Add("sort_by", String.Join(",", orderedFields));

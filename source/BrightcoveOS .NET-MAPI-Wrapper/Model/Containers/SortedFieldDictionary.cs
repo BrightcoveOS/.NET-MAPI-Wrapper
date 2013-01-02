@@ -20,7 +20,11 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		/// <summary>
 		/// Constructor.
 		/// </summary>
+<<<<<<< HEAD
 		/// <param name="orderedDictionary">A properly constructed <see cref="IOrderedDictionary"/>.</param>
+=======
+		/// <param name="orderedDictionary">A properly constructed <see cref="IOrderedDictionary"></see></param>
+>>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
 		/// <example>
 		/// The example below demonstrates how to pass in objects to this constructor.
 		/// <code>
@@ -55,7 +59,11 @@ namespace BrightcoveMapiWrapper.Model.Containers
 		/// <summary>
 		/// Parses the parameters passed to the constructor.
 		/// </summary>
+<<<<<<< HEAD
 		/// <param name="fields">The <see cref="T:Object[]"/> passed to the constructor.</param>
+=======
+		/// <param name="fields">The object[] passed to the constructor.</param>
+>>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
 		/// <exception cref="ArgumentException">Either the length of the params argument is odd, each pair of objects within the params argument do not each comprise a valid <see cref="KeyValuePair{SortBy,SortOrder}"/>, or there is a duplicate <see cref="SortBy"/> key within the params argument.</exception>
 		private void ParseParams(ref object[] fields)
 		{
