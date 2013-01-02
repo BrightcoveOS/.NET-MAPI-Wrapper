@@ -364,7 +364,6 @@ namespace BrightcoveMapiWrapper.Model
 
 	/// <summary>
 	/// Specify the region for setting the general service URL.
-<<<<<<< HEAD
 	/// </summary>
 	public enum BrightcoveRegion
 	{
@@ -384,24 +383,17 @@ namespace BrightcoveMapiWrapper.Model
 
 	/// <summary>
 	/// The read methods supported by Brightcove. Available method descriptions are taken from <a href="http://docs.brightcove.com/en/media/">Brightcove Video Cloud Media API Reference</a>.
-=======
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
 	/// </summary>
 	public enum BrightcoveReadMethod
 	{
 		/// <summary>
 		/// No option specified.
-<<<<<<< HEAD
-		/// </summary>
-		None,
-=======
 		/// </summary>
 		None = 0,
 		/// <summary>
 		/// Any unspecified region. Mapped to the .com generic top-level domain.
 		/// </summary>
 		Generic,
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
 		/// <summary>
 		/// Find all audio track playlists in this account.
 		/// </summary>

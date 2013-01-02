@@ -731,11 +731,7 @@ namespace BrightcoveMapiWrapper.Api
 				string[] orderedFields = sortFields.OrderedDictionary.Cast<DictionaryEntry>()
 					.Where(x => x.Key is SortBy)
 					.Where(x => x.Value is SortOrder)
-<<<<<<< HEAD
 					.Select(x => String.Format("{0}:{1}", ((SortBy)x.Key).ToBrightcoveName(), ((SortOrder)x.Value).ToBrightcoveName()))
-=======
-					.Select(x => String.Format("{0}:{1}", ( (SortBy)x.Key ).ToBrightcoveName(), ( (SortOrder)x.Value ).ToBrightcoveName()))
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
 					.ToArray();
 
 				parms.Add("sort_by", String.Join(",", orderedFields));
@@ -890,7 +886,7 @@ namespace BrightcoveMapiWrapper.Api
 																	  IEnumerable<string> videoFields, IEnumerable<string> customFields, bool getItemCount)
 		{
 			return SearchVideos(all, any, none, pageSize, pageNumber, exact, new SortedFieldDictionary(sortBy, sortOrder), videoFields,
-			                    customFields, getItemCount);
+								customFields, getItemCount);
 		}
 
 		/// <summary>
@@ -961,7 +957,7 @@ namespace BrightcoveMapiWrapper.Api
 																	  int pageSize, int pageNumber, bool exact, SortBy sortBy, SortOrder sortOrder,
 																	  IEnumerable<string> videoFields)
 		{
-		    return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortBy, sortOrder, videoFields, null);
+			return SearchVideos(all, any, none, pageSize, pageNumber, exact, sortBy, sortOrder, videoFields, null);
 		}
 
 		/// <summary>
@@ -2114,7 +2110,7 @@ namespace BrightcoveMapiWrapper.Api
 		#endregion
 
 		#region FindVideosByTags
-		
+
 		///// <summary>
 		///// Performs a search on all the tags of the videos in this account, and returns a collection of videos that 
 		///// contain the specified tags. Note that tags are not case-sensitive.

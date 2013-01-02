@@ -2966,7 +2966,6 @@
             <summary>
             Deserializes the specified dictionary.
             </summary>
-<<<<<<< HEAD
             <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
             <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
@@ -2986,10 +2985,6 @@
             </summary>
             <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
             <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
-=======
-            <param name="dictionary">The dictionary.</param>
-            <param name="serializer">The serializer.</param>
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.BrightcoveError.Name">
             <summary>
@@ -3129,15 +3124,9 @@
             <summary>
             Constructor.
             </summary>
-<<<<<<< HEAD
             <param name="orderedDictionary">A properly constructed <see cref="T:System.Collections.Specialized.IOrderedDictionary"/>.</param>
             <example>
             The example below demonstrates how to pass in objects to this constructor.
-=======
-            <param name="orderedDictionary">A properly constructed <see cref="T:System.Collections.Specialized.IOrderedDictionary"></see></param>
-            <example>
-            The below snippet demonstrates how to pass in objects to this constructor.
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
             <code>
             var dict = new <see cref="P:BrightcoveMapiWrapper.Model.Containers.SortedFieldDictionary.OrderedDictionary"/>
             {
@@ -3154,11 +3143,7 @@
             </summary>
             <param name="fields">The <see cref="T:System.Object"/> array passed to the constructor.</param>
             <example>
-<<<<<<< HEAD
             The example below demonstrates how to pass in objects to this constructor.
-=======
-            The below snippet demonstrates how to pass in objects to this constructor.
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
             <code>
             SortedFieldDictionary sortFields = new SortedFieldDictionary(SortBy.DisplayName, SortOrder.Ascending, SortBy.CreationDate, SortOrder.Descending);
             </code>
@@ -3168,20 +3153,12 @@
             <summary>
             Parses the parameters passed to the constructor.
             </summary>
-<<<<<<< HEAD
-            <param name="fields">The <see cref="T:Object[]"/> passed to the constructor.</param>
-=======
             <param name="fields">The object[] passed to the constructor.</param>
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
             <exception cref="T:System.ArgumentException">Either the length of the params argument is odd, each pair of objects within the params argument do not each comprise a valid <see cref="T:System.Collections.Generic.KeyValuePair`2"/>, or there is a duplicate <see cref="T:BrightcoveMapiWrapper.Model.SortBy"/> key within the params argument.</exception>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Containers.SortedFieldDictionary.OrderedDictionary">
             <summary>
-<<<<<<< HEAD
             A dictionary that preserves both uniqueness of <see cref="T:BrightcoveMapiWrapper.Model.SortBy"/> (you can only sort by one field in a single request) and insertion order (the order by which you sort directly affects which items are returned by a single API call).
-=======
-            A dictionary that preserves both uniqueness of SortBy (you can only sort by one field in a single request) and insertion order (the order by which you sort directly affects which items are returned by a single API call).
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
             </summary>
         </member>
         <member name="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist">
@@ -3200,7 +3177,6 @@
             Constructor.
             </summary>
         </member>
-<<<<<<< HEAD
         <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
             Serializes the specified serializer.
@@ -3217,8 +3193,6 @@
             <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
             <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
-=======
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist.AccountId">
             <summary>
             The ID of the account to which this Playlist belongs, assigned by Brightcove.
@@ -3381,7 +3355,6 @@
             Constructor.
             </summary>
         </member>
-<<<<<<< HEAD
         <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
             Deserializes the specified dictionary.
@@ -3398,8 +3371,6 @@
             A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.
             </returns>
         </member>
-=======
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack.AccountId">
             <summary>
             A number, assigned by Brightcove, that uniquely identifies the account to which the Audio belongs.
@@ -3623,7 +3594,6 @@
             Constructor.
             </summary>
         </member>
-<<<<<<< HEAD
         <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveLogoOverlay.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
             Serializes the specified serializer.
@@ -3640,8 +3610,6 @@
             <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
             <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
-=======
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveLogoOverlay.Id">
             <summary>
             A number that uniquely identifies the LogoOverlay. This id is automatically assigned 
@@ -4096,6 +4064,11 @@
             No option specified.
             </summary>
         </member>
+        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.Generic">
+            <summary>
+            Any unspecified region. Mapped to the .com generic top-level domain.
+            </summary>
+        </member>
         <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllAudiotrackPlaylists">
             <summary>
             Find all audio track playlists in this account.
@@ -4361,16 +4334,7 @@
             Shares the specified video with a list of sharee accounts.
             </summary>
         </member>
-<<<<<<< HEAD
         <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UnshareVideo">
-=======
-        <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveCuePoint.#ctor">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveCuePoint.Name">
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
             <summary>
             Deletes the specified previously shared video from a list of sharee accounts. If a shared version of the specified video does not exist in a sharee account, no action is taken.
             </summary>
@@ -5177,7 +5141,6 @@
             Constructor.
             </summary>
         </member>
-<<<<<<< HEAD
         <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
             Serializes the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist"/>. Note that the <see cref="P:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Videos"/> property is not serialized with the rest of the other properties, as including this property on updates causes an exception.
@@ -5192,8 +5155,6 @@
             <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
             <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
-=======
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.AccountId">
             <summary>
             A number that uniquely identifies the account to which this Playlist belongs, assigned by Brightcove.
@@ -5270,7 +5231,6 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-<<<<<<< HEAD
         <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveResultContainer`1.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
             Serializes the specified serializer.
@@ -5288,8 +5248,6 @@
             <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
             <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
-=======
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
         <member name="P:BrightcoveMapiWrapper.Model.Containers.BrightcoveResultContainer`1.Result">
             <summary>
             A type of result.
@@ -5305,7 +5263,6 @@
             Constructor.
             </summary>
         </member>
-<<<<<<< HEAD
         <member name="M:BrightcoveMapiWrapper.Model.Containers.BrightcoveNestedError.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
             Serializes the specified serializer.
@@ -5323,8 +5280,6 @@
             <param name="dictionary">The <see cref="T:System.Collections.Generic.IDictionary`2"/>.</param>
             <param name="serializer">The <see cref="T:System.Web.Script.Serialization.JavaScriptSerializer"/>.</param>
         </member>
-=======
->>>>>>> e5713fc5dfa129c75b57d9eecb64b18ffab590aa
         <member name="P:BrightcoveMapiWrapper.Model.Containers.BrightcoveNestedError.Message">
             <summary>
             The error message.
