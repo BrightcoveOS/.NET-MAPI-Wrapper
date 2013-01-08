@@ -156,7 +156,7 @@ namespace BrightcoveMapiWrapper.Api
 
 		#endregion
 
-		#region
+		#region DeleteVideo
 
 		/// <summary>
 		/// Deletes a video, specified by video ID
@@ -186,6 +186,13 @@ namespace BrightcoveMapiWrapper.Api
 			DoDeleteVideo(-1, referenceId, cascade, deleteShares);
 		}
 
+		/// <summary>
+		/// Deletes a video, specified by video ID or reference ID.
+		/// </summary>
+		/// <param name="videoId">The ID for the video to delete. Either a video ID or a reference ID must be supplied.</param>
+		/// <param name="referenceId">The publisher-assigned reference ID of the video you want to delete. Either a video ID or a reference ID must be supplied.</param>
+		/// <param name="cascade">Set this to true if you want to delete this video even if it is part of a manual playlist or assigned to a player. The video will be removed from all playlists and players in which it appears, then deleted.</param>
+		/// <param name="deleteShares">Set this to true if you want also to delete shared copies of this video. Note that this will delete all shared copies from your account, as well as from all accounts with which the video has been shared, regardless of whether or not those accounts are currently using the video in playlists or players.</param>
 		private void DoDeleteVideo(long videoId, string referenceId, bool cascade, bool deleteShares)
 		{
 			string propName;
@@ -211,7 +218,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// Determines the status of an upload.
 		/// </summary>
 		/// <param name="videoId">The ID of the video whose status you'd like to get.</param>
-		/// <returns>A BrightcoveUploadStatus that specifies the current state of the upload.</returns>
+		/// <returns>A <see cref="BrightcoveUploadStatus"/> that specifies the current state of the upload.</returns>
 		public BrightcoveUploadStatus GetUploadStatus(long videoId)
 		{
 			return DoGetUploadStatus(videoId, null);
@@ -221,18 +228,24 @@ namespace BrightcoveMapiWrapper.Api
 		/// Determines the status of an upload.
 		/// </summary>
 		/// <param name="referenceId">The reference ID of the video whose status you'd like to get.</param>
-		/// <returns>A BrightcoveUploadStatus that specifies the current state of the upload.</returns>
+		/// <returns>A <see cref="BrightcoveUploadStatus"/> that specifies the current state of the upload.</returns>
 		public BrightcoveUploadStatus GetUploadStatus(string referenceId)
 		{
 			return DoGetUploadStatus(-1, referenceId);
 		}
 
+		/// <summary>
+		/// Determines the status of an upload.
+		/// </summary>
+		/// <param name="videoId">The ID of the video whose status you'd like to get.</param>
+		/// <param name="referenceId">The reference ID of the video whose status you'd like to get.</param>
+		/// <returns>A <see cref="BrightcoveUploadStatus"/> that specifies the current state of the upload.</returns>
 		private BrightcoveUploadStatus DoGetUploadStatus(long videoId, string referenceId)
 		{
 			string propName;
 			object propValue;
 			GetIdValuesForUpload(videoId, referenceId, "video_id", "reference_id", out propName, out propValue);
-			
+
 			BrightcoveParamCollection parms = CreateWriteParamCollection("get_upload_status",
 																		 methodParams => methodParams.Add(propName, propValue));
 
@@ -259,12 +272,34 @@ namespace BrightcoveMapiWrapper.Api
 		{
 			BrightcoveParamCollection parms = CreateWriteParamCollection("share_video",
 																		 methodParams =>
-																		 	{
-																				methodParams.Add("video_id", videoId);
-																				methodParams.Add("auto_accept", autoAccept.ToString().ToLower());
-																				methodParams.Add("force_reshare", forceReshare.ToString().ToLower());
-																				methodParams.Add("sharee_account_ids", shareeAccountIds);
-																		 	});
+																		 {
+																			 methodParams.Add("video_id", videoId);
+																			 methodParams.Add("auto_accept", autoAccept.ToString().ToLower());
+																			 methodParams.Add("force_reshare", forceReshare.ToString().ToLower());
+																			 methodParams.Add("sharee_account_ids", shareeAccountIds);
+																		 });
+
+			return RunPost<BrightcoveResultContainer<long[]>>(parms).Result;
+		}
+
+		#endregion
+
+		#region UnshareVideo
+
+		/// <summary>
+		/// Deletes the specified previously shared video from a list of sharee accounts. If a shared version of the specified video does not exist in a sharee account, no action is taken.
+		/// </summary>
+		/// <param name="videoId">The id for the video that is shared.</param>
+		/// <param name="shareeAccountIds">List of Account IDs from which to stop sharing the video.</param>
+		/// <returns>A collection of sharee account IDs for accounts previously containing shared videos specifically removed by this method.</returns>
+		public ICollection<long> UnshareVideo(long videoId, IEnumerable<long> shareeAccountIds)
+		{
+			BrightcoveParamCollection parms = CreateWriteParamCollection("unshare_video",
+																		 methodParams =>
+																		 {
+																			 methodParams.Add("video_id", videoId);
+																			 methodParams.Add("sharee_account_ids", shareeAccountIds);
+																		 });
 
 			return RunPost<BrightcoveResultContainer<long[]>>(parms).Result;
 		}

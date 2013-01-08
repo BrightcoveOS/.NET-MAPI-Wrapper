@@ -1,7 +1,12 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
+using BrightcoveMapiWrapper.Model;
 
 namespace BrightcoveMapiWrapper.Api
 {
+	/// <summary>
+	/// Used to generate basic information about connections to Brightcove.
+	/// </summary>
 	public class BrightcoveApiConfig
 	{
 		/// <summary>
@@ -80,20 +85,55 @@ namespace BrightcoveMapiWrapper.Api
 			set;
 		}
 
+		/// <summary>
+		/// Generic constructor.
+		/// </summary>
 		public BrightcoveApiConfig() : this(null)
 		{
 		}
 
-		public BrightcoveApiConfig(string readToken) : this(readToken, null)
+		/// <summary>
+		/// A read-only configuration.
+		/// </summary>
+		/// <param name="readToken">The authentication token provided to authorize read access to the Media APIs.</param>
+		public BrightcoveApiConfig(string readToken) : this(readToken, null, BrightcoveRegion.Generic)
 		{
 		}
-        
-		public BrightcoveApiConfig(string readToken, string writeToken)
+
+		/// <summary>
+		/// A read-only configuration for the specified region.
+		/// </summary>
+		/// <param name="readToken">The authentication token provided to authorize read access to the Media APIs.</param>
+		/// <param name="region">The region of the video publishing.</param>
+		public BrightcoveApiConfig(string readToken, BrightcoveRegion region): this(readToken, null, region)
+		{
+		}
+
+		/// <summary>
+		/// A read/write configuration.
+		/// </summary>
+		/// <param name="readToken">The authentication token provided to authorize read access to the Media APIs.</param>
+		/// <param name="writeToken">The authentication token provided to authorize write access to the Media APIs.</param>
+		public BrightcoveApiConfig(string readToken, string writeToken) : this(readToken, writeToken, BrightcoveRegion.Generic)
+		{
+		}
+
+		/// <summary>
+		/// A read/write configuration for the specified region.
+		/// </summary>
+		/// <param name="readToken">The authentication token provided to authorize read access to the Media APIs.</param>
+		/// <param name="writeToken">The authentication token provided to authorize write access to the Media APIs.</param>
+		/// <param name="region">The region of the video publishing.</param>
+		public BrightcoveApiConfig(string readToken, string writeToken, BrightcoveRegion region)
 		{
 			ReadToken = readToken;
 			WriteToken = writeToken;
-			ApiReadUrl = "http://api.brightcove.com/services/library";
-			ApiWriteUrl = "http://api.brightcove.com/services/post";
+
+			string domain = region == BrightcoveRegion.Japan ? "co.jp" : "com";
+			const string apiStem = "http://api.brightcove.{0}/services/{1}";
+			ApiReadUrl = String.Format(apiStem, domain, "library");
+			ApiWriteUrl = String.Format(apiStem, domain, "post");
+
 			RequestTimeout = 100000; // .NET default
 			Encoding = Encoding.UTF8;
 			UserAgent = "Brightcove .NET MAPI Wrapper";

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{55E43500-DED9-49BC-B217-215770DB8A56}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BrightcoveOS.NET_MAPI_Wrapper.Tests</RootNamespace>
+    <AssemblyName>BrightcoveOS.NET_MAPI_Wrapper.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\nunit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IntegrationTests\ApiKeys.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\AudioTrackPlaylistReadTestBase.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAllAudioTrackPlaylistsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAudioTrackPlaylistByIdTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAudioTrackPlaylistByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAudioTrackPlaylistsByReferenceIds.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistRead\FindAudioTracksByPlaylistIdsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistWrite\AudioTrackPlaylistWriteTestBase.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistWrite\CreateAudioTrackPlaylistTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistWrite\DeleteAudioTrackPlaylistTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackPlaylistWrite\UpdateAudioTrackPlaylistTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\AudioTrackReadTestBase.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAllAudioTracksTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTrackByIdTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTrackByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTracksByIdsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTracksByReferenceIdsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTracksByTagsTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindAudioTracksByTextTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackRead\FindModifiedAudioTracksTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\AddAudioImageTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\AudioTrackWriteTestBase.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\AudioTrackWriteTestBase.Samples.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\CreateAudioTrackTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\DeleteAudioTrackTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\GetAudioTrackUploadStatusTests.cs" />
+    <Compile Include="IntegrationTests\AudioTrackWrite\UpdateAudioTrackTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindAllPlaylistsTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistByIdTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistsByIdsTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistsByReferenceIdsTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\FindPlaylistsForPlayerIdTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistRead\PlaylistReadTestBase.cs" />
+    <Compile Include="IntegrationTests\PlaylistWrite\CreatePlaylistTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistWrite\DeletePlaylistTests.cs" />
+    <Compile Include="IntegrationTests\PlaylistWrite\PlaylistWriteTestBase.cs" />
+    <Compile Include="IntegrationTests\PlaylistWrite\UpdatePlaylistTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindAllVideosTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindModifiedVideosTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindRelatedVideosTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideoByIdTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideoByIdUnfilteredTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideoByReferenceIdTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideoByReferenceIdUnfilteredTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByIdsTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByIdsUnfilteredTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByReferenceIdsTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByReferenceIdsUnfilteredTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByTagsTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\FindVideosByTextTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\SearchVideosCoreTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\SearchVideosUrlConstructionTests.cs" />
+    <Compile Include="IntegrationTests\VideoRead\VideoReadTestBase.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\AddImageTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\AddLogoOverlayTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\CreateVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\DeleteVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\GetUploadStatusTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\RemoveLogoOverlayTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\ShareVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\UnshareVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\UpdateVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\VideoWriteTestBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\source\BrightcoveOS .NET-MAPI-Wrapper\BrightcoveOS .NET-MAPI-Wrapper.csproj">
+      <Project>{EAD350C8-FFED-40E2-AE86-182C71B585DF}</Project>
+      <Name>BrightcoveOS .NET-MAPI-Wrapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IntegrationTests\AudioTrackRead\AudioTrackReadTestBase.Samples.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Building_On_The_Past.mov" />
+    <Content Include="Assets\FDR_Declares_War_19411208.mp3" />
+    <Content Include="Assets\GWBush_Oval_Office_Address_20010911.mp3" />
+    <Content Include="Assets\jfk_1963_0626_berliner_64kb.mp3" />
+    <Content Include="Assets\rslane32_-_SAX_STRING.mp3" />
+    <Content Include="Assets\test-image.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

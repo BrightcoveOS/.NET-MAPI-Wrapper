@@ -191,7 +191,7 @@ namespace BrightcoveMapiWrapper.Api
 		{
 			return FindAudioTrackPlaylistById(audioTrackPlaylistId, null);
 		}
-        
+		
 		#endregion
 
 		#region FindAudioTrackPlaylistByReferenceId
@@ -257,9 +257,9 @@ namespace BrightcoveMapiWrapper.Api
 		/// <param name="audioTrackFields">A list of the fields you wish to have populated in the audio tracks contained in the playlists.</param>
 		/// <param name="playlistFields">A list of the fields you wish to have populated in the playlists contained in the returned object.</param>
 		/// <returns>The specified playlists, in the order of the ids you passed in. If no playlist exists for an id, null is returned in its place.</returns>
-        public BrightcoveItemCollection<BrightcoveAudioTrackPlaylist> FindAudioTrackPlaylistsByIds(IEnumerable<long> audioTrackPlaylistIds, 
+		public BrightcoveItemCollection<BrightcoveAudioTrackPlaylist> FindAudioTrackPlaylistsByIds(IEnumerable<long> audioTrackPlaylistIds,
 			IEnumerable<string> audioTrackFields, IEnumerable<string> playlistFields)
-        {
+		{
 			NameValueCollection parms = BuildBasicReadParams("find_audiotrack_playlists_by_ids");
 
 			if (audioTrackPlaylistIds == null)
@@ -279,7 +279,7 @@ namespace BrightcoveMapiWrapper.Api
 			}
 
 			return RunQuery<BrightcoveItemCollection<BrightcoveAudioTrackPlaylist>>(parms);
-        }
+		}
 
 		/// <summary>
 		/// Retrieve a set of audio track playlists based on their ids.

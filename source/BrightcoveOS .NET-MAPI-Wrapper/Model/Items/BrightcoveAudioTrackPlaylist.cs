@@ -29,7 +29,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<long> AudioTrackIds
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<BrightcoveAudioTrack> AudioTracks
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -47,7 +47,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<string> FilterTags
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -57,7 +57,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public long Id
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -117,6 +117,9 @@ namespace BrightcoveMapiWrapper.Model.Items
 			set;
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BrightcoveAudioTrackPlaylist()
 		{
 			AudioTrackIds = new List<long>();
@@ -127,23 +130,50 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#region Implementation of IJavaScriptConvertable
 
+		/// <summary>
+		/// Serializes the <see cref="BrightcoveAudioTrackPlaylist"/>. Note that the <see cref="AudioTracks"/> property is not serialized with the rest of the other properties as the <see cref="AudioTrackIds"/> properties is instead used by Brightcove.
+		/// </summary>
+		/// <param name="serializer">The serializer.</param>
+		/// <returns>
+		/// A serialized <see cref="IDictionary{String,Object}" />.
+		/// </returns>
 		public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
 		{
 			IDictionary<string, object> serialized = new Dictionary<string, object>();
-
-			serialized["audioTrackIds"] = AudioTrackIds;
-			serialized["audioTracks"] = AudioTracks;
+			
 			serialized["filterTags"] = FilterTags;
-			serialized["id"] = Id;
 			serialized["name"] = Name;
 			serialized["playlistType"] = PlaylistType.ToBrightcoveName();
 			serialized["referenceId"] = ReferenceId;
 			serialized["shortDescription"] = ShortDescription;
 			serialized["thumbnailURL"] = ThumbnailUrl;
 
+			// The Id must be non-0.
+			if (Id != 0)
+			{
+				serialized["id"] = Id;
+			}
+
+			// Smart playlists (i.e. anything but an Explicit playlist) should not have the VideoIds
+			// populated, as 1) Brightcove determines which video Ids belong in a smart playlist, and
+			// 2) serializing this property for a smart playlists results in an error.
+			//
+			// It is still the case that you cannot switch from a smart playlist to an explicit playlist,
+			// and attempting to do so will result in an error. A workaround in this case is detailed @
+			// https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/wiki/Known-Issues#wiki-convert-smart-playlist-to-explicit.
+			if (PlaylistType == PlaylistType.Explicit && AudioTrackIds != null && AudioTrackIds.Any())
+			{
+				serialized["audioTrackIds"] = AudioTrackIds;
+			}
+
 			return serialized;
 		}
 
+		/// <summary>
+		/// Deserializes the specified dictionary.
+		/// </summary>
+		/// <param name="dictionary">The <see cref="IDictionary{String,Object}" />.</param>
+		/// <param name="serializer">The <see cref="JavaScriptSerializer" />.</param>
 		public void Deserialize(IDictionary<string, object> dictionary, JavaScriptSerializer serializer)
 		{
 			foreach (string key in dictionary.Keys)

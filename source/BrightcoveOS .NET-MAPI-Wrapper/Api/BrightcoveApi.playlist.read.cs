@@ -35,7 +35,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// the value 'customFields' in the video_fields parameter.</param>
 		/// <param name="getItemCount">If true, also return how many total results there are.</param>
 		/// <returns>A collection of Playlists that is the specified subset of all the playlists in this account.</returns>
-		public BrightcoveItemCollection<BrightcovePlaylist> FindAllPlaylists(int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder, IEnumerable<string> videoFields, 
+		public BrightcoveItemCollection<BrightcovePlaylist> FindAllPlaylists(int pageSize, int pageNumber, SortBy sortBy, SortOrder sortOrder, IEnumerable<string> videoFields,
 																			 IEnumerable<string> playlistFields, IEnumerable<string> customFields, bool getItemCount)
 		{
 			NameValueCollection parms = BuildBasicReadParams("find_all_playlists");
@@ -45,7 +45,7 @@ namespace BrightcoveMapiWrapper.Api
 			parms.Add("sort_by", sortBy.ToBrightcoveName());
 			parms.Add("sort_order", sortOrder.ToBrightcoveName());
 			parms.Add("get_item_count", getItemCount.ToString().ToLower());
-			
+
 			if (videoFields != null)
 			{
 				parms.AddRange("video_fields", videoFields);
@@ -290,7 +290,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// the value 'customFields' in the video_fields parameter.</param>
 		/// <returns>The specified playlists, in the order of the ids you passed in. If no playlist exists for an id, 
 		/// null is returned in its place.</returns>
-		public BrightcoveItemCollection<BrightcovePlaylist> FindPlaylistsByIds(IEnumerable<long> playlistIds, IEnumerable<string> videoFields, 
+		public BrightcoveItemCollection<BrightcovePlaylist> FindPlaylistsByIds(IEnumerable<long> playlistIds, IEnumerable<string> videoFields,
 																			   IEnumerable<string> playlistFields, IEnumerable<string> customFields)
 		{
 			NameValueCollection parms = BuildBasicReadParams("find_playlists_by_ids");

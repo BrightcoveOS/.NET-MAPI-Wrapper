@@ -5,6 +5,9 @@ using System.Text;
 
 namespace BrightcoveMapiWrapper.Util
 {
+	/// <summary>
+	/// Manipulates enums.
+	/// </summary>
 	public class EnumUtil
 	{
 		/// <summary>
