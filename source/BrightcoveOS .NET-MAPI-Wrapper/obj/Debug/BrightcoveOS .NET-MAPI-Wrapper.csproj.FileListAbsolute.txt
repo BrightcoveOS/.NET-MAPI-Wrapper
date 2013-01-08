@@ -11,3 +11,4 @@ C:\Velir\Projects\.NET-MAPI-Wrapper\bin\Debug\BrightcoveOS.NET-MAPI-Wrapper.pdb
 C:\Velir\Projects\.NET-MAPI-Wrapper\source\BrightcoveOS .NET-MAPI-Wrapper\obj\Debug\ResolveAssemblyReference.cache
 C:\Velir\Projects\.NET-MAPI-Wrapper\source\BrightcoveOS .NET-MAPI-Wrapper\obj\Debug\BrightcoveOS.NET-MAPI-Wrapper.dll
 C:\Velir\Projects\.NET-MAPI-Wrapper\source\BrightcoveOS .NET-MAPI-Wrapper\obj\Debug\BrightcoveOS.NET-MAPI-Wrapper.pdb
+C:\Velir\Projects\.NET-MAPI-Wrapper\bin\Debug\BrightcoveOS.NET-MAPI-Wrapper.XML

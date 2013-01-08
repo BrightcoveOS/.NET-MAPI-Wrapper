@@ -193,7 +193,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 			// It is still the case that you cannot switch from a smart playlist to an explicit playlist,
 			// and attempting to do so will result in an error. A workaround in this case is detailed @
 			// https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/wiki/Known-Issues#wiki-convert-smart-playlist-to-explicit.
-			if (PlaylistType == PlaylistType.Explicit && VideoIds.Any())
+			if (PlaylistType == PlaylistType.Explicit && VideoIds != null && VideoIds.Any())
 			{
 				serialized["videoIds"] = VideoIds;
 			}
