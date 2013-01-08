@@ -135,7 +135,7 @@
             Find multiple audio tracks, given their ids.
             </summary>
             <param name="audioTrackIds">The list of audio track ids for the audio tracks we'd like to retrieve.</param>
-            <param name="audioTrackFields">A list of the fields you wish to have populated in the audiotracks
+            <param name="audioTrackFields">A list of the fields you wish to have populated in the audio tracks
             contained in the returned object.</param>
             <returns>A collection that contains the audio track objects corresponding to the audio track ids given.</returns>
         </member>
@@ -555,6 +555,14 @@
             <param name="referenceId">The Reference ID of the playlist you'd like to delete</param>
             <param name="cascade">If true, playlist will be deleted even if it is referenced by players. The playlist will 
             be removed from all players in which it appears, then deleted.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DoDeletePlaylist(System.Int64,System.String,System.Boolean)">
+            <summary>
+            Deletes a playlist, specified by playlist ID or reference ID.
+            </summary>
+            <param name="playlistId">The ID for the playlist to delete. Either a playlist ID or a reference ID must be supplied.</param>
+            <param name="referenceId">The publisher-assigned reference ID of the playlist you want to delete. Either a playlist ID or a reference ID must be supplied.</param>
+            <param name="cascade">Set this to true if you want to delete this playlist even if it is referenced by players. The playlist will be removed from all players in which it appears, then deleted.</param>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindVideoById(System.Int64,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
             <summary>
@@ -1077,29 +1085,6 @@
             to return a hit in the result set. If the field's name is not present, it will 
             search among the name, shortDescription, and longDescription fields by default.</param>
             <returns>A collection of videos matching the specified criteria.</returns>
-        </member>
-        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindRelatedVideos(System.String,System.String,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
-            <summary>
-            Finds videos related to the given video. Combines the name and short description of the given 
-            video and searches for any partial matches in the name, description, and tags of all videos in 
-            the Brightcove media library for this account.
-            </summary>
-            <param name="searchParam">The parameter by which related videos are determined.</param>
-            <param name="searchValue">The parameter value by which related videos are determined.</param>
-            <param name="pageSize">Number of items returned per page. A page is a subset of all of the items 
-            that satisfy the request. The maximum page size is 100.</param>
-            <param name="pageNumber">The zero-indexed number of the page to return</param>
-            <param name="videoFields">A list of the fields you wish to have populated in the 
-            Videos contained in the returned object. If you omit this parameter, the method returns the 
-            following fields of the video: id, name, shortDescription, longDescription, creationDate, 
-            publisheddate, lastModifiedDate, linkURL, linkText, tags, videoStillURL, thumbnailURL, 
-            referenceId, length, economics, playsTotal, playsTrailingWeek. If you use a token with URL 
-            access, this method also returns FLVURL, renditions, FLVFullLength, videoFullLength.</param>
-            <param name="customFields">A list of the custom fields you wish to have populated 
-            in the videos contained in the returned object. If you omit this parameter, no custom fields are 
-            returned, unless you include the value 'customFields' in the video_fields parameter.</param>
-            <param name="getItemCount">If true, also return how many total results there are.</param>
-            <returns>A collection of videos, ordered by relevance to the provided video.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindRelatedVideosById(System.Int64,System.Int32,System.Int32,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
@@ -2028,25 +2013,42 @@
             this will delete all shared copies from your account, as well as from all accounts with which the video has 
             been shared, regardless of whether or not those accounts are currently using the video in playlists or players.</param>
         </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DoDeleteVideo(System.Int64,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Deletes a video, specified by video ID or reference ID.
+            </summary>
+            <param name="videoId">The ID for the video to delete. Either a video ID or a reference ID must be supplied.</param>
+            <param name="referenceId">The publisher-assigned reference ID of the video you want to delete. Either a video ID or a reference ID must be supplied.</param>
+            <param name="cascade">Set this to true if you want to delete this video even if it is part of a manual playlist or assigned to a player. The video will be removed from all playlists and players in which it appears, then deleted.</param>
+            <param name="deleteShares">Set this to true if you want also to delete shared copies of this video. Note that this will delete all shared copies from your account, as well as from all accounts with which the video has been shared, regardless of whether or not those accounts are currently using the video in playlists or players.</param>
+        </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.GetUploadStatus(System.Int64)">
             <summary>
             Determines the status of an upload.
             </summary>
             <param name="videoId">The ID of the video whose status you'd like to get.</param>
-            <returns>A BrightcoveUploadStatus that specifies the current state of the upload.</returns>
+            <returns>A <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveUploadStatus"/> that specifies the current state of the upload.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.GetUploadStatus(System.String)">
             <summary>
             Determines the status of an upload.
             </summary>
             <param name="referenceId">The reference ID of the video whose status you'd like to get.</param>
-            <returns>A BrightcoveUploadStatus that specifies the current state of the upload.</returns>
+            <returns>A <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveUploadStatus"/> that specifies the current state of the upload.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DoGetUploadStatus(System.Int64,System.String)">
+            <summary>
+            Determines the status of an upload.
+            </summary>
+            <param name="videoId">The ID of the video whose status you'd like to get.</param>
+            <param name="referenceId">The reference ID of the video whose status you'd like to get.</param>
+            <returns>A <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveUploadStatus"/> that specifies the current state of the upload.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.ShareVideo(System.Int64,System.Boolean,System.Boolean,System.Collections.Generic.IEnumerable{System.Int64})">
             <summary>
             Shares the specified video with a list of sharee accounts.
             </summary>
-            <param name="videoId">The id for the video that will be shared.</param>
+            <param name="videoId">The id for video that will be shared.</param>
             <param name="autoAccept">If the target account has the option enabled, setting this flag to true will bypass 
             the approval process, causing the shared video to automatically appear in the target account's library. If the 
             target account does not have the option enabled, or this flag is unspecified or false, then the shared video 
@@ -2222,21 +2224,38 @@
             <param name="postParams"></param>
             <returns></returns>
         </member>
-        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.BuildBasicReadParams``1(``0)">
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.BuildBasicReadParams(System.String)">
             <summary>
-            Builds a collection of params common to all API read requests.
+            Builds a collection of params common to all API read requests
             </summary>
-            <typeparam name="T">An enum of type <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveReadMethod"/>.</typeparam>
-            <param name="method">A valid <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveReadMethod"/> value to perform.</param>
+            <param name="command">The name of a particular Brightcove read API method.</param>
             <returns>A <see cref="T:System.Collections.Specialized.NameValueCollection"/> containing the basic GET parameters.</returns>
         </member>
-        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.BuildBasicWriteParams``1(``0)">
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.BuildBasicWriteParams(System.String)">
             <summary>
-            Builds a collection of params common to all API write requests.
+            Builds a basic collection of write params common to all API write requests.
             </summary>
-            <typeparam name="T">An enum of type <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod"/>.</typeparam>
-            <param name="method">A valid <see cref="T:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod"/> value to perform.</param>
+            <param name="method">The name of a particular Brightcove write API method.</param>
             <returns>A <see cref="T:System.Collections.Specialized.NameValueCollection"/> containing the basic POST parameters.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.CreateWriteParamCollection(System.String,System.Action{System.Collections.Generic.IDictionary{System.String,System.Object}})">
+            <summary>
+            Builds a collection of write params common to all API write requests.
+            </summary>
+            <param name="method">The Brightcove write method to perform.</param>
+            <param name="addMethodParamsCallback">The callback to performed on the passed dictionary.</param>
+            <returns>A <see cref="T:System.Collections.Specialized.NameValueCollection"/> containing the basic POST parameters.</returns>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.GetIdValuesForUpload(System.Int64,System.String,System.String,System.String,System.String@,System.Object@)">
+            <summary>
+            Determines whether to use the Id property or the reference Id property in various places in the API.
+            </summary>
+            <param name="numericId">The numeric id.</param>
+            <param name="referenceId">The reference id.</param>
+            <param name="idPropName">Name of the id property name.</param>
+            <param name="refPropName">Name of the reference id property name.</param>
+            <param name="propName">Name of the property to use.</param>
+            <param name="propValue">The property value.</param>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindAllPlaylists(System.Int32,System.Int32,BrightcoveMapiWrapper.Model.SortBy,BrightcoveMapiWrapper.Model.SortOrder,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
@@ -2698,6 +2717,14 @@
             <param name="referenceId">The Reference ID of the playlist you'd like to delete</param>
             <param name="cascade">If true, playlist will be deleted even if it is referenced by players. The playlist will 
             be removed from all players in which it appears, then deleted.</param>
+        </member>
+        <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.DoDeleteAudioTrackPlaylist(System.Int64,System.String,System.Boolean)">
+            <summary>
+            Deletes the playlist whether you're using a numeric Id or a string reference Id.
+            </summary>
+            <param name="playlistId">The ID for the playlist to delete. Either a playlist ID or a reference ID must be supplied.</param>
+            <param name="referenceId">The publisher-assigned reference ID of the playlist you want to delete. Either a playlist ID or a reference ID must be supplied.</param>
+            <param name="cascade">Set this to true if you want to delete this playlist even if it is referenced by players. The playlist will be removed from all players in which it appears, then deleted.</param>
         </member>
         <member name="M:BrightcoveMapiWrapper.Api.BrightcoveApi.FindAllAudioTrackPlaylists(System.Int32,System.Int32,BrightcoveMapiWrapper.Model.SortBy,BrightcoveMapiWrapper.Model.SortOrder,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
             <summary>
@@ -3179,7 +3206,7 @@
         </member>
         <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
-            Serializes the specified serializer.
+            Serializes the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist"/>. Note that the <see cref="P:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist.AudioTracks"/> property is not serialized with the rest of the other properties as the <see cref="P:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrackPlaylist.AudioTrackIds"/> properties is instead used by Brightcove.
             </summary>
             <param name="serializer">The serializer.</param>
             <returns>
@@ -3408,7 +3435,7 @@
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack.LastModifiedDate">
             <summary>
-            Last modified dat
+            Last modified date
             </summary>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcoveAudioTrack.Length">
@@ -3790,12 +3817,12 @@
         </member>
         <member name="F:BrightcoveMapiWrapper.Model.PlaylistType.OldestToNewest">
             <summary>
-            A smart playlist, ordered from oldest to newest, by published date.
+            A smart playlist, ordered from oldest to newest, by activated date.
             </summary>
         </member>
         <member name="F:BrightcoveMapiWrapper.Model.PlaylistType.NewestToOldest">
             <summary>
-            A smart playlist, ordered from newest to oldest, by published date.
+            A smart playlist, ordered from newest to oldest, by activated date.
             </summary>
         </member>
         <member name="F:BrightcoveMapiWrapper.Model.PlaylistType.Alphabetical">
@@ -4052,316 +4079,6 @@
         <member name="F:BrightcoveMapiWrapper.Model.BrightcoveRegion.Japan">
             <summary>
             Japan. Mapped to the .co.jp country code top-level domain.
-            </summary>
-        </member>
-        <member name="T:BrightcoveMapiWrapper.Model.BrightcoveReadMethod">
-            <summary>
-            The read methods supported by Brightcove. Available method descriptions are taken from <a href="http://docs.brightcove.com/en/media/">Brightcove Video Cloud Media API Reference</a>.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.None">
-            <summary>
-            No option specified.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.Generic">
-            <summary>
-            Any unspecified region. Mapped to the .com generic top-level domain.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllAudiotrackPlaylists">
-            <summary>
-            Find all audio track playlists in this account.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackPlaylistById">
-            <summary>
-            Finds a particular audio track playlist based on its id.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackPlaylistByReferenceId">
-            <summary>
-            Retrieve an audio track playlist based on its publisher-assigned reference id.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackPlaylistsByIds">
-            <summary>
-            Retrieve a set of audio track playlists based on their ids.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackPlaylistsByReferenceIds">
-            <summary>
-            Retrieve multiple audio track playlists based on their publisher-assigned reference ids.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllAudiotracks">
-            <summary>
-            Find all audio tracks in the Brightcove media library for this account.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackById">
-            <summary>
-            Finds a single audio track with the specified id.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotrackByReferenceId">
-            <summary>
-            Find an audio track based on its publisher-assigned reference id.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotracksByIds">
-            <summary>
-            Find multiple audio tracks, given their ids.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotracksByReferenceIds">
-            <summary>
-            Find multiple audio tracks based on their publisher-assigned reference ids.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotracksByTags">
-            <summary>
-            Performs a search on all the tags of the audio tracks in this account, and returns a collection of audio tracks that contain the specified tags. Note that tags are case-sensitive.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAudiotracksByText">
-            <summary>
-            Searches through all the audio tracks in this account, and returns a collection of audio tracks whose name, short description, or long description contain a match for the specified text.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindModifiedAudiotracks">
-            <summary>
-            Gets all the audio tracks that have been modified since the given time.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllPlaylists">
-            <summary>
-            Find all playlists in this account.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistById">
-            <summary>
-            Finds a particular playlist based on its ID.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistsByIds">
-            <summary>
-            Retrieve a set of playlists based on their IDs.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistByReferenceId">
-            <summary>
-            Retrieve a playlist based on its publisher-assigned reference ID.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistsByReferenceIds">
-            <summary>
-            Retrieve multiple playlists based on their publisher-assigned reference IDs.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindPlaylistsForPlayerId">
-            <summary>
-            Given the ID of a player, returns all the playlists assigned to that player.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideoById">
-            <summary>
-            Finds a single video with the specified ID.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByIds">
-            <summary>
-            Find multiple videos, given their IDs.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideoByReferenceId">
-            <summary>
-            Find a video based on its publisher-assigned reference ID.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByReferenceIds">
-            <summary>
-            Find multiple videos based on their publisher-assigned reference IDs.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindAllVideos">
-            <summary>
-            Find all videos in the Video Cloud media library for this account. This method has the limitation of returning only videos available for play, and does not include videos marked as inactive, currently in the upload process, or outside the scheduled play time.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.SearchVideos">
-            <summary>
-            Searches videos according to the criteria provided by the user. The criteria are constructed using field/value pairs specified in the command. Consider using the search_videos method for video searches rather than using the other find_video read methods. The search_videos method offers more flexible search and sorting options than the find_video methods, and is especially more flexible than the find_videos_by_text and find_videos_by_tags methods.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindRelatedVideos">
-            <summary>
-            Finds videos related to the given video. Combines the name and short description of the given video and searches for any partial matches in the name, short description, long description, tags, and custom fields of all videos in the Video Cloud media library for this account. More precise ways of finding related videos include tagging your videos by subject and using the find_videos_by_tags method to find videos that share the same tags: or creating a playlist that includes videos that you know are related. Consider using the search_videos method, which offers more flexible search and sorting options.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByUserId">
-            <summary>
-            Retrieves the videos uploaded by the specified user id. This method can be used to find videos submitted using the old consumer-generated media (CGM) module in Brightcove 2.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByCampaignId">
-            <summary>
-            Gets all the videos associated with the given campaign ID. Campaigns are a feature of the old consumer-generated media (CGM) module in Brightcove 2.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindModifiedVideos">
-            <summary>
-            Gets all the videos that have been modified since the given time.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByText">
-            <summary>
-            Searches through all the videos in this account, and returns a collection of videos whose name, short description, or long description contain a match for the specified text. Unlike some other Read methods, this method does not provide parameters for sorting the result set. The result set is sorted by relevance. The find_videos_by_text method returns substring matches - words from your search string plus a wildcard (*) at the end; thus, if your search string is "war", the result set will include results such as "warrior", "warfare", and "warbler." Substrings that don't match the beginning of a word are not returned; thus, if your search string is "war", the result set would not include results such as "swarthy" or "inward".
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByTags">
-            <summary>
-            Performs a search on all the tags of the videos in this account, and returns a collection of videos that contain the specified tags. Note that tags are not case-sensitive. This method does not provide parameters for sorting the result set. 
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideoByIdUnfiltered">
-            <summary>
-            Finds a single video with the specified ID. Unlike find_video_by_id, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByIdsUnfiltered">
-            <summary>
-            Find multiple videos, given their IDs. Unlike find_videos_by_ids, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideoByReferenceIdUnfiltered">
-            <summary>
-            Find a video based on its publisher-assigned reference ID. Unlike find_video_by_reference_id, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveReadMethod.FindVideosByReferenceIdsUnfiltered">
-            <summary>
-            Find multiple videos based on their publisher-assigned reference IDs. Unlike find_videos_by_reference_ids, this unfiltered version also returns videos that are unscheduled, inactive, or deleted.
-            </summary>
-        </member>
-        <member name="T:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod">
-            <summary>
-            The write methods supported by Brightcove. Available method descriptions are taken from <a href="http://docs.brightcove.com/en/media/">Brightcove Video Cloud Media API Reference</a>.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.None">
-            <summary>
-            No option specified.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.CreateAudiotrackPlaylist">
-            <summary>
-            Creates a playlist.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UpdateAudiotrackPlaylist">
-            <summary>
-            Updates a playlist.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeleteAudiotrackPlaylist">
-            <summary>
-            Deletes a playlist, specified by playlist ID or reference ID.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.CreateAudiotrack">
-            <summary>
-            Creates a new audio track in Brightcove by uploading a file.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.AddAudioImage">
-            <summary>
-            Add a thumbnail asset to the specified audio track.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UpdateAudiotrack">
-            <summary>
-            Updates the audio track information for a Brightcove audio track.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeleteAudiotrack">
-            <summary>
-            Deletes an audio track.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.GetAudiotrackUploadStatus">
-            <summary>
-            Gets the audiotrack upload status. 
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.CreatePlaylist">
-            <summary>
-            Creates a playlist. This method must be called using an HTTP POST request and JSON parameters. If the playlistType property in the Playlist object you submit is explicit, that means it's a manual playlist. If the playlistType property is not explicit, that means it's a smart playlist.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UpdatePlaylist">
-            <summary>
-            Updates a playlist, specified by playlist ID or reference ID. Either a playlist ID or a reference ID must be supplied. If you are updating the value of the reference ID, then both the playlist ID and reference ID must be supplied. This method must be called using an HTTP POST request and JSON parameters.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeletePlaylist">
-            <summary>
-            Deletes a playlist, specified by playlist ID or reference ID.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.CreateVideo">
-            <summary>
-            Use this method to create a single video in your Video Cloud Media Library. You can either upload a new video file, or use the remote assets approach, in which you pass a reference to a video file on your own CDN.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UpdateVideo">
-            <summary>
-            Use this method to modify the metadata for a single video in your Video Cloud Media Library.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeleteVideo">
-            <summary>
-            Deletes a video.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.GetUploadStatus">
-            <summary>
-            Call this function in an HTTP POST request to determine the status of an upload. Note that there is a brief delay from the moment you submit a create_video method call and the moment the transaction for that method call is complete. During that interval, a get_upload_status method call will return an error message saying, "Illegal value - Cannot find any video", because the video has not yet been assigned an ID and begun uploading.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.ShareVideo">
-            <summary>
-            Shares the specified video with a list of sharee accounts.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.UnshareVideo">
-            <summary>
-            Deletes the specified previously shared video from a list of sharee accounts. If a shared version of the specified video does not exist in a sharee account, no action is taken.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.AddImage">
-            <summary>
-            Add a new thumbnail or video still image to a video, or assign an existing image to another video.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.AddLogoOverlay">
-            <summary>
-            Add a logo overlay image to a video.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.RemoveLogoOverlay">
-            <summary>
-            Removes a logo overlay previously assigned to a video.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.AddCaptioning">
-            <summary>
-            Assigns Captioning to a video via uploading a caption file or providing URL of caption file. Deletes any Captioning previously assigned to a video.
-            </summary>
-        </member>
-        <member name="F:BrightcoveMapiWrapper.Model.BrightcoveWriteMethod.DeleteCaptioning">
-            <summary>
-            Assigns Captioning to a video via uploading a caption file or providing URL of caption file. Deletes any Captioning previously assigned to a video.
             </summary>
         </member>
         <member name="T:BrightcoveMapiWrapper.Model.Items.BrightcoveVideo">
@@ -5143,10 +4860,10 @@
         </member>
         <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Serialize(System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
-            Serializes the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist"/>. Note that the <see cref="P:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Videos"/> property is not serialized with the rest of the other properties, as including this property on updates causes an exception.
+            Serializes the <see cref="T:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist"/>. Note that the <see cref="P:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Videos"/> property is not serialized with the rest of the other properties as the <see cref="P:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.VideoIds"/> properties is instead used by Brightcove.
             </summary>
-            <param name="serializer"></param>
-            <returns></returns>
+            <param name="serializer">The serializer.</param>
+            <returns>A serialized <see cref="T:System.Collections.Generic.IDictionary`2"/>.</returns>
         </member>
         <member name="M:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.Deserialize(System.Collections.Generic.IDictionary{System.String,System.Object},System.Web.Script.Serialization.JavaScriptSerializer)">
             <summary>
@@ -5207,7 +4924,14 @@
             <summary>
             For a smart playlist, defines whether the video must contain all or contain 
             one or more of the values in filterTags. Use AND for "contains all" and OR for 
-            "contains one or more." Not available in Read API methods.
+            "contains one or more."
+            <remarks>
+            Defaults to <see cref="F:BrightcoveMapiWrapper.Model.TagInclusionRule.Or">TagInclusionRule.Or</see>. Not available
+            in Read API methods. An undocumented behavior, however, is that this property is
+            available as one of the properties in the playlist returned by the
+            <see cref="M:BrightcoveMapiWrapper.Api.BrightcoveApi.UpdatePlaylist(BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist)">UpdatePlaylist</see>
+            method.
+            </remarks>
             </summary>
         </member>
         <member name="P:BrightcoveMapiWrapper.Model.Items.BrightcovePlaylist.ThumbnailUrl">

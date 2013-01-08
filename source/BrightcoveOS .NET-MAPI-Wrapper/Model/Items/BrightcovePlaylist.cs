@@ -43,7 +43,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public long Id
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -97,7 +97,14 @@ namespace BrightcoveMapiWrapper.Model.Items
 		/// <summary>
 		/// For a smart playlist, defines whether the video must contain all or contain 
 		/// one or more of the values in filterTags. Use AND for "contains all" and OR for 
-		/// "contains one or more." Not available in Read API methods.
+		/// "contains one or more."
+		/// <remarks>
+		/// Defaults to <see cref="BrightcoveMapiWrapper.Model.TagInclusionRule.Or">TagInclusionRule.Or</see>. Not available
+		/// in Read API methods. An undocumented behavior, however, is that this property is
+		/// available as one of the properties in the playlist returned by the
+		/// <see cref="BrightcoveMapiWrapper.Api.BrightcoveApi.UpdatePlaylist">UpdatePlaylist</see>
+		/// method.
+		/// </remarks>
 		/// </summary>
 		public TagInclusionRule TagInclusionRule
 		{
@@ -143,30 +150,53 @@ namespace BrightcoveMapiWrapper.Model.Items
 			VideoIds = new List<long>();
 			Videos = new List<BrightcoveVideo>();
 			PlaylistType = PlaylistType.Explicit;
-			TagInclusionRule = TagInclusionRule.And;
 		}
 
 		#region Implementation of IJavaScriptConvertable
 
 		/// <summary>
-		/// Serializes the <see cref="BrightcovePlaylist"/>. Note that the <see cref="Videos"/> property is not serialized with the rest of the other properties, as including this property on updates causes an exception.
+		/// Serializes the <see cref="BrightcovePlaylist"/>. Note that the <see cref="Videos"/> property is not serialized with the rest of the other properties as the <see cref="VideoIds"/> properties is instead used by Brightcove.
 		/// </summary>
-		/// <param name="serializer"></param>
-		/// <returns></returns>
+		/// <param name="serializer">The serializer.</param>
+		/// <returns>A serialized <see cref="IDictionary{String,Object}" />.</returns>
 		public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
 		{
 			IDictionary<string, object> serialized = new Dictionary<string, object>();
 
 			serialized["filterTags"] = FilterTags;
-			serialized["id"] = Id;
 			serialized["name"] = Name;
 			serialized["playlistType"] = PlaylistType.ToBrightcoveName();
 			serialized["referenceId"] = ReferenceId;
 			serialized["shortDescription"] = ShortDescription;
-			serialized["tagInclusionRule"] = TagInclusionRule.ToBrightcoveName();
 			serialized["thumbnailURL"] = ThumbnailUrl;
-			serialized["videoIds"] = VideoIds;
-			serialized["videos"] = Videos;
+
+			// The Id must be non-0.
+			if (Id != 0)
+			{
+				serialized["id"] = Id;
+			}
+
+			// If TagInclusionRule is set to None, then we won't serialize the value back to Brightcove.
+			// In this case, whatever the value of TagInclusionRule was before the call will remain the
+			// same. In the event of a Create call, it will be set to Or. In the event of an Update, the
+			// returned playlist will contain the actual value of the TagInclusionRule, though it is not
+			// accessible via a GET request (i.e. FindAll, FindById, etc.).
+			if (TagInclusionRule != TagInclusionRule.None)
+			{
+				serialized["tagInclusionRule"] = TagInclusionRule.ToBrightcoveName();
+			}
+
+			// Smart playlists (i.e. anything but an Explicit playlist) should not have the VideoIds
+			// populated, as 1) Brightcove determines which video Ids belong in a smart playlist, and
+			// 2) serializing this property for a smart playlists results in an error.
+			//
+			// It is still the case that you cannot switch from a smart playlist to an explicit playlist,
+			// and attempting to do so will result in an error. A workaround in this case is detailed @
+			// https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/wiki/Known-Issues#wiki-convert-smart-playlist-to-explicit.
+			if (PlaylistType == PlaylistType.Explicit && VideoIds.Any())
+			{
+				serialized["videoIds"] = VideoIds;
+			}
 
 			return serialized;
 		}

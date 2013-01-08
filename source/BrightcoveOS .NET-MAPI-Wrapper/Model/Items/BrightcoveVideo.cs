@@ -87,7 +87,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public long Id
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -297,7 +297,6 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 			serialized["customFields"] = CustomFields;
 			serialized["economics"] = Economics.ToBrightcoveName();
-			serialized["id"] = Id;
 			serialized["itemState"] = ItemState.ToBrightcoveName();
 			serialized["linkURL"] = LinkUrl;
 			serialized["linkText"] = LinkText;
@@ -336,6 +335,12 @@ namespace BrightcoveMapiWrapper.Model.Items
 			if (CuePoints.Count > 0)
 			{
 				serialized["cuePoints"] = CuePoints;
+			}
+
+			// The Id must be non-0.
+			if (Id != 0)
+			{
+				serialized["id"] = Id;
 			}
 
 			return serialized;

@@ -14,7 +14,8 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.AudioTrackPlaylis
 		[Test]
 		public void FindAudioTracksByPlaylistIds_Basic_Test()
 		{
-			BrightcoveItemCollection<BrightcoveAudioTrackPlaylist> playlists = _api.FindAudioTrackPlaylistsByIds(new[] { playlistId, long.MaxValue });
+			_playlists = _api.FindAllAudioTrackPlaylists(1, 0);
+			BrightcoveItemCollection<BrightcoveAudioTrackPlaylist> playlists = _api.FindAudioTrackPlaylistsByIds(new[] { _playlists.First().Id, long.MaxValue });
 
 			Assert.NotNull(playlists);
 			Assert.AreEqual(2, playlists.Count);

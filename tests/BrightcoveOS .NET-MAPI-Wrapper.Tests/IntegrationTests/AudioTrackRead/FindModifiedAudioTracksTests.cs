@@ -12,7 +12,7 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.AudioTrackRead
 		[Test]
 		public void FindModifiedAudioTracks_Test_Basic()
 		{
-			_audioTracks = _api.FindModifiedAudioTracks(DateTime.Now.AddMonths(-2));
+			_audioTracks = _api.FindModifiedAudioTracks(DateTime.UtcNow.AddMonths(-2));
 
 			Assert.Greater(_audioTracks.Count, 0);
 			Assert.AreEqual(0, _audioTracks.Count(o => o == null));

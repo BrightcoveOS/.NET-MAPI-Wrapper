@@ -12,7 +12,7 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.PlaylistRead
 		[Test]
 		public void FindAllPlaylists_Test_Basic()
 		{
-			_playlists = _api.FindAllPlaylists(1, 0);
+			_playlists = _api.FindAllPlaylists();
 
 			Assert.Greater(_playlists.Count, 0);
 			Assert.Greater(_playlists[0].VideoIds.Count, 0);

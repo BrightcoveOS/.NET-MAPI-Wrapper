@@ -22,7 +22,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public long Id
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -84,10 +84,12 @@ namespace BrightcoveMapiWrapper.Model.Items
 		{
 			IDictionary<string, object> serialized = new Dictionary<string, object>();
 
-			if (Id > 0)
+			// The Id must be non-0.
+			if (Id != 0)
 			{
 				serialized["id"] = Id;
 			}
+
 			serialized["image"] = Image;
 			serialized["tooltip"] = Tooltip;
 			serialized["linkURL"] = LinkUrl;

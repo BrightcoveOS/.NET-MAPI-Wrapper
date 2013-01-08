@@ -14,9 +14,7 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.AudioTrackPlaylis
 		protected BrightcoveApi _api;
 		protected BrightcoveItemCollection<BrightcoveAudioTrackPlaylist> _playlists;
 		protected const string _refId = "test-audio-playlist-reference-id";
-		protected string _refId2 = "test-audio-playlist-reference-id2";
-		// Currently the only active audio track playlist in the system.
-		protected const long playlistId = 2064604653001;
+		protected const string _refId2 = "test-audio-playlist-reference-id2";
 
 		[SetUp]
 		public void SetUp()

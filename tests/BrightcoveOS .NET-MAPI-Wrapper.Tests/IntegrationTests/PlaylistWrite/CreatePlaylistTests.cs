@@ -13,11 +13,13 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.PlaylistWrite
 		[Test]
 		public void CreatePlaylist_Test_Basic()
 		{
-			BrightcovePlaylist playlist = new BrightcovePlaylist();
-			playlist.Name = "Test Playlist";
-			playlist.ShortDescription = "Test Short Description";
+			BrightcovePlaylist playlist = new BrightcovePlaylist
+			{
+				Name = "Testing something else",
+				ShortDescription = "Test Short Description"
+			};
+
 			playlist.VideoIds.Add(1964394725001);
-			playlist.VideoIds.Add(1964394726001);
 			playlist.VideoIds.Add(1964394737001);
 
 			long newId = _api.CreatePlaylist(playlist);

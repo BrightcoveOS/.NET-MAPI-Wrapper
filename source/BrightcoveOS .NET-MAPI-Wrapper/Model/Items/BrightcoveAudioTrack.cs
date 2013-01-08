@@ -65,7 +65,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public long Id
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		}
 
 		/// <summary>
-		/// Last modified dat
+		/// Last modified date
 		/// </summary>
 		public DateTime LastModifiedDate
 		{
@@ -338,8 +338,13 @@ namespace BrightcoveMapiWrapper.Model.Items
 			dictionary.Add("referenceId", ReferenceId);
 			dictionary.Add("shortDescription", ShortDescription);
 			dictionary.Add("longDescription", LongDescription);
-			dictionary.Add("id", Id);
 			dictionary.Add("tags", Tags);
+
+			// The Id must be non-0.
+			if (Id != 0)
+			{
+				dictionary.Add("id", Id);
+			}
 
 			return dictionary;
 		}

@@ -13,7 +13,8 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.AudioTrackPlaylis
 		[Test]
 		public void FindAudioTrackPlaylistById_NonExistent_Test()
 		{
-			BrightcoveAudioTrackPlaylist playlist = _api.FindAudioTrackPlaylistById(playlistId);
+			_playlists = _api.FindAllAudioTrackPlaylists(1, 0);
+			BrightcoveAudioTrackPlaylist playlist = _api.FindAudioTrackPlaylistById(_playlists.First().Id);
 			Assert.AreEqual(3, playlist.AudioTracks.Count);
 		}
 	}

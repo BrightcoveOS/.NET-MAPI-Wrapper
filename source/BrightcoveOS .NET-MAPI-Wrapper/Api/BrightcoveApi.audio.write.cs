@@ -14,19 +14,6 @@ namespace BrightcoveMapiWrapper.Api
 	public partial class BrightcoveApi
 	{
 		#region CreateAudioTrack
-		///// <summary>
-		///// Creates a new audio track in Brightcove by uploading a file.
-		///// </summary>
-		///// <param name="audioTrack">The audio track to create</param>
-		///// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
-		///// <returns>The numeric ID of the uploaded track</returns>
-		//public long CreateAudioTrack(BrightcoveAudioTrack audioTrack, FileUploadInfo fileUploadInfo)
-		//{
-		//    BrightcoveParamCollection parms = CreateWriteParamCollection("create_audiotrack",
-		//                                                                 methodParams => methodParams.Add("audiotrack", audioTrack));
-		//    return RunFilePost<BrightcoveResultContainer<long>>(parms, fileUploadInfo).Result;
-		//}
-
 		/// <summary>
 		/// Creates a new audio track in Brightcove by uploading a file.
 		/// </summary>
@@ -35,7 +22,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The numeric ID of the uploaded track</returns>
 		public long CreateAudioTrack(BrightcoveAudioTrack audioTrack, FileUploadInfo fileUploadInfo)
 		{
-			BrightcoveParamCollection parms = CreateWriteParamCollection(BrightcoveWriteMethod.CreateAudiotrack,
+			BrightcoveParamCollection parms = CreateWriteParamCollection("create_audiotrack",
 																		 methodParams => methodParams.Add("audiotrack", audioTrack));
 			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileUploadInfo).Result;
 		}
@@ -146,33 +133,6 @@ namespace BrightcoveMapiWrapper.Api
 			return AddAudioImage(image, fileToUpload, audioTrackReferenceId, true);
 		}
 
-		///// <summary>
-		///// Add a thumbnail asset to the specified audio track.
-		///// </summary>
-		///// <param name="image">A BrightcoveImage containing the metadata for the image you'd like to create (or update).</param>
-		///// <param name="fileUploadInfo">Information for the file to be uploaded.</param>
-		///// <param name="audioTrackId">The ID of the audio track to which you'd like to assign the image.</param>
-		///// <param name="audioTrackReferenceId">The reference ID of the audio track to which you'd like to assign the image.</param>
-		///// <param name="resize">Set this to false if you don't want your image to be automatically resized to the default size for its type. 
-		///// By default images will be resized.</param>
-		///// <returns>The image that was added or updated.</returns>
-		//private BrightcoveImage DoAddAudioImage(BrightcoveImage image, FileUploadInfo fileUploadInfo, long audioTrackId, string audioTrackReferenceId, bool resize)
-		//{
-		//    string propName;
-		//    object propValue;
-		//    GetIdValuesForUpload(audioTrackId, audioTrackReferenceId, "audiotrack_id", "audiotrack_reference_id", out propName, out propValue);
-
-		//    BrightcoveParamCollection parms = CreateWriteParamCollection("add_audio_image",
-		//                                                                 methodParams =>
-		//                                                                 {
-		//                                                                     methodParams.Add("image", image);
-		//                                                                     methodParams.Add("resize", resize.ToString().ToLower());
-		//                                                                     methodParams.Add(propName, propValue);
-		//                                                                 });
-
-		//    return RunFilePost<BrightcoveResultContainer<BrightcoveImage>>(parms, fileUploadInfo).Result;
-		//}
-
 		/// <summary>
 		/// Add a thumbnail asset to the specified audio track.
 		/// </summary>
@@ -189,7 +149,7 @@ namespace BrightcoveMapiWrapper.Api
 			object propValue;
 			GetIdValuesForUpload(audioTrackId, audioTrackReferenceId, "audiotrack_id", "audiotrack_reference_id", out propName, out propValue);
 
-			BrightcoveParamCollection parms = CreateWriteParamCollection(BrightcoveWriteMethod.AddAudioImage,
+			BrightcoveParamCollection parms = CreateWriteParamCollection("add_audio_image",
 																		 methodParams =>
 																		 {
 																			 methodParams.Add("image", image);
@@ -203,29 +163,6 @@ namespace BrightcoveMapiWrapper.Api
 		#endregion
 
 		#region UpdateAudioTrack
-		///// <summary>
-		///// Updates the audio track information for a Brightcove audio track.
-		///// </summary>
-		///// <param name="audioTrack"></param>
-		///// <returns>The updated BrightcoveAudioTrack</returns>
-		//public BrightcoveAudioTrack UpdateAudioTrack(BrightcoveAudioTrack audioTrack)
-		//{
-		//    BrightcoveParamCollection parms = CreateWriteParamCollection("update_audiotrack",
-		//                                                                 methodParams => methodParams.Add("audiotrack", audioTrack));
-		//    return RunPost<BrightcoveResultContainer<BrightcoveAudioTrack>>(parms).Result;
-		//}
-
-		///// <summary>
-		///// Gets the audiotrack upload status. 
-		///// </summary>
-		///// <param name="referenceId">The reference id.</param>
-		///// <returns>The status of the upload</returns>
-		//public BrightcoveUploadStatus GetAudioTrackUploadStatus(string referenceId)
-		//{
-		//    BrightcoveParamCollection parms = CreateWriteParamCollection("get_audiotrack_upload_status",
-		//                                                                 methodParams => methodParams.Add("reference_id", referenceId));
-		//    return RunPost<BrightcoveResultContainer<BrightcoveUploadStatus>>(parms).Result;
-		//}
 
 		/// <summary>
 		/// Updates the audio track information for a Brightcove audio track.
@@ -234,13 +171,15 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The updated BrightcoveAudioTrack</returns>
 		public BrightcoveAudioTrack UpdateAudioTrack(BrightcoveAudioTrack audioTrack)
 		{
-			BrightcoveParamCollection parms = CreateWriteParamCollection(BrightcoveWriteMethod.UpdateAudiotrack,
+			BrightcoveParamCollection parms = CreateWriteParamCollection("update_audiotrack",
 																		 methodParams => methodParams.Add("audiotrack", audioTrack));
 			return RunPost<BrightcoveResultContainer<BrightcoveAudioTrack>>(parms).Result;
 		}
+
 		#endregion
 
 		#region GetAudioTrackUploadStatus
+
 		/// <summary>
 		/// Gets the audiotrack upload status. 
 		/// </summary>
@@ -248,10 +187,11 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The status of the upload</returns>
 		public BrightcoveUploadStatus GetAudioTrackUploadStatus(string referenceId)
 		{
-			BrightcoveParamCollection parms = CreateWriteParamCollection(BrightcoveWriteMethod.GetAudiotrackUploadStatus,
+			BrightcoveParamCollection parms = CreateWriteParamCollection("get_audiotrack_upload_status",
 																		 methodParams => methodParams.Add("reference_id", referenceId));
 			return RunPost<BrightcoveResultContainer<BrightcoveUploadStatus>>(parms).Result;
 		}
+		
 		#endregion
 
 		#region DeleteAudioTrack
@@ -299,7 +239,7 @@ namespace BrightcoveMapiWrapper.Api
 			object propValue;
 			GetIdValuesForUpload(audioTrackId, referenceId, "audiotrack_id", "reference_id", out propName, out propValue);
 
-			BrightcoveParamCollection parms = CreateWriteParamCollection(BrightcoveWriteMethod.DeleteAudiotrack,
+			BrightcoveParamCollection parms = CreateWriteParamCollection("delete_audiotrack",
 																		 methodParams =>
 																		 {
 																			 methodParams.Add(propName, propValue);

@@ -16,15 +16,15 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 		public void FindVideosByIds_Basic()
 		{
 			List<long> ids = new List<long>
-			                   	{
-			                   		1939643268001,
-									1964441415001
-			                   	};
+			{
+				1964394725001,
+				1964394737001
+			};
 
 			_videos = _api.FindVideosByIds(ids);
 
-			Assert.AreEqual(2, _videos.Count);
-			Assert.AreEqual(0, _videos.Where(o => o == null).Count());
+			Assert.AreEqual(ids.Count, _videos.Count);
+			Assert.AreEqual(0, _videos.Count(o => o == null));
 		}
 	}
 }

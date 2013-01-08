@@ -40,5 +40,17 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.AudioTrackWrite
 
 			Assert.IsTrue(tags.OrderBy(x => x).SequenceEqual(result.Tags.OrderBy(x => x)));
 		}
+
+		[Test]
+		public void UpdateAudioTrackInformation_ReferenceId_Test()
+		{
+			BrightcoveItemCollection<BrightcoveAudioTrack> audioTracks = Api.FindAllAudioTracks();
+
+			BrightcoveAudioTrack audioTrack = audioTracks.Single(x => x.LongDescription.Contains("arbor")); // arbor for pearl hARBOR
+			// Change the reference Id
+			audioTrack.ReferenceId = "FDR-Pearl-Harbor";
+			BrightcoveAudioTrack result = Api.UpdateAudioTrack(audioTrack);
+			Assert.AreEqual(audioTrack.ReferenceId, result.ReferenceId);
+		}
 	}
 }

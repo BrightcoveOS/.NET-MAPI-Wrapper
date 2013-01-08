@@ -16,7 +16,7 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.AudioTrackWrite
 				{
 					ReferenceId = "test-audio-reference-id",
 					Name = "test-audio-reference-id",
-					ShortDescription = "Test audio, created via the API. Audio is from ccMixter, a community remix site created by Creative Commons: http://ccmixter.org/files/rslane32/12510",
+					ShortDescription = "Test audio, created via the API.",
 					LongDescription = "Test audio, created via the API. Audio is from ccMixter, a community remix site created by Creative Commons: http://ccmixter.org/files/rslane32/12510"
 				};
 			}

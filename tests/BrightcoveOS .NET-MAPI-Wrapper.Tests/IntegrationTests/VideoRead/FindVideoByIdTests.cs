@@ -23,17 +23,5 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 			Assert.AreEqual("Wildlife_TamarinMonkey", video.Name);
 			Assert.AreEqual("Wildlife_TamarinMonkey", video.ShortDescription);
 		}
-
-		[Test]
-		public void FindVideoById_IncludeCustomField()
-		{
-			long id = 424758964001;
-			BrightcoveVideo video = _api.FindVideoById(id, null, new[] { "date" });
-
-			Assert.IsNotNull(video);
-			Assert.AreEqual(424758964001, video.Id);
-			Assert.AreEqual("Modern Treatment for Vascular Anomalies", video.Name);
-			Assert.AreEqual("October 23, 2009", video.CustomFields["date"]);
-		}
 	}
 }

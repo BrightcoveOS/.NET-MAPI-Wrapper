@@ -114,15 +114,14 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// Builds a collection of params common to all API read requests.
+		/// Builds a collection of params common to all API read requests
 		/// </summary>
-		/// <typeparam name="T">An enum of type <see cref="BrightcoveReadMethod"/>.</typeparam>
-		/// <param name="method">A valid <see cref="BrightcoveReadMethod"/> value to perform.</param>
+		/// <param name="command">The name of a particular Brightcove read API method.</param>
 		/// <returns>A <see cref="NameValueCollection"/> containing the basic GET parameters.</returns>
-		protected NameValueCollection BuildBasicReadParams<T>(T method) where T : struct, IConvertible
+		protected NameValueCollection BuildBasicReadParams(string command)
 		{
 			NameValueCollection parms = new NameValueCollection();
-			parms.Add("command", method.ToBrightcoveName().ToLower());
+			parms.Add("command", command);
 			parms.Add("token", Configuration.ReadToken);
 
 			if (!String.IsNullOrEmpty(Configuration.MediaDelivery))
@@ -132,68 +131,33 @@ namespace BrightcoveMapiWrapper.Api
 			return parms;
 		}
 
-		///// <summary>
-		///// Builds a collection of params common to all API read requests
-		///// </summary>
-		///// <param name="command"></param>
-		///// <returns></returns>
-		//protected NameValueCollection BuildBasicReadParams(string command)
-		//{
-		//    NameValueCollection parms = new NameValueCollection();
-		//    parms.Add("command", command);
-		//    parms.Add("token", Configuration.ReadToken);
-
-		//    if (!String.IsNullOrEmpty(Configuration.MediaDelivery))
-		//    {
-		//        parms.Add("media_delivery", Configuration.MediaDelivery);
-		//    }
-		//    return parms;
-		//}
-
 
 		/// <summary>
-		/// Builds a collection of params common to all API write requests.
+		/// Builds a basic collection of write params common to all API write requests.
 		/// </summary>
-		/// <typeparam name="T">An enum of type <see cref="BrightcoveWriteMethod"/>.</typeparam>
-		/// <param name="method">A valid <see cref="BrightcoveWriteMethod"/> value to perform.</param>
+		/// <param name="method">The name of a particular Brightcove write API method.</param>
 		/// <returns>A <see cref="NameValueCollection"/> containing the basic POST parameters.</returns>
-		private BrightcoveParamCollection BuildBasicWriteParams<T>(T method) where T : struct, IConvertible
+		private BrightcoveParamCollection BuildBasicWriteParams(string method)
 		{
 			BrightcoveParamCollection methodParams = new BrightcoveParamCollection();
 			methodParams.Add("token", Configuration.WriteToken);
 
 			BrightcoveParamCollection parms = new BrightcoveParamCollection();
-			parms.Add("method", method.ToBrightcoveName().ToLower());
+			parms.Add("method", method);
 			parms.Add(_methodParamsKey, methodParams);
 
 			return parms;
 		}
 
-		///// <summary>
-		///// Builds a collection of params common to all API write requests
-		///// </summary>
-		///// <param name="method"></param>
-		///// <returns></returns>
-		//private BrightcoveParamCollection BuildBasicWriteParams(string method)
-		//{
-		//    BrightcoveParamCollection methodParams = new BrightcoveParamCollection();
-		//    methodParams.Add("token", Configuration.WriteToken);
 
-		//    BrightcoveParamCollection parms = new BrightcoveParamCollection();
-		//    parms.Add("method", method);
-		//    parms.Add(_methodParamsKey, methodParams);
-
-		//    return parms;
-		//}
-
-		
-		private BrightcoveParamCollection CreateWriteParamCollection<T>(T method, Action<IDictionary<string, object>> addMethodParamsCallback) where T : struct, IConvertible
+		/// <summary>
+		/// Builds a collection of write params common to all API write requests.
+		/// </summary>
+		/// <param name="method">The Brightcove write method to perform.</param>
+		/// <param name="addMethodParamsCallback">The callback to performed on the passed dictionary.</param>
+		/// <returns>A <see cref="NameValueCollection"/> containing the basic POST parameters.</returns>
+		private BrightcoveParamCollection CreateWriteParamCollection(string method, Action<IDictionary<string, object>> addMethodParamsCallback)
 		{
-			if (!typeof(T).IsEnum)
-			{
-				throw new ArgumentException("T must be an enumerated type");
-			}
-
 			BrightcoveParamCollection parms = BuildBasicWriteParams(method);
 			if (addMethodParamsCallback != null)
 			{
@@ -203,18 +167,16 @@ namespace BrightcoveMapiWrapper.Api
 			return parms;
 		}
 
-		//private BrightcoveParamCollection CreateWriteParamCollection(string method, Action<IDictionary<string, object>> addMethodParamsCallback)
-		//{
-		//    BrightcoveParamCollection parms = BuildBasicWriteParams(method);
-		//    if (addMethodParamsCallback != null)
-		//    {
-		//        BrightcoveParamCollection methodParams = (BrightcoveParamCollection)parms[_methodParamsKey];
-		//        addMethodParamsCallback(methodParams);
-		//    }
-		//    return parms;
-		//}
 
-
+		/// <summary>
+		/// Determines whether to use the Id property or the reference Id property in various places in the API.
+		/// </summary>
+		/// <param name="numericId">The numeric id.</param>
+		/// <param name="referenceId">The reference id.</param>
+		/// <param name="idPropName">Name of the id property name.</param>
+		/// <param name="refPropName">Name of the reference id property name.</param>
+		/// <param name="propName">Name of the property to use.</param>
+		/// <param name="propValue">The property value.</param>
 		private static void GetIdValuesForUpload(long numericId, string referenceId, string idPropName, string refPropName, out string propName, out object propValue)
 		{
 			propName = String.IsNullOrEmpty(referenceId) ? idPropName : refPropName;

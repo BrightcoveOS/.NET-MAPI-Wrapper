@@ -10,32 +10,9 @@ namespace BrightcoveMapiWrapper.Api
 {
 	public partial class BrightcoveApi
 	{
-		///// <summary>
-		///// Creates a playlist
-		///// </summary>
-		///// <param name="playlist">The playlist you'd like to create.</param>
-		///// <returns>The ID of the newly created playlist.</returns>
-		//public long CreateAudioTrackPlaylist(BrightcoveAudioTrackPlaylist playlist)
-		//{
-		//    BrightcoveParamCollection parms = CreateWriteParamCollection("create_audiotrack_playlist",
-		//                                                                 methodParams => methodParams.Add("audiotrack_playlist", playlist));
-		//    return RunPost<BrightcoveResultContainer<long>>(parms).Result;
-		//}
-
-		///// <summary>
-		///// Creates a playlist
-		///// </summary>
-		///// <param name="playlist">The playlist you'd like to update.</param>
-		///// <returns>The updated playlist.</returns>
-		//public BrightcoveAudioTrackPlaylist UpdateAudioTrackPlaylist(BrightcoveAudioTrackPlaylist playlist)
-		//{
-		//    BrightcoveParamCollection parms = CreateWriteParamCollection("update_audiotrack_playlist",
-		//                                                                 methodParams => methodParams.Add("audiotrack_playlist", playlist));
-		//    return RunPost<BrightcoveResultContainer<BrightcoveAudioTrackPlaylist>>(parms).Result;
-		//}
+		
 
 		#region CreateAudioTrackPlaylist
-		
 		/// <summary>
 		/// Creates a playlist.
 		/// </summary>
@@ -43,7 +20,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The ID of the newly created playlist.</returns>
 		public long CreateAudioTrackPlaylist(BrightcoveAudioTrackPlaylist playlist)
 		{
-			BrightcoveParamCollection parms = CreateWriteParamCollection(BrightcoveWriteMethod.CreateAudiotrackPlaylist,
+			BrightcoveParamCollection parms = CreateWriteParamCollection("create_audiotrack_playlist",
 																		 methodParams => methodParams.Add("audiotrack_playlist", playlist));
 			return RunPost<BrightcoveResultContainer<long>>(parms).Result;
 		}
@@ -57,7 +34,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// <returns>The updated playlist.</returns>
 		public BrightcoveAudioTrackPlaylist UpdateAudioTrackPlaylist(BrightcoveAudioTrackPlaylist playlist)
 		{
-			BrightcoveParamCollection parms = CreateWriteParamCollection(BrightcoveWriteMethod.UpdateAudiotrackPlaylist,
+			BrightcoveParamCollection parms = CreateWriteParamCollection("update_audiotrack_playlist",
 																		 methodParams => methodParams.Add("audiotrack_playlist", playlist));
 			return RunPost<BrightcoveResultContainer<BrightcoveAudioTrackPlaylist>>(parms).Result;
 		}
@@ -86,13 +63,19 @@ namespace BrightcoveMapiWrapper.Api
 			DoDeleteAudioTrackPlaylist(-1, referenceId, cascade);
 		}
 
+		/// <summary>
+		/// Deletes the playlist whether you're using a numeric Id or a string reference Id.
+		/// </summary>
+		/// <param name="playlistId">The ID for the playlist to delete. Either a playlist ID or a reference ID must be supplied.</param>
+		/// <param name="referenceId">The publisher-assigned reference ID of the playlist you want to delete. Either a playlist ID or a reference ID must be supplied.</param>
+		/// <param name="cascade">Set this to true if you want to delete this playlist even if it is referenced by players. The playlist will be removed from all players in which it appears, then deleted.</param>
 		private void DoDeleteAudioTrackPlaylist(long playlistId, string referenceId, bool cascade)
 		{
 			string propName;
 			object propValue;
 			GetIdValuesForUpload(playlistId, referenceId, "playlist_id", "reference_id", out propName, out propValue);
 
-			BrightcoveParamCollection parms = CreateWriteParamCollection(BrightcoveWriteMethod.DeleteAudiotrackPlaylist,
+			BrightcoveParamCollection parms = CreateWriteParamCollection("delete_audiotrack_playlist",
 																		 methodParams =>
 																		 {
 																			 methodParams.Add(propName, propValue);
