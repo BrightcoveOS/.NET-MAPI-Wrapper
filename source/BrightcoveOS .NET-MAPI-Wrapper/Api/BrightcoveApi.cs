@@ -17,12 +17,15 @@ using BrightcoveMapiWrapper.Serialization;
 namespace BrightcoveMapiWrapper.Api
 {
 	/// <summary>
-	/// .NET Wrapper for Brightcove's REST Media API
+	/// .NET Wrapper for Brightcove's REST Media API.
 	/// </summary>
 	public partial class BrightcoveApi
 	{
 		private const string _methodParamsKey = "params";
 
+		/// <summary>
+		/// The pointer to the Configuration of the <see cref="Connector"/>. />
+		/// </summary>
 		public BrightcoveApiConfig Configuration
 		{
 			get
@@ -31,6 +34,9 @@ namespace BrightcoveMapiWrapper.Api
 			}
 		}
 
+		/// <summary>
+		/// The Connector used for Brightcove connections.
+		/// </summary>
 		public IBrightcoveApiConnector Connector
 		{
 			get;
@@ -38,7 +44,7 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// .NET Wrapper for Brightcove's REST Media API
+		/// .NET Wrapper for Brightcove's REST Media API.
 		/// </summary>
 		/// <param name="connector"></param>
 		public BrightcoveApi(IBrightcoveApiConnector connector)
@@ -59,7 +65,7 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// Converts a wrapper model class into the corresponding json representation
+		/// Converts a wrapper model class into the corresponding JSON representation.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="obj"></param>
@@ -71,7 +77,7 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// Runs an API read query (HTTP GET) 
+		/// Runs an API read query (HTTP GET).
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="parms"></param>
@@ -95,7 +101,7 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 		/// <summary>
-		/// Runs an API write (HTTP POST) that includes file data 
+		/// Runs an API write (HTTP POST) that includes file data.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="fileToUpload"></param>
@@ -110,8 +116,8 @@ namespace BrightcoveMapiWrapper.Api
 		/// <summary>
 		/// Builds a collection of params common to all API read requests
 		/// </summary>
-		/// <param name="command"></param>
-		/// <returns></returns>
+		/// <param name="command">The name of a particular Brightcove read API method.</param>
+		/// <returns>A <see cref="NameValueCollection"/> containing the basic GET parameters.</returns>
 		protected NameValueCollection BuildBasicReadParams(string command)
 		{
 			NameValueCollection parms = new NameValueCollection();
@@ -125,11 +131,12 @@ namespace BrightcoveMapiWrapper.Api
 			return parms;
 		}
 
+
 		/// <summary>
-		/// Builds a collection of params common to all API write requests
+		/// Builds a basic collection of write params common to all API write requests.
 		/// </summary>
-		/// <param name="method"></param>
-		/// <returns></returns>
+		/// <param name="method">The name of a particular Brightcove write API method.</param>
+		/// <returns>A <see cref="NameValueCollection"/> containing the basic POST parameters.</returns>
 		private BrightcoveParamCollection BuildBasicWriteParams(string method)
 		{
 			BrightcoveParamCollection methodParams = new BrightcoveParamCollection();
@@ -142,6 +149,13 @@ namespace BrightcoveMapiWrapper.Api
 			return parms;
 		}
 
+
+		/// <summary>
+		/// Builds a collection of write params common to all API write requests.
+		/// </summary>
+		/// <param name="method">The Brightcove write method to perform.</param>
+		/// <param name="addMethodParamsCallback">The callback to performed on the passed dictionary.</param>
+		/// <returns>A <see cref="NameValueCollection"/> containing the basic POST parameters.</returns>
 		private BrightcoveParamCollection CreateWriteParamCollection(string method, Action<IDictionary<string, object>> addMethodParamsCallback)
 		{
 			BrightcoveParamCollection parms = BuildBasicWriteParams(method);
@@ -154,6 +168,15 @@ namespace BrightcoveMapiWrapper.Api
 		}
 
 
+		/// <summary>
+		/// Determines whether to use the Id property or the reference Id property in various places in the API.
+		/// </summary>
+		/// <param name="numericId">The numeric id.</param>
+		/// <param name="referenceId">The reference id.</param>
+		/// <param name="idPropName">Name of the id property name.</param>
+		/// <param name="refPropName">Name of the reference id property name.</param>
+		/// <param name="propName">Name of the property to use.</param>
+		/// <param name="propValue">The property value.</param>
 		private static void GetIdValuesForUpload(long numericId, string referenceId, string idPropName, string refPropName, out string propName, out object propValue)
 		{
 			propName = String.IsNullOrEmpty(referenceId) ? idPropName : refPropName;

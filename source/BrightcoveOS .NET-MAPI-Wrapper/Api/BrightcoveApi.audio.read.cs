@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -182,7 +183,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// Find multiple audio tracks, given their ids.
 		/// </summary>
 		/// <param name="audioTrackIds">The list of audio track ids for the audio tracks we'd like to retrieve.</param>
-		/// <param name="audioTrackFields">A list of the fields you wish to have populated in the audiotracks
+		/// <param name="audioTrackFields">A list of the fields you wish to have populated in the audio tracks
 		/// contained in the returned object.</param>
 		/// <returns>A collection that contains the audio track objects corresponding to the audio track ids given.</returns>
 		public BrightcoveItemCollection<BrightcoveAudioTrack> FindAudioTracksByIds(IEnumerable<long> audioTrackIds, IEnumerable<string> audioTrackFields)
@@ -270,7 +271,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// in the returned object.</param>
 		/// <param name="getItemCount">If true, also return how many total results there are.</param>
 		/// <returns></returns>
-		public BrightcoveItemCollection<BrightcoveAudioTrack> FindAudioTracksByTags(IEnumerable<string> andTags, IEnumerable<string> orTags, int pageSize, int pageNumber, 
+		public BrightcoveItemCollection<BrightcoveAudioTrack> FindAudioTracksByTags(IEnumerable<string> andTags, IEnumerable<string> orTags, int pageSize, int pageNumber,
 																					SortBy sortBy, SortOrder sortOrder, IEnumerable<string> audioTrackFields, bool getItemCount)
 		{
 			NameValueCollection parms = BuildBasicReadParams("find_audiotracks_by_tags");
@@ -298,7 +299,7 @@ namespace BrightcoveMapiWrapper.Api
 
 			return RunQuery<BrightcoveItemCollection<BrightcoveAudioTrack>>(parms);
 		}
-
+		
 		/// <summary>
 		/// Performs a search on all the tags of the audio tracks in this account, and returns a collection of audio tracks that 
 		/// contain the specified tags. Note that tags are case-sensitive.
@@ -486,7 +487,7 @@ namespace BrightcoveMapiWrapper.Api
 		/// contained in the returned object.</param>
 		/// <param name="getItemCount">If true, also return how many total results there are in this campaign.</param>
 		/// <returns>All audio tracks that have been modified since the given time.</returns>
-		public BrightcoveItemCollection<BrightcoveAudioTrack> FindModifiedAudioTracks(DateTime fromDate, IEnumerable<ModifiedVideoFilter> filters, int pageSize, int pageNumber, 
+		public BrightcoveItemCollection<BrightcoveAudioTrack> FindModifiedAudioTracks(DateTime fromDate, IEnumerable<ModifiedVideoFilter> filters, int pageSize, int pageNumber,
 																					  SortBy sortBy, SortOrder sortOrder, IEnumerable<string> audioTrackFields, bool getItemCount)
 		{
 			NameValueCollection parms = BuildBasicReadParams("find_modified_audiotracks");

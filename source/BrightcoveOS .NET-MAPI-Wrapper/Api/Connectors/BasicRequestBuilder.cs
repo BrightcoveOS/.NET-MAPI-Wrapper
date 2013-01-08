@@ -15,25 +15,44 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 	/// </summary>
 	public class BasicRequestBuilder : IRequestBuilder
 	{
+		/// <summary>
+		/// An instance of <see cref="BrightcoveApiConfig"/>.
+		/// </summary>
 		public BrightcoveApiConfig Configuration
 		{
 			get;
 			set;
 		}
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="configuration">A configured <see cref="BrightcoveApiConfig"/>.</param>
 		public BasicRequestBuilder(BrightcoveApiConfig configuration)
 		{
 			Configuration = configuration;
 		}
 
+		/// <summary>
+		/// Builds a GET request for the specified URL.
+		/// </summary>
+		/// <param name="url">The URL to request.</param>
+		/// <returns>An HttpWebRequest for GETing the specified URL.</returns>
 		public virtual HttpWebRequest BuildRequest(string url)
 		{
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.Timeout = Configuration.RequestTimeout;
 			request.UserAgent = Configuration.UserAgent;
+			
 			return request;
 		}
-        
+		
+		/// <summary>
+		/// Builds a POST request for the specified URL and parameters.
+		/// </summary>
+		/// <param name="postUrl">The URL to request.</param>
+		/// <param name="postParameters">The parameters to POST.</param>
+		/// <returns>An HttpWebRequest that will POST the specified parameters.</returns>
 		public virtual HttpWebRequest BuildPostFormRequest(string postUrl, NameValueCollection postParameters)
 		{
 			HttpWebRequest request = BuildRequest(postUrl);
@@ -50,6 +69,13 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			return request;
 		}
 
+		/// <summary>
+		/// Builds the multipart form data post request.
+		/// </summary>
+		/// <param name="postUrl">The post URL.</param>
+		/// <param name="postParameters">The post parameters.</param>
+		/// <param name="fileToUpload">The file to upload.</param>
+		/// <returns></returns>
 		public virtual HttpWebRequest BuildMultipartFormDataPostRequest(string postUrl, NameValueCollection postParameters, FileUploadInfo fileToUpload)
 		{
 			string boundary = "-----------------------------" + DateTime.Now.Ticks.ToString("x");
@@ -60,12 +86,22 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			// request properties
 			request.Method = "POST";
 			request.ContentType = contentType;
+
+			// Turn off write stream buffering for file uploads to reduce memory usage
+			request.AllowWriteStreamBuffering = false;
 			
 			WriteMultipartFormData(request, postParameters, fileToUpload, boundary);
 
 			return request;
 		}
 
+		/// <summary>
+		/// Writes the multipart form data.
+		/// </summary>
+		/// <param name="request">The request.</param>
+		/// <param name="postParameters">The post parameters.</param>
+		/// <param name="fileToUpload">The file to upload.</param>
+		/// <param name="boundary">The boundary.</param>
 		protected virtual void WriteMultipartFormData(HttpWebRequest request, NameValueCollection postParameters, FileUploadInfo fileToUpload, string boundary)
 		{
 			// keep track of how much data we're sending
@@ -76,9 +112,9 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 			foreach (string key in postParameters)
 			{
 				string paramData = string.Format("--{0}\r\nContent-Disposition: form-data; name=\"{1}\"\r\n\r\n{2}\r\n",
-				                                boundary,
-				                                key,
-				                                postParameters[key]);
+												boundary,
+												key,
+												postParameters[key]);
 				byte[] bytes = Configuration.Encoding.GetBytes(paramData);
 				parameterBytes.Add(bytes);
 				contentLength += bytes.Length;
@@ -112,7 +148,7 @@ namespace BrightcoveMapiWrapper.Api.Connectors
 				
 				// file header
 				requestStream.Write(fileHeaderBytes, 0, fileHeaderBytes.Length);
-                               
+							   
 				// file data
 				byte[] buffer = new byte[4096];
 				int bytesRead;
