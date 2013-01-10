@@ -48,7 +48,7 @@ Examples and other documentation are available on the [wiki].
 
 Copyright & License
 ----------------
-Copyright (c) 2011 [Velir](http://www.velir.com), released under the [MIT License](file:MIT-LICENSE)
+Copyright (c) [Velir](http://www.velir.com), released under the [MIT License](file:MIT-LICENSE)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
