@@ -57,6 +57,12 @@ namespace BrightcoveMapiWrapper.Api
 			DoDeletePlaylist(-1, referenceId, cascade);
 		}
 
+		/// <summary>
+		/// Deletes a playlist, specified by playlist ID or reference ID.
+		/// </summary>
+		/// <param name="playlistId">The ID for the playlist to delete. Either a playlist ID or a reference ID must be supplied.</param>
+		/// <param name="referenceId">The publisher-assigned reference ID of the playlist you want to delete. Either a playlist ID or a reference ID must be supplied.</param>
+		/// <param name="cascade">Set this to true if you want to delete this playlist even if it is referenced by players. The playlist will be removed from all players in which it appears, then deleted.</param>
 		private void DoDeletePlaylist(long playlistId, string referenceId, bool cascade)
 		{
 			string propName;

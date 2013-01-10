@@ -65,7 +65,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public long Id
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		}
 
 		/// <summary>
-		/// Last modified dat
+		/// Last modified date
 		/// </summary>
 		public DateTime LastModifiedDate
 		{
@@ -104,7 +104,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 			get;
 			set;
 		}
-        
+		
 		/// <summary>
 		/// Link URL
 		/// </summary>
@@ -171,7 +171,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 			get;
 			set;
 		}
-               
+			   
 		/// <summary>
 		/// Start date
 		/// </summary>
@@ -187,7 +187,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<string> Tags
 		{
 			get; 
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -210,6 +210,9 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#endregion
 
+		/// <summary>
+		/// Constructor.
+		/// </summary>
 		public BrightcoveAudioTrack ()
 		{
 			Tags = new List<string>();
@@ -217,6 +220,11 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#region IJavaScriptConvertable implementation
 
+		/// <summary>
+		/// Deserializes the specified dictionary.
+		/// </summary>
+		/// <param name="dictionary">The <see cref="IDictionary{String,Object}" />.</param>
+		/// <param name="serializer">The <see cref="JavaScriptSerializer" />.</param>
 		public void Deserialize(IDictionary<string, object> dictionary, JavaScriptSerializer serializer)
 		{
 			foreach (string key in dictionary.Keys)
@@ -315,6 +323,13 @@ namespace BrightcoveMapiWrapper.Model.Items
 			}
 		}
 
+		/// <summary>
+		/// Serializes the specified serializer.
+		/// </summary>
+		/// <param name="serializer">The serializer.</param>
+		/// <returns>
+		/// A serialized <see cref="IDictionary{String,Object}" />.
+		/// </returns>
 		public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
 		{
 			//Add each entry to the dictionary.
@@ -323,6 +338,13 @@ namespace BrightcoveMapiWrapper.Model.Items
 			dictionary.Add("referenceId", ReferenceId);
 			dictionary.Add("shortDescription", ShortDescription);
 			dictionary.Add("longDescription", LongDescription);
+			dictionary.Add("tags", Tags);
+
+			// The Id must be non-0.
+			if (Id != 0)
+			{
+				dictionary.Add("id", Id);
+			}
 
 			return dictionary;
 		}

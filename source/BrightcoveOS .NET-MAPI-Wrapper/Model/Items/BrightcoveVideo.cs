@@ -14,7 +14,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 	/// </summary>
 	public class BrightcoveVideo : BrightcoveItem, IJavaScriptConvertable
 	{
-		#region Properties 
+		#region Properties
 
 		/// <summary>
 		/// A number, assigned by Brightcove, that uniquely identifies the account to which the Video belongs.
@@ -40,7 +40,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<BrightcoveCuePoint> CuePoints
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -49,7 +49,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public CustomFieldCollection CustomFields
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -87,7 +87,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public long Id
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -180,7 +180,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 			get;
 			private set;
 		}
-        
+
 		/// <summary>
 		/// A user-specified id that uniquely identifies the Video, limited to 150 characters. 
 		/// A referenceId can be used as a foreign-key to identify this video in another system. 
@@ -189,7 +189,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		/// </summary>
 		public string ReferenceId
 		{
-			get; 
+			get;
 			set;
 		}
 
@@ -204,7 +204,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<BrightcoveRendition> Renditions
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -233,7 +233,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 		public ICollection<string> Tags
 		{
 			get;
-			private set;
+			set;
 		}
 
 		/// <summary>
@@ -284,13 +284,19 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#region IJavaScriptConvertable implementation
 
+		/// <summary>
+		/// Serializes the specified serializer.
+		/// </summary>
+		/// <param name="serializer">The serializer.</param>
+		/// <returns>
+		/// A serialized <see cref="IDictionary{String,Object}" />.
+		/// </returns>
 		public IDictionary<string, object> Serialize(JavaScriptSerializer serializer)
 		{
 			IDictionary<string, object> serialized = new Dictionary<string, object>();
 
 			serialized["customFields"] = CustomFields;
 			serialized["economics"] = Economics.ToBrightcoveName();
-			serialized["id"] = Id;
 			serialized["itemState"] = ItemState.ToBrightcoveName();
 			serialized["linkURL"] = LinkUrl;
 			serialized["linkText"] = LinkText;
@@ -305,10 +311,10 @@ namespace BrightcoveMapiWrapper.Model.Items
 			{
 				serialized["startDate"] = StartDate.ToUnixMillisecondsUtc();
 			}
-            if (EndDate > DateTime.MinValue)
-            {
-            	serialized["endDate"] = EndDate.ToUnixMillisecondsUtc();
-            }
+			if (EndDate > DateTime.MinValue)
+			{
+				serialized["endDate"] = EndDate.ToUnixMillisecondsUtc();
+			}
 
 			// When creating or updating a video, only one of either VideoFullLength and Renditions may 
 			// be set. If both are set, we get the following error:
@@ -325,15 +331,26 @@ namespace BrightcoveMapiWrapper.Model.Items
 			{
 				serialized["videoFullLength"] = VideoFullLength;
 			}
-			
+
 			if (CuePoints.Count > 0)
 			{
 				serialized["cuePoints"] = CuePoints;
 			}
 
+			// The Id must be non-0.
+			if (Id != 0)
+			{
+				serialized["id"] = Id;
+			}
+
 			return serialized;
 		}
 
+		/// <summary>
+		/// Deserializes the specified dictionary.
+		/// </summary>
+		/// <param name="dictionary">The <see cref="IDictionary{String,Object}" />.</param>
+		/// <param name="serializer">The <see cref="JavaScriptSerializer" />.</param>
 		public void Deserialize(IDictionary<string, object> dictionary, JavaScriptSerializer serializer)
 		{
 			foreach (string key in dictionary.Keys)
@@ -375,9 +392,9 @@ namespace BrightcoveMapiWrapper.Model.Items
 					case "id":
 						Id = Convert.ToInt64(dictionary[key]);
 						break;
-					
+
 					case "itemState":
-						ItemState = ((string) dictionary[key]).ToBrightcoveEnum<ItemState>();
+						ItemState = ((string)dictionary[key]).ToBrightcoveEnum<ItemState>();
 						break;
 
 					case "lastModifiedDate":
@@ -441,7 +458,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 					case "tags":
 						Tags.Clear();
-						Tags.AddRange(serializer.ConvertToType<List<string>>(dictionary[key])); 
+						Tags.AddRange(serializer.ConvertToType<List<string>>(dictionary[key]));
 						break;
 
 					case "thumbnailURL":
@@ -464,6 +481,6 @@ namespace BrightcoveMapiWrapper.Model.Items
 
 		#endregion
 
-		
+
 	}
 }

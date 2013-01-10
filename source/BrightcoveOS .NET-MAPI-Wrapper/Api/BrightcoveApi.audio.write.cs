@@ -13,6 +13,7 @@ namespace BrightcoveMapiWrapper.Api
 {
 	public partial class BrightcoveApi
 	{
+		#region CreateAudioTrack
 		/// <summary>
 		/// Creates a new audio track in Brightcove by uploading a file.
 		/// </summary>
@@ -40,6 +41,7 @@ namespace BrightcoveMapiWrapper.Api
 				return CreateAudioTrack(audioTrack, new FileUploadInfo(fs, fileName));
 			}
 		}
+		#endregion
 
 		#region AddAudioImage
 
@@ -160,6 +162,8 @@ namespace BrightcoveMapiWrapper.Api
 
 		#endregion
 
+		#region UpdateAudioTrack
+
 		/// <summary>
 		/// Updates the audio track information for a Brightcove audio track.
 		/// </summary>
@@ -172,6 +176,10 @@ namespace BrightcoveMapiWrapper.Api
 			return RunPost<BrightcoveResultContainer<BrightcoveAudioTrack>>(parms).Result;
 		}
 
+		#endregion
+
+		#region GetAudioTrackUploadStatus
+
 		/// <summary>
 		/// Gets the audiotrack upload status. 
 		/// </summary>
@@ -183,5 +191,64 @@ namespace BrightcoveMapiWrapper.Api
 																		 methodParams => methodParams.Add("reference_id", referenceId));
 			return RunPost<BrightcoveResultContainer<BrightcoveUploadStatus>>(parms).Result;
 		}
+		
+		#endregion
+
+		#region DeleteAudioTrack
+		/// <summary>
+		/// Deletes an <see cref="BrightcoveAudioTrack">audio track</see>, specified by ID.
+		/// </summary>
+		/// <param name="audioTrackId">The ID of the <see cref="BrightcoveAudioTrack">audio track</see> you'd like to delete</param>
+		/// <param name="cascade">If true, <see cref="BrightcoveAudioTrack">audio track</see> will be deleted even if it is part of a manual playlist or assigned to 
+		/// a player. The <see cref="BrightcoveAudioTrack">audio track</see> will be removed from all playlists and players in which it appears, then deleted.</param>
+		/// <param name="deleteShares">Set this to true if you want also to delete shared copies of this <see cref="BrightcoveAudioTrack">audio track</see>. Note that 
+		/// this will delete all shared copies from your account, as well as from all accounts with which the <see cref="BrightcoveAudioTrack">audio track</see> has 
+		/// been shared, regardless of whether or not those accounts are currently using the <see cref="BrightcoveAudioTrack">audio track</see> in playlists or players.</param>
+		public void DeleteAudioTrack(long audioTrackId, bool cascade, bool deleteShares)
+		{
+			DoDeleteAudioTrack(audioTrackId, null, cascade, deleteShares);
+		}
+
+		/// <summary>
+		/// Deletes a <see cref="BrightcoveAudioTrack">audio track</see>, specified by the reference ID.
+		/// </summary>
+		/// <param name="referenceId">The reference ID of the <see cref="BrightcoveAudioTrack">audio track</see> you'd like to delete</param>
+		/// <param name="cascade">If true, <see cref="BrightcoveAudioTrack">audio track</see> will be deleted even if it is part of a manual playlist or assigned to 
+		/// a player. The <see cref="BrightcoveAudioTrack">audio track</see> will be removed from all playlists and players in which it appears, then deleted.</param>
+		/// <param name="deleteShares">Set this to true if you want also to delete shared copies of this <see cref="BrightcoveAudioTrack">audio track</see>. Note that 
+		/// this will delete all shared copies from your account, as well as from all accounts with which the <see cref="BrightcoveAudioTrack">audio track</see> has 
+		/// been shared, regardless of whether or not those accounts are currently using the <see cref="BrightcoveAudioTrack">audio track</see> in playlists or players.</param>
+		public void DeleteAudioTrack(string referenceId, bool cascade, bool deleteShares)
+		{
+			DoDeleteAudioTrack(-1, referenceId, cascade, deleteShares);
+		}
+
+		/// <summary>
+		/// Figures out whether the user wants to delete an audio track by ID or reference Id, then performs the action.
+		/// </summary>
+		/// <param name="audioTrackId">The ID of the <see cref="BrightcoveAudioTrack">audio track</see> you'd like to delete</param>
+		/// <param name="referenceId">The reference ID of the <see cref="BrightcoveAudioTrack">audio track</see> you'd like to delete</param>
+		/// <param name="cascade">If true, <see cref="BrightcoveAudioTrack">audio track</see> will be deleted even if it is part of a manual playlist or assigned to 
+		/// a player. The <see cref="BrightcoveAudioTrack">audio track</see> will be removed from all playlists and players in which it appears, then deleted.</param>
+		/// <param name="deleteShares">Set this to true if you want also to delete shared copies of this <see cref="BrightcoveAudioTrack">audio track</see>. Note that 
+		/// this will delete all shared copies from your account, as well as from all accounts with which the <see cref="BrightcoveAudioTrack">audio track</see> has 
+		/// been shared, regardless of whether or not those accounts are currently using the <see cref="BrightcoveAudioTrack">audio track</see> in playlists or players.</param>
+		private void DoDeleteAudioTrack(long audioTrackId, string referenceId, bool cascade, bool deleteShares)
+		{
+			string propName;
+			object propValue;
+			GetIdValuesForUpload(audioTrackId, referenceId, "audiotrack_id", "reference_id", out propName, out propValue);
+
+			BrightcoveParamCollection parms = CreateWriteParamCollection("delete_audiotrack",
+																		 methodParams =>
+																		 {
+																			 methodParams.Add(propName, propValue);
+																			 methodParams.Add("cascade", cascade.ToString().ToLower());
+																			 methodParams.Add("delete_shares", deleteShares.ToString().ToLower());
+																		 });
+
+			RunPost<BrightcoveResultContainer<long>>(parms);
+		}
+		#endregion
 	}
 }
