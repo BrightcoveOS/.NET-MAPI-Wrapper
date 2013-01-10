@@ -1,7 +1,7 @@
 BrightcoveOS .NET-MAPI-Wrapper Changelog
 --------------
 
-**Version 2.0.0 (January 10, 2013)**
+**Version 2.0 (January 10, 2013)**
 
 - `BrightcoveAPI`
 	- Modified several methods that were not working, either due to a changed specification by Brightcove or an error in Brightcove's implementation.
