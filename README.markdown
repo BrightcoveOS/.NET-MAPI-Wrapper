@@ -69,7 +69,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[latest-dll]: https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/blob/master/releases/BrightcoveOS.NET-MAPI-Wrapper-2.0.dlls.zip?raw=true
+[latest-dll]: https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/blob/master/releases/BrightcoveOS.NET-MAPI-Wrapper-latest.dlls.zip?raw=true
 [wiki]: https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/wiki
 [brightcove-api-docs]: http://docs.brightcove.com/en/media/
 [velir]: http://www.velir.com
