@@ -2,7 +2,7 @@ BrightcoveOS .NET-MAPI-Wrapper
 --------------
 - **Homepage**: [https://github.com/BrightcoveOS/.NET-MAPI-Wrapper](https://github.com/BrightcoveOS/.NET-MAPI-Wrapper)
 - **Author**: [David Mills](mailto:david.mills@velir.com)
-- **Copyright**: 2011 [Velir]
+- **Copyright**: [Velir]
 - **License**: [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 About the .NET-MAPI-Wrapper
