@@ -1,7 +1,0 @@
-C:\Velir\Projects\Brightcove4net\source\Brightcove4net\bin\Release\Brightcove4net.dll
-C:\Velir\Projects\Brightcove4net\source\Brightcove4net\bin\Release\Brightcove4net.pdb
-C:\Velir\Projects\Brightcove4net\source\Brightcove4net\obj\Release\ResolveAssemblyReference.cache
-C:\Velir\Projects\Brightcove4net\source\Brightcove4net\obj\Release\Brightcove4net.dll
-C:\Velir\Projects\Brightcove4net\source\Brightcove4net\obj\Release\Brightcove4net.pdb
-C:\Velir\Projects\Brightcove4net\bin\Release\Brightcove4net.dll
-C:\Velir\Projects\Brightcove4net\bin\Release\Brightcove4net.pdb
