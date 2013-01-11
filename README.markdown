@@ -13,7 +13,7 @@ Getting Started
 ----------------
 1. Download the [latest release][latest-dll]. Extract the archive and place BrightcoveOS.NET-MAPI-Wrapper.dll in an appropriate place for inclusion in your project. 
 	- Choose the debug dll while developing, since it is compiled with debug symbols, and will print raw information about the API calls to the .NET debug trace listener as the calls are made. 
-	- For productions environments, use the release version of the dll.
+	- For production environments, use the release version of the dll.
 2. Add a reference to your project for the dll.
 3. Add "using" statements to your code for the following namespaces:
 	- using BrightcoveMapiWrapper.Api;
@@ -48,7 +48,7 @@ Examples and other documentation are available on the [wiki].
 
 Copyright & License
 ----------------
-Copyright (c) 2011 [Velir](http://www.velir.com), released under the [MIT License](file:MIT-LICENSE)
+Copyright (c) 2011 [Velir](http://www.velir.com), released under the [MIT License](https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/blob/master/MIT-LICENSE)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
