@@ -2,7 +2,7 @@ BrightcoveOS .NET-MAPI-Wrapper
 --------------
 - **Homepage**: [https://github.com/BrightcoveOS/.NET-MAPI-Wrapper](https://github.com/BrightcoveOS/.NET-MAPI-Wrapper)
 - **Author**: [David Mills](mailto:david.mills@velir.com)
-- **Copyright**: 2011 [Velir]
+- **Copyright**: [Velir]
 - **License**: [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 About the .NET-MAPI-Wrapper
@@ -48,7 +48,7 @@ Examples and other documentation are available on the [wiki].
 
 Copyright & License
 ----------------
-Copyright (c) 2011 [Velir](http://www.velir.com), released under the [MIT License](https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/blob/master/MIT-LICENSE)
+Copyright (c) [Velir](http://www.velir.com), released under the [MIT License](https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/blob/master/MIT-LICENSE)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -69,7 +69,7 @@ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[latest-dll]: https://github.com/downloads/BrightcoveOS/.NET-MAPI-Wrapper/BrightcoveOS.NET-MAPI-Wrapper.latest.dlls.zip
+[latest-dll]: https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/blob/master/releases/BrightcoveOS.NET-MAPI-Wrapper-latest.dlls.zip?raw=true
 [wiki]: https://github.com/BrightcoveOS/.NET-MAPI-Wrapper/wiki
 [brightcove-api-docs]: http://docs.brightcove.com/en/media/
 [velir]: http://www.velir.com

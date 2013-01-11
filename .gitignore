@@ -1,11 +1,9 @@
 
 Brightcove4net.5.1.ReSharper.user
-_ReSharper.Brightcove4net
-source/Brightcove4net/obj
-Brightcove4net.suo
 _ReSharper.BrightcoveOS .NET-MAPI-Wrapper
 *.suo
 *.user
 source/BrightcoveOS .NET-MAPI-Wrapper/obj
 tests/BrightcoveOS .NET-MAPI-Wrapper.Tests/bin/
 tests/BrightcoveOS .NET-MAPI-Wrapper.Tests/obj/
+bin
