@@ -92,9 +92,9 @@ namespace BrightcoveMapiWrapper.Api
         /// Valid values are MP4 or FLV, representing the H264 and VP6 codecs respectively. Note that transcoding of 
         /// FLV files to another codec is not currently supported. This parameter is optional and defaults to FLV.</param>
         /// <returns>The numeric ID of the newly created video.</returns>
-        public long CreateVideo(BrightcoveVideo video, EncodeTo encodeTo)
+        public long CreateVideo(BrightcoveVideo video)
         {
-            return CreateVideo(video, (FileUploadInfo)null, encodeTo, true, false, false);
+            return CreateVideo(video, (FileUploadInfo)null, EncodeTo.None, false, false, false);
         }
 
 		/// <summary>
