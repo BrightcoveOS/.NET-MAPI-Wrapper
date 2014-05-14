@@ -27,5 +27,23 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoWrite
 			long newId = _api.CreateVideo(video, FileToUpload, EncodeTo.Mp4, false);
 			Assert.That(newId, Is.GreaterThan(0));
 		}
+
+        [Test]
+        public void CreateVideo_VideoFullLength()
+        {
+            BrightcoveVideo video = new BrightcoveVideo();
+            video.Name = "Test Video Creation";
+            video.ReferenceId = "test-reference-id";
+            video.ShortDescription = "Test video, created via the API. Video is from the Creative Commons: http://creativecommons.org/videos/building-on-the-past";
+            video.VideoFullLength = new BrightcoveRendition
+                {
+                    RemoteUrl = "http://blip.tv/file/get/Commonscreative-BuildingOnThePast896.mov",
+                    ControllerType = ControllerType.Default,
+                    VideoCodec = VideoCodec.H264
+                };
+
+            long newId = _api.CreateVideo(video);
+            Assert.That(newId, Is.GreaterThan(0));
+        }
 	}
 }

@@ -45,7 +45,15 @@ namespace BrightcoveMapiWrapper.Api
 																			 methodParams.Add("preserve_source_rendition", preserveSourceRendition.ToString().ToLower());
 																			 methodParams.Add("H264NoProcessing ", h264NoProcessing.ToString().ToLower());
 																		 });
-			return RunFilePost<BrightcoveResultContainer<long>>(parms, fileUploadInfo).Result;
+
+            if (fileUploadInfo != null)
+            {
+                return RunFilePost<BrightcoveResultContainer<long>>(parms, fileUploadInfo).Result;
+            }
+            else
+            {
+                return RunPost<BrightcoveResultContainer<long>>(parms).Result;
+            }
 		}
 
 		/// <summary>
@@ -74,6 +82,20 @@ namespace BrightcoveMapiWrapper.Api
 			                   h264NoProcessing);
 			}
 		}
+
+        /// <summary>
+        /// Creates a new video using a remote URL rendition.  The remote URL should be set
+        /// in the video renditions.
+        /// </summary>
+        /// <param name="video">The metadata for the video you want to create.</param>
+        /// <param name="encodeTo">If the file requires transcoding, use this parameter to specify the target encoding. 
+        /// Valid values are MP4 or FLV, representing the H264 and VP6 codecs respectively. Note that transcoding of 
+        /// FLV files to another codec is not currently supported. This parameter is optional and defaults to FLV.</param>
+        /// <returns>The numeric ID of the newly created video.</returns>
+        public long CreateVideo(BrightcoveVideo video)
+        {
+            return CreateVideo(video, (FileUploadInfo)null, EncodeTo.None, false, false, false);
+        }
 
 		/// <summary>
 		/// Creates a new video by uploading a file.
