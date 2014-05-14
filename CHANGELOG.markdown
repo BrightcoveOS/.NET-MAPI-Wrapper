@@ -1,7 +1,11 @@
 BrightcoveOS .NET-MAPI-Wrapper Changelog
 --------------
 
-**Version 2.0 (January 10, 2013)**
+**Version 2.01 (May 14, 2014)**
+
+- Added support for `CreateVideo` call with a remote asset specified (rather than uploading a file directly).
+
+**Version 2.00 (January 10, 2013)**
 
 - `BrightcoveAPI`
 	- Modified several methods that were not working, either due to a changed specification by Brightcove or an error in Brightcove's implementation.
