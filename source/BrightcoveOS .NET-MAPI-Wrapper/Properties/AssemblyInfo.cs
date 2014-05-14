@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Velir")]
 [assembly: AssemblyProduct("BrightcoveOS .NET-MAPI-Wrapper")]
-[assembly: AssemblyCopyright("Copyright © Velir 2011")]
+[assembly: AssemblyCopyright("Copyright © Velir 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.00.*")]
-[assembly: AssemblyInformationalVersion("2.00")]
+[assembly: AssemblyVersion("2.01.*")]
+[assembly: AssemblyInformationalVersion("2.01")]
