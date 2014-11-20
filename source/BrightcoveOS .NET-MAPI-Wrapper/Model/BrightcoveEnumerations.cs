@@ -209,7 +209,32 @@ namespace BrightcoveMapiWrapper.Model
 		/// <summary>
 		/// Uses the default controller.
 		/// </summary>
-		Default
+		Default,
+		/// <summary>
+		/// Uses the Akamai HD controller.
+		/// </summary>
+		AkamaiHd,
+		/// <summary>
+		/// Uses the Akamai HD Live controller.
+		/// </summary>
+		AkamaiHdLive,
+		/// <summary>
+		/// Uses the Akamai Streaming controller.
+		/// </summary>
+		AkamaiHd2,
+		/// <summary>
+		/// Uses the Akamai Secure Streaming controller.
+		/// </summary>
+		AkamaiSecureStreaming,
+		/// <summary>
+		/// Uses the Akamai Streaming controller.
+		/// </summary>
+		AkamaiStreaming,
+		/// <summary>
+		/// Uses the Limelight Media vault(?) controller.
+		/// </summary>
+		LimelightMediavalut
+
 	}
 
 	/// <summary>
