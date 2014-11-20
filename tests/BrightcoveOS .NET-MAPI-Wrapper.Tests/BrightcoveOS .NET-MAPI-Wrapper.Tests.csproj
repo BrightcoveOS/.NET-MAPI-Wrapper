@@ -44,6 +44,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -116,6 +117,7 @@
     <Compile Include="IntegrationTests\VideoWrite\RemoveLogoOverlayTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\ShareVideoTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\UnshareVideoTests.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\VideoWriteCoreTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\UpdateVideoTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\VideoWriteTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
