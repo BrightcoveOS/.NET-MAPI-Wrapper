@@ -1,6 +1,10 @@
 BrightcoveOS .NET-MAPI-Wrapper Changelog
 --------------
 
+**Version 2.02 (November 20, 2014)**
+
+- Added support for Akamai and Limelight ControllerTypes
+
 **Version 2.01 (May 14, 2014)**
 
 - Added support for `CreateVideo` call with a remote asset specified (rather than uploading a file directly).
