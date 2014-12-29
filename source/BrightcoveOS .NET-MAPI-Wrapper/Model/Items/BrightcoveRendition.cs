@@ -148,7 +148,6 @@ namespace BrightcoveMapiWrapper.Model.Items
 			serialized["size"] = Size;
 			serialized["videoDuration"] = VideoDuration;
 			serialized["videoCodec"] = VideoCodec.ToBrightcoveName();
-            serialized["id"] = Id;
 
 			return serialized;
 		}
