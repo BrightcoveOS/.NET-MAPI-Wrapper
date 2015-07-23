@@ -58,8 +58,10 @@
     <Compile Include="Api\BrightcoveApiConfig.cs" />
     <Compile Include="Model\Containers\SortedFieldDictionary.cs" />
     <Compile Include="Model\Items\BrightcoveAudioTrack.cs" />
+    <Compile Include="Model\Items\BrightcoveCaptioning.cs" />
     <Compile Include="Model\Items\BrightcoveItem.cs" />
     <Compile Include="Model\Items\BrightcoveVideo.cs" />
+    <Compile Include="Model\Items\BrightcoveCaptionSource.cs" />
     <Compile Include="Serialization\IJavaScriptConvertable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\BrightcoveItemConverter.cs" />

@@ -109,6 +109,7 @@
     <Compile Include="IntegrationTests\VideoRead\SearchVideosCoreTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\SearchVideosUrlConstructionTests.cs" />
     <Compile Include="IntegrationTests\VideoRead\VideoReadTestBase.cs" />
+    <Compile Include="IntegrationTests\VideoWrite\AddCaptioningTest.cs" />
     <Compile Include="IntegrationTests\VideoWrite\AddImageTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\AddLogoOverlayTests.cs" />
     <Compile Include="IntegrationTests\VideoWrite\CreateVideoTests.cs" />
@@ -138,6 +139,9 @@
     <Content Include="Assets\jfk_1963_0626_berliner_64kb.mp3" />
     <Content Include="Assets\rslane32_-_SAX_STRING.mp3" />
     <Content Include="Assets\test-image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Sample_CaptionFile.dfxp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
