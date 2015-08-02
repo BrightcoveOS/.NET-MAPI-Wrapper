@@ -66,8 +66,13 @@ namespace BrightcoveMapiWrapper.Serialization
 															new BrightcoveItemConverter<BrightcoveResultContainer<BrightcoveItemCollection<BrightcoveVideo>>>(),
 						                              		new BrightcoveItemConverter<BrightcoveResultContainer<BrightcoveItemCollection<BrightcoveAudioTrack>>>(),
 						                              		new BrightcoveItemConverter<BrightcoveResultContainer<BrightcoveItemCollection<BrightcovePlaylist>>>(),
-						                              		new BrightcoveItemConverter<BrightcoveResultContainer<BrightcoveItemCollection<BrightcoveAudioTrackPlaylist>>>()
-						                              	});
+						                              		new BrightcoveItemConverter<BrightcoveResultContainer<BrightcoveItemCollection<BrightcoveAudioTrackPlaylist>>>(),
+
+                                                            // captioning
+                                                            new BrightcoveItemConverter<BrightcoveCaptioning>(),
+                                                            new BrightcoveItemConverter<BrightcoveCaptionSource>(),
+                                                            new BrightcoveItemConverter<BrightcoveResultContainer<BrightcoveCaptioning>>(),
+                                                          });
 		}
 
 		/// <summary>
