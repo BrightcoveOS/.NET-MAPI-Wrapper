@@ -219,6 +219,16 @@ namespace BrightcoveMapiWrapper.Model.Items
         }
 
         /// <summary>
+        /// The DigitalMaster object represents a special rendition that will not have urls.
+        /// This is the source file that was uploaded and is read-only.
+        /// </summary>
+        public BrightcoveRendition DigitalMaster
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// A short description describing the Video, limited to 250 characters. The 
         /// shortDescription is a required property when you create a video.
         /// </summary>
@@ -466,6 +476,10 @@ namespace BrightcoveMapiWrapper.Model.Items
 
                     case "IOSRenditions":
                         IOSRenditions = serializer.ConvertToType<BrightcoveItemCollection<BrightcoveRendition>>(dictionary[key]);
+                        break;
+
+                    case "digitalMaster":
+                        DigitalMaster = serializer.ConvertToType<BrightcoveRendition>(dictionary[key]);
                         break;
 
                     case "shortDescription":

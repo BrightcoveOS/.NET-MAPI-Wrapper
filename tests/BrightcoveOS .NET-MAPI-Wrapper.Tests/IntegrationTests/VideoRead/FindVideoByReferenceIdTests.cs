@@ -8,9 +8,9 @@ using NUnit.Framework;
 
 namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 {
-	[TestFixture]
-	public class FindVideoByReferenceIdTests : VideoReadTestBase
-	{
+    [TestFixture]
+    public class FindVideoByReferenceIdTests : VideoReadTestBase
+    {
         private string _refId = "1939643268001";
 
         [Test]
@@ -25,12 +25,12 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
         }
 
         [Test]
-		public void FindVideoByRefId_Renditions()
-		{
-			BrightcoveVideo video = _api.FindVideoByReferenceId(_refId);
+        public void FindVideoByRefId_Renditions()
+        {
+            BrightcoveVideo video = _api.FindVideoByReferenceId(_refId);
 
-			Assert.Greater(video.Renditions.Count, 0);
-		}
+            Assert.Greater(video.Renditions.Count, 0);
+        }
 
         [Test]
         public void FindVideoByRefId_IOSRenditions()
@@ -41,12 +41,20 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
         }
 
         [Test]
-		public void FindVideoByRefId_NonExistent()
-		{
-			string refId = "doesn't exist!";
-			BrightcoveVideo video = _api.FindVideoByReferenceId(refId);
+        public void FindVideoByRefId_DigitalMaster()
+        {
+            BrightcoveVideo video = _api.FindVideoByReferenceId(_refId, new[] { "digitalMaster" });
 
-			Assert.IsNull(video);
-		}
-	}
+            Assert.IsNotNull(video.DigitalMaster);
+        }
+
+        [Test]
+        public void FindVideoByRefId_NonExistent()
+        {
+            string refId = "doesn't exist!";
+            BrightcoveVideo video = _api.FindVideoByReferenceId(refId);
+
+            Assert.IsNull(video);
+        }
+    }
 }
