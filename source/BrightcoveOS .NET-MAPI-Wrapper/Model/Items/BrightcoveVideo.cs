@@ -207,11 +207,25 @@ namespace BrightcoveMapiWrapper.Model.Items
 			set;
 		}
 
-		/// <summary>
-		/// A short description describing the Video, limited to 250 characters. The 
-		/// shortDescription is a required property when you create a video.
+        /// <summary>
+		/// An collection of Renditions that represent the multi-bitrate streaming renditions available for this 
+		/// Video. A Video should have not more than 10 Renditions. 
+		/// Note that when creating or updating a video, only one of either VideoFullLength and Renditions may 
+		/// be set. If both are set, only Renditions will be submitted to the API and VideoFullLength will
+		/// be ignored.
+		/// Note that this property can be accessed with the Media API only with a special read or write token.
 		/// </summary>
-		public string ShortDescription
+		public ICollection<BrightcoveRendition> IOSRenditions
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// A short description describing the Video, limited to 250 characters. The 
+        /// shortDescription is a required property when you create a video.
+        /// </summary>
+        public string ShortDescription
 		{
 			get;
 			set;
@@ -277,6 +291,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 			Tags = new List<string>();
 			CustomFields = new CustomFieldCollection();
 			Renditions = new List<BrightcoveRendition>();
+            IOSRenditions = new List<BrightcoveRendition>();
 			CuePoints = new List<BrightcoveCuePoint>();
 			ItemState = ItemState.Active;
 			Economics = Economics.Free;
@@ -331,8 +346,12 @@ namespace BrightcoveMapiWrapper.Model.Items
 			{
 				serialized["videoFullLength"] = VideoFullLength;
 			}
+            if (IOSRenditions.Count > 0)
+            {
+                serialized["IOSRenditions"] = IOSRenditions.Where(r => !String.IsNullOrEmpty(r.RemoteUrl));
+            }
 
-			if (CuePoints.Count > 0)
+            if (CuePoints.Count > 0)
 			{
 				serialized["cuePoints"] = CuePoints;
 			}
@@ -444,11 +463,15 @@ namespace BrightcoveMapiWrapper.Model.Items
 						ReferenceId = (string)dictionary[key];
 						break;
 
-					case "renditions":
-						Renditions = serializer.ConvertToType<BrightcoveItemCollection<BrightcoveRendition>>(dictionary[key]);
-						break;
+                    case "renditions":
+                        Renditions = serializer.ConvertToType<BrightcoveItemCollection<BrightcoveRendition>>(dictionary[key]);
+                        break;
 
-					case "shortDescription":
+                    case "IOSRenditions":
+                        IOSRenditions = serializer.ConvertToType<BrightcoveItemCollection<BrightcoveRendition>>(dictionary[key]);
+                        break;
+
+                    case "shortDescription":
 						ShortDescription = (string)dictionary[key];
 						break;
 

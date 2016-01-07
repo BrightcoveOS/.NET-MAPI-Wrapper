@@ -11,20 +11,20 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 	[TestFixture]
 	public class FindVideoByReferenceIdTests : VideoReadTestBase
 	{
-		private string _refId = "1939643268001";
+        private string _refId = "1939643268001";
 
-		[Test]
-		public void FindVideoByRefId_Basic()
-		{
-			BrightcoveVideo video = _api.FindVideoByReferenceId(_refId);
+        [Test]
+        public void FindVideoByRefId_Basic()
+        {
+            BrightcoveVideo video = _api.FindVideoByReferenceId(_refId);
 
-			Assert.IsNotNull(video);
-			Assert.AreEqual(1939643268001, video.Id);
-			Assert.AreEqual("Wildlife_TamarinMonkey", video.Name);
-			Assert.AreEqual("Wildlife_TamarinMonkey", video.ShortDescription);
-		}
+            Assert.IsNotNull(video);
+            Assert.AreEqual(1939643268001, video.Id);
+            Assert.AreEqual("Wildlife_TamarinMonkey", video.Name);
+            Assert.AreEqual("Wildlife_TamarinMonkey", video.ShortDescription);
+        }
 
-		[Test]
+        [Test]
 		public void FindVideoByRefId_Renditions()
 		{
 			BrightcoveVideo video = _api.FindVideoByReferenceId(_refId);
@@ -32,7 +32,15 @@ namespace BrightcoveOS.NET_MAPI_Wrapper.Tests.IntegrationTests.VideoRead
 			Assert.Greater(video.Renditions.Count, 0);
 		}
 
-		[Test]
+        [Test]
+        public void FindVideoByRefId_IOSRenditions()
+        {
+            BrightcoveVideo video = _api.FindVideoByReferenceId(_refId, new[] { "IOSRenditions" });
+
+            Assert.Greater(video.IOSRenditions.Count, 0);
+        }
+
+        [Test]
 		public void FindVideoByRefId_NonExistent()
 		{
 			string refId = "doesn't exist!";
