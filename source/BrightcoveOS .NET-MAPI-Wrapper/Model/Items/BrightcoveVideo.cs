@@ -208,12 +208,9 @@ namespace BrightcoveMapiWrapper.Model.Items
 		}
 
         /// <summary>
-		/// An collection of Renditions that represent the multi-bitrate streaming renditions available for this 
-		/// Video. A Video should have not more than 10 Renditions. 
-		/// Note that when creating or updating a video, only one of either VideoFullLength and Renditions may 
-		/// be set. If both are set, only Renditions will be submitted to the API and VideoFullLength will
-		/// be ignored.
-		/// Note that this property can be accessed with the Media API only with a special read or write token.
+		/// An collection of IOS Renditions that represents one of the multi-bitrate streaming renditions 
+        /// available for this Video.
+		/// Note that this property is WRITABLE for remote assets only. It supports READ access.
 		/// </summary>
 		public ICollection<BrightcoveRendition> IOSRenditions
         {
