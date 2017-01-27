@@ -1,5 +1,8 @@
 BrightcoveOS .NET-MAPI-Wrapper
 --------------
+
+**WARNING:** The Media API is deprecated and should not be used for new projects. [More information](https://support.brightcove.com/en/service-changes).
+
 - **Homepage**: [https://github.com/BrightcoveOS/.NET-MAPI-Wrapper](https://github.com/BrightcoveOS/.NET-MAPI-Wrapper)
 - **Author**: [David Mills](mailto:david.mills@velir.com)
 - **Copyright**: [Velir]
