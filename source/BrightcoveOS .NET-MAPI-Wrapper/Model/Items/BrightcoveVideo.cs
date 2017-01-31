@@ -207,11 +207,32 @@ namespace BrightcoveMapiWrapper.Model.Items
 			set;
 		}
 
-		/// <summary>
-		/// A short description describing the Video, limited to 250 characters. The 
-		/// shortDescription is a required property when you create a video.
+        /// <summary>
+		/// An collection of IOS Renditions that represents one of the multi-bitrate streaming renditions 
+        /// available for this Video.
+		/// Note that this property is WRITABLE for remote assets only. It supports READ access.
 		/// </summary>
-		public string ShortDescription
+		public ICollection<BrightcoveRendition> IOSRenditions
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The DigitalMaster object represents a special rendition that will not have urls.
+        /// This is the source file that was uploaded and is read-only.
+        /// </summary>
+        public BrightcoveRendition DigitalMaster
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// A short description describing the Video, limited to 250 characters. The 
+        /// shortDescription is a required property when you create a video.
+        /// </summary>
+        public string ShortDescription
 		{
 			get;
 			set;
@@ -277,6 +298,7 @@ namespace BrightcoveMapiWrapper.Model.Items
 			Tags = new List<string>();
 			CustomFields = new CustomFieldCollection();
 			Renditions = new List<BrightcoveRendition>();
+            IOSRenditions = new List<BrightcoveRendition>();
 			CuePoints = new List<BrightcoveCuePoint>();
 			ItemState = ItemState.Active;
 			Economics = Economics.Free;
@@ -331,8 +353,12 @@ namespace BrightcoveMapiWrapper.Model.Items
 			{
 				serialized["videoFullLength"] = VideoFullLength;
 			}
+            if (IOSRenditions.Count > 0)
+            {
+                serialized["IOSRenditions"] = IOSRenditions.Where(r => !String.IsNullOrEmpty(r.RemoteUrl));
+            }
 
-			if (CuePoints.Count > 0)
+            if (CuePoints.Count > 0)
 			{
 				serialized["cuePoints"] = CuePoints;
 			}
@@ -444,11 +470,19 @@ namespace BrightcoveMapiWrapper.Model.Items
 						ReferenceId = (string)dictionary[key];
 						break;
 
-					case "renditions":
-						Renditions = serializer.ConvertToType<BrightcoveItemCollection<BrightcoveRendition>>(dictionary[key]);
-						break;
+                    case "renditions":
+                        Renditions = serializer.ConvertToType<BrightcoveItemCollection<BrightcoveRendition>>(dictionary[key]);
+                        break;
 
-					case "shortDescription":
+                    case "IOSRenditions":
+                        IOSRenditions = serializer.ConvertToType<BrightcoveItemCollection<BrightcoveRendition>>(dictionary[key]);
+                        break;
+
+                    case "digitalMaster":
+                        DigitalMaster = serializer.ConvertToType<BrightcoveRendition>(dictionary[key]);
+                        break;
+
+                    case "shortDescription":
 						ShortDescription = (string)dictionary[key];
 						break;
 
