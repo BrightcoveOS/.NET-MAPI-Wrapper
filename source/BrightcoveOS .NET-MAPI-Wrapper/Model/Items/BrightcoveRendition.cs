@@ -15,6 +15,15 @@ namespace BrightcoveMapiWrapper.Model.Items
 	/// </summary>
 	public class BrightcoveRendition : BrightcoveItem, IJavaScriptConvertable
 	{
+        /// <summary>
+        /// The rendition's id.
+        /// </summary>
+	    public long Id 
+        { 
+            get; 
+            private set; 
+        }
+
 		/// <summary>
 		/// [Optional — required for live streaming only] Depending on your CDN, one of the following 
 		/// values: LIMELIGHT_LIVE or AKAMAI_LIVE.
@@ -157,6 +166,13 @@ namespace BrightcoveMapiWrapper.Model.Items
 					case "error":
 						ApiUtil.ThrowIfError(dictionary, key, serializer);
 						break;
+
+                    case "id":
+                        if (dictionary[key] != null)
+                        {
+                            Id = (long)dictionary[key];
+                        }
+                        break;
 
 					case "controllerType":
 						ControllerType = ((string)dictionary[key]).ToBrightcoveEnum<ControllerType>();
